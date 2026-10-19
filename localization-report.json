@@ -1,0 +1,193 @@
+{
+  "htmlPagesFound": 15,
+  "requiredPagesFound": 15,
+  "uiTranslationKeys": 455,
+  "dynamicTranslationKeys": 182,
+  "translationKeys": 637,
+  "completeArabicKeys": 637,
+  "completeEnglishKeys": 637,
+  "expectedDynamicArabicValues": 182,
+  "missingDynamicArabicValues": [],
+  "missingDynamicEnglishValues": [],
+  "staticTextNodesFound": 169,
+  "unmappedStaticStrings": [],
+  "untranslatedHardcodedInterfaceStrings": [],
+  "conflictingStaticAliases": [
+    {
+      "value": "AI tools",
+      "keys": [
+        "category.aiTools",
+        "home.categoryAI"
+      ]
+    },
+    {
+      "value": "الكتب والقرطاسية",
+      "keys": [
+        "home.serviceBooksTitle",
+        "benefits.books.title"
+      ]
+    },
+    {
+      "value": "Software download guides",
+      "keys": [
+        "home.serviceGuidesTitle",
+        "benefits.software.title"
+      ]
+    },
+    {
+      "value": "الكتب والقرطاسية",
+      "keys": [
+        "home.serviceBooksTitle",
+        "pageTitle.bookDiscounts"
+      ]
+    },
+    {
+      "value": "Developer tools",
+      "keys": [
+        "home.categoryDeveloper",
+        "benefits.category.developer"
+      ]
+    },
+    {
+      "value": "الكل",
+      "keys": [
+        "filters.all",
+        "housing.furnishedAll"
+      ]
+    },
+    {
+      "value": "Default",
+      "keys": [
+        "benefits.sort.default",
+        "housing.sortDefault"
+      ]
+    },
+    {
+      "value": "Clear filters",
+      "keys": [
+        "benefits.clearFilters",
+        "housing.clearFilters"
+      ]
+    },
+    {
+      "value": "Default",
+      "keys": [
+        "benefits.sort.default",
+        "transportation.sortDefault"
+      ]
+    },
+    {
+      "value": "Cheapest",
+      "keys": [
+        "housing.sortCheapest",
+        "transportation.sortCheapest"
+      ]
+    },
+    {
+      "value": "Clear filters",
+      "keys": [
+        "benefits.clearFilters",
+        "transportation.clearFilters"
+      ]
+    },
+    {
+      "value": "سكن جامعي",
+      "keys": [
+        "housing.universityBadge",
+        "media.altUniversityHousing"
+      ]
+    }
+  ],
+  "duplicateOrConflictingKeys": [
+    {
+      "value": "AI tools",
+      "keys": [
+        "category.aiTools",
+        "home.categoryAI"
+      ]
+    },
+    {
+      "value": "الكتب والقرطاسية",
+      "keys": [
+        "home.serviceBooksTitle",
+        "benefits.books.title"
+      ]
+    },
+    {
+      "value": "Software download guides",
+      "keys": [
+        "home.serviceGuidesTitle",
+        "benefits.software.title"
+      ]
+    },
+    {
+      "value": "الكتب والقرطاسية",
+      "keys": [
+        "home.serviceBooksTitle",
+        "pageTitle.bookDiscounts"
+      ]
+    },
+    {
+      "value": "Developer tools",
+      "keys": [
+        "home.categoryDeveloper",
+        "benefits.category.developer"
+      ]
+    },
+    {
+      "value": "الكل",
+      "keys": [
+        "filters.all",
+        "housing.furnishedAll"
+      ]
+    },
+    {
+      "value": "Default",
+      "keys": [
+        "benefits.sort.default",
+        "housing.sortDefault"
+      ]
+    },
+    {
+      "value": "Clear filters",
+      "keys": [
+        "benefits.clearFilters",
+        "housing.clearFilters"
+      ]
+    },
+    {
+      "value": "Default",
+      "keys": [
+        "benefits.sort.default",
+        "transportation.sortDefault"
+      ]
+    },
+    {
+      "value": "Cheapest",
+      "keys": [
+        "housing.sortCheapest",
+        "transportation.sortCheapest"
+      ]
+    },
+    {
+      "value": "Clear filters",
+      "keys": [
+        "benefits.clearFilters",
+        "transportation.clearFilters"
+      ]
+    },
+    {
+      "value": "سكن جامعي",
+      "keys": [
+        "housing.universityBadge",
+        "media.altUniversityHousing"
+      ]
+    }
+  ],
+  "manualReviewItems": [],
+  "missingPages": [],
+  "pagesMissingLocalizationScripts": [],
+  "missingTranslationKeyReferences": [],
+  "missingCategoryKeys": [],
+  "passed": false
+}

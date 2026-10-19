@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script src="js/translations.js"></script>
+  <script src="js/i18n.js"></script>
+  <title>StudentHub - النقل</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Readex+Pro:wght@400;600;700&family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <div class="app-container">
+
+    <header class="app-bar">
+      <div class="app-bar__logo-wrap">
+        <div class="app-bar__logo-icon">
+          <img src="assets/images/-5370780119330398362_121.jpg" alt="Logo" style="width: 100%; height: 100%; border-radius: 50%; object-fit: cover;">
+        </div>
+        <span class="app-bar__title">
+          <span style="color: var(--accent-amber);">Student</span>Hub
+        </span>
+      </div>
+    </header>
+
+    <main class="app-content">
+
+      <section class="transport-directory" aria-labelledby="transportHeading">
+        <div class="transport-directory__intro">
+          <h1 class="section-heading" id="transportHeading">دليل النقل للطلاب</h1>
+          <p class="transport-directory__description" id="transportIntro">استكشف أمثلة توضيحية للمسارات ونقاط الانطلاق والوصول في زاخو ومحيطها.</p>
+        </div>
+
+        <aside class="demo-banner" id="transportDemoNotice" role="note">هذه بيانات تجريبية. المواعيد والأجور والمسارات خيالية وغير مؤكدة، ولا تشير إلى خدمات حقيقية.</aside>
+
+        <div class="transport-directory__tools">
+          <label class="transport-directory__search-label" id="transportSearchLabel" for="searchInput">ابحث حسب نقطة الانطلاق أو الوصول</label>
+          <div class="transport-directory__search-wrap"><span class="transport-directory__search-icon" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg></span><input class="transport-directory__search" id="searchInput" type="search" placeholder="اكتب اسم منطقة أو وجهة" autocomplete="off"></div>
+          <div class="transport-directory__suggestions" id="searchSuggestions" aria-label="اقتراحات البحث"></div>
+          <div class="transport-directory__filters" id="filterChips" aria-label="تصفية حسب نوع النقل"></div>
+          <div class="transport-directory__sort-row"><label for="transportSort">ترتيب حسب</label><select id="transportSort" class="transport-directory__sort"><option value="default">افتراضي</option><option value="cheapest">الأقل أجراً</option><option value="available">متاح الآن</option></select><p id="transportCount" class="transport-directory__count" aria-live="polite"></p></div>
+        </div>
+
+        <div id="cardContainer" aria-live="polite"></div>
+      </section>
+
+    </main>
+
+    <nav class="bottom-nav">
+      <a href="index.html" class="nav-item">
+        <span class="lucide-icon lucide-icon--house" aria-hidden="true"></span>
+        <span>الرئيسية</span>
+      </a>
+      <a href="deals.html" class="nav-item">
+        <span class="lucide-icon lucide-icon--badge-percent" aria-hidden="true"></span>
+        <span>العروض</span>
+      </a>
+      <a href="benefits.html" class="nav-item">
+        <span class="lucide-icon lucide-icon--graduation-cap" aria-hidden="true"></span>
+        <span>المزايا</span>
+      </a>
+      <a href="transportation.html" class="nav-item active">
+        <span class="lucide-icon lucide-icon--bus" aria-hidden="true"></span>
+        <span>النقل</span>
+      </a>
+      <a href="housing.html" class="nav-item">
+        <span class="lucide-icon lucide-icon--building-2" aria-hidden="true"></span>
+        <span>السكن</span>
+      </a>
+    </nav>
+
+  </div>
+
+  <script src="js/data.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/navigation.js"></script>
+</body>
+</html>

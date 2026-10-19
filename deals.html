@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script src="js/translations.js"></script>
+  <script src="js/i18n.js"></script>
+  <title>StudentHub - العروض</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Readex+Pro:wght@400;600;700&family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <div class="app-container">
+
+    <!-- Header -->
+    <header class="app-bar">
+      <div class="app-bar__logo-wrap">
+        <div class="app-bar__logo-icon">
+          <img src="assets/images/-5370780119330398362_121.jpg" alt="Logo" style="width: 100%; height: 100%; border-radius: 50%; object-fit: cover;">
+        </div>
+        <span class="app-bar__title">
+          <span style="color: var(--accent-amber);">Student</span>Hub
+        </span>
+      </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="app-content deals-directory">
+      <section aria-labelledby="dealsHeading">
+        <h1 class="section-heading" id="dealsHeading"></h1>
+        <p class="deals-directory__intro" id="dealsIntro"></p>
+        <label class="deals-directory__search-label" id="dealsSearchLabel" for="searchInput"></label>
+        <input class="deals-directory__search" id="searchInput" type="search" autocomplete="off">
+        <div class="deals-directory__filters" id="filterChips" aria-label="فئات عروض الطلاب"></div>
+        <div id="cardContainer" aria-live="polite"></div>
+      </section>
+    </main>
+
+    <!-- Bottom Navigation Bar -->
+    <nav class="bottom-nav">
+      <a href="index.html" class="nav-item">
+        <span class="lucide-icon lucide-icon--house" aria-hidden="true"></span>
+        <span>الرئيسية</span>
+      </a>
+      <a href="deals.html" class="nav-item active">
+        <span class="lucide-icon lucide-icon--badge-percent" aria-hidden="true"></span>
+        <span>العروض</span>
+      </a>
+      <a href="benefits.html" class="nav-item">
+        <span class="lucide-icon lucide-icon--graduation-cap" aria-hidden="true"></span>
+        <span>المزايا</span>
+      </a>
+      <a href="transportation.html" class="nav-item">
+        <span class="lucide-icon lucide-icon--bus" aria-hidden="true"></span>
+        <span>النقل</span>
+      </a>
+      <a href="housing.html" class="nav-item">
+        <span class="lucide-icon lucide-icon--building-2" aria-hidden="true"></span>
+        <span>السكن</span>
+      </a>
+    </nav>
+
+  </div>
+
+  <script src="js/data.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/navigation.js"></script>
+</body>
+</html>
