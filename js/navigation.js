@@ -1,5 +1,8 @@
 /** Shared StudentHub navigation drawer and language control. */
 (() => {
+  const themeStorageKey = 'studenthubTheme';
+  let darkMode = document.documentElement.dataset.theme === 'dark';
+
   const fallbackLinks = [
     ['index.html', 'الرئيسية'], ['deals.html', 'العروض'], ['benefits.html', 'المزايا'],
     ['transportation.html', 'النقل'], ['housing.html', 'السكن']
@@ -85,7 +88,7 @@
     }
     englishOption.addEventListener('click', () => chooseLanguage('en'));
     arabicOption.addEventListener('click', () => chooseLanguage('ar'));
-    header.append(languageSwitch, menuButton);
+    header.append(menuButton);
 
     const overlay = document.createElement('div');
     overlay.className = 'site-nav-overlay';
@@ -99,11 +102,40 @@
     drawer.setAttribute('aria-label', window.StudentHubI18n?.t('navigation.drawer') || 'قائمة StudentHub');
     drawer.setAttribute('aria-hidden', 'true');
 
+    const themeRow = document.createElement('div');
+    themeRow.className = 'site-nav__theme';
+    const themeLabel = document.createElement('span');
+    themeLabel.className = 'site-nav__theme-label';
+    themeLabel.id = 'siteNavThemeLabel';
+    const themeIcon = document.createElement('span');
+    themeIcon.className = 'site-nav__theme-icon';
+    themeIcon.setAttribute('aria-hidden', 'true');
+    themeIcon.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.9 13A8.5 8.5 0 0 1 11 3.1 8.5 8.5 0 1 0 20.9 13Z"/></svg>';
+    const themeText = document.createElement('span');
+    themeText.className = 'site-nav__theme-text';
+    themeLabel.append(themeIcon, themeText);
+    const themeButton = document.createElement('button');
+    themeButton.type = 'button';
+    themeButton.className = 'site-nav__theme-switch';
+    themeButton.setAttribute('role', 'switch');
+    themeButton.setAttribute('aria-labelledby', themeLabel.id);
+    themeButton.setAttribute('aria-checked', String(darkMode));
+    themeButton.innerHTML = '<span></span>';
+    themeRow.append(themeLabel, themeButton);
+    themeButton.addEventListener('click', () => {
+      darkMode = !darkMode;
+      document.documentElement.dataset.theme = darkMode ? 'dark' : 'light';
+      themeButton.setAttribute('aria-checked', String(darkMode));
+      try {
+        window.localStorage.setItem(themeStorageKey, darkMode ? 'dark' : 'light');
+      } catch { /* Theme still applies for this page when storage is unavailable. */ }
+    });
+
     const drawerHeader = document.createElement('div');
     drawerHeader.className = 'site-nav__header';
     const brand = document.createElement('img');
     brand.className = 'site-nav__brand';
-    brand.src = 'assets/logo.png';
+    brand.src = 'assets/images/StudentHubLogo.png';
     brand.alt = 'StudentHub';
     const brandName = document.createElement('span');
     brandName.className = 'site-nav__brand-name';
@@ -115,7 +147,8 @@
     closeButton.innerHTML = icon('x');
     const brandGroup = document.createElement('div');
     brandGroup.className = 'site-nav__brand-group';
-    brandGroup.append(brand, brandName);
+    languageSwitch.classList.add('site-nav__language');
+    brandGroup.append(brand, brandName, languageSwitch);
     drawerHeader.append(brandGroup, closeButton);
 
     const nav = document.createElement('nav');
@@ -165,7 +198,7 @@
     developerName.textContent = 'Rody';
     developer.append(developerPrefix, developerName);
     contact.append(contactTitle, email, developer);
-    drawer.append(drawerHeader, nav, contact);
+    drawer.append(drawerHeader, themeRow, nav, contact);
     overlay.append(drawer);
     document.body.append(overlay);
 
@@ -184,6 +217,7 @@
       nav.setAttribute('aria-label', i18n.t('navigation.label'));
       contactTitle.textContent = i18n.t('navigation.contact');
       developerPrefix.textContent = i18n.t('navigation.developedBy');
+      themeText.textContent = i18n.t('navigation.nightMode');
       const en = i18n.getLanguage() === 'en';
       englishOption.classList.toggle('is-current', en);
       arabicOption.classList.toggle('is-current', !en);

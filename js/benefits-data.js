@@ -30,5 +30,34 @@ window.STUDENTHUB_BENEFITS = {
     { id: 'mysql-workbench', mark: 'MySQL', name: 'MySQL Workbench Community', category: 'database', description: { ar: 'أداة إدارة ونمذجة لقواعد بيانات MySQL؛ توجد نسخ Community وتجارية.', en: 'Administration and modeling tool for MySQL; Community and commercial editions exist.' }, systems: 'Windows, macOS, Linux (check current support)', license: { ar: 'نسخة Community مفتوحة المصدر؛ توجد أيضًا نسخة تجارية.', en: 'Community edition is open source; a commercial edition also exists.' }, student: { ar: 'لا يوجد سعر طلابي معلن للنسخة Community.', en: 'No student price is claimed for the Community edition.' }, download: 'https://dev.mysql.com/downloads/workbench/', guide: 'https://dev.mysql.com/doc/workbench/en/wb-installing.html' },
     { id: 'postgresql', mark: 'PG', name: 'PostgreSQL', category: 'database', description: { ar: 'نظام قواعد بيانات علائقي مفتوح المصدر مع أدوات رسمية للتنزيل والتثبيت.', en: 'An open-source relational database with official download and installation resources.' }, systems: 'Windows, macOS, Linux (see platform installers)', license: { ar: 'مفتوح المصدر وفق ترخيص PostgreSQL.', en: 'Open source under the PostgreSQL License.' }, student: { ar: 'لا يوجد عرض طلابي منفصل.', en: 'No separate student offer.' }, download: 'https://www.postgresql.org/download/', guide: 'https://www.postgresql.org/docs/current/installation.html' },
     { id: 'wireshark', mark: 'WS', name: 'Wireshark', category: 'networking', description: { ar: 'محلل بروتوكولات شبكات مفتوح المصدر.', en: 'An open-source network protocol analyzer.' }, systems: 'Windows, macOS, Linux, UNIX variants (see downloads)', license: { ar: 'مفتوح المصدر؛ راجع شروط التوزيع الرسمية.', en: 'Open source; see official distribution terms.' }, student: { ar: 'لا يوجد ترخيص طلابي منفصل.', en: 'No separate student license.' }, download: 'https://www.wireshark.org/download.html', guide: 'https://www.wireshark.org/docs/wsug_html_chunked/ChapterBuildInstall.html' }
+  ],
+  homeServices: [
+    {
+      id: 'fastlink-student-internet',
+      name: {
+        ar: 'إنترنت فاستلينك للطلاب (مثال)',
+        en: 'Fastlink Student Internet (Example)'
+      },
+      provider: 'Fastlink',
+      category: 'Internet',
+      description: {
+        ar: 'مثال فقط: إنترنت طلابي بسعر 5 دولارات؛ التوفر وشروط الفوترة غير متحقق منها.',
+        en: 'Example only: $5 student internet; availability and billing terms are unverified.'
+      },
+      price: {
+        ar: 'مثال فقط: 5 دولارات؛ مدة الفوترة غير محددة.',
+        en: 'Example only: $5; billing period unspecified.'
+      },
+      duration: '',
+      expiration: '',
+      eligibility: {
+        ar: 'غير متحقق منها؛ يرجى التأكد مباشرةً من المزود.',
+        en: 'Unverified; confirm directly with the provider.'
+      },
+      activation: '',
+      information: '',
+      lastVerified: '',
+      verificationStatus: 'demo'
+    }
   ]
 };

@@ -48,10 +48,8 @@
       imageFrame.className = 'home-offer-image-frame';
       const image = document.createElement('img');
       image.className = 'home-offer-image';
-      image.src = Number(item.id) === 7 ? 'assets/images/image.JB.png'
-        : Number(item.id) === 1 ? 'assets/images/image.4B.png'
-        : Number(item.id) === 2 ? 'assets/images/golverdi.png'
-          : ({ restaurant: 'assets/images/image1.png', cafe: 'assets/images/image1.png', gym: 'assets/images/image.png', shop: 'assets/images/image1.png', other: 'assets/images/image1.png' })[item.category] || 'assets/images/image1.png';
+      image.src = item.image || (Number(item.id) === 1 ? 'assets/images/image.4B.png'
+        : ({ restaurant: 'assets/images/image1.png', cafe: 'assets/images/image1.png', gym: 'assets/images/image.png', shop: 'assets/images/image1.png', other: 'assets/images/image1.png' })[item.category] || 'assets/images/image1.png');
       image.alt = i18n.data('deals', item, 'business_name') || item.business_name;
       image.loading = 'lazy';
       imageFrame.append(image);
@@ -251,12 +249,13 @@
     const catalog = window.STUDENTHUB_BENEFITS;
     if (!catalog) return;
     // Keep local business data intact; this carousel reads the separate Benefits catalog.
+    const fastlinkService = (catalog.homeServices || []).find((item) => item.id === 'fastlink-student-internet');
     const technologyOffers = [
-      ...(catalog.software || []).filter((item) => ['vscode', 'visual-studio-community'].includes(item.id)).map((item) => ({ item, kind: 'software', source: item.download, value: item.license, guide: item.guide })),
-      ...(catalog.offers || []).filter((item) => ['github-pack', 'jetbrains-students', 'google-ai-student-2026'].includes(item.id)).map((item) => ({ item, kind: 'offer', source: item.information, value: item.price }))
+      ...(fastlinkService ? [{ item: fastlinkService, kind: 'service' }] : []),
+      ...(catalog.software || []).filter((item) => item.id === 'visual-studio-community').map((item) => ({ item, kind: 'software' })),
+      ...(catalog.offers || []).filter((item) => item.id === 'google-ai-student-2026').map((item) => ({ item, kind: 'offer' }))
     ];
-    const useTechnologyOffers = true; // Set to false to restore the preserved local-business carousel.
-    const offers = useTechnologyOffers ? technologyOffers : (typeof dealsData === 'undefined' ? [] : dealsData.map((item) => ({ item, kind: 'local' })));
+    const offers = technologyOffers;
     if (!offers.length) return;
     const escapeHtml = (value) => String(value).replace(/[&<>"']/g, (char) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[char]));
     let currentIndex = 0;
@@ -275,40 +274,23 @@
       track.setAttribute('aria-label', i18n.t('home.servicesCarousel'));
       previous.setAttribute('aria-label', i18n.t('home.servicesPrevious'));
       next.setAttribute('aria-label', i18n.t('home.servicesNext'));
-      track.innerHTML = offers.map(({ item, kind, source, value, guide }) => {
-        if (kind === 'local') {
-          const name = item.business_name || '';
-          const discount = i18n.data('deals', item, 'discount') || item.discount || '';
-          const description = i18n.data('deals', item, 'description') || item.description || '';
-          const validity = i18n.data('deals', item, 'valid_until') || item.valid_until || '';
-          const howTo = i18n.data('deals', item, 'how_to_use') || item.how_to_use || '';
-          const badge = discount.match(/\d+(?:\.\d+)?%/)?.[0] || discount;
-          const share = `https://wa.me/?text=${encodeURIComponent(`${name}\n${window.location.href}`)}`;
-          return `<article class="featured-card home-service-offer"><a class="home-service-offer__link" href="deals.html"><div class="featured-card__body"><div class="featured-card__top">${badge ? `<span class="featured-card__badge-pct home-service-offer__badge">${escapeHtml(badge)}</span>` : ''}<span class="featured-card__text"><strong class="featured-card__main" dir="auto">${escapeHtml(name)}</strong>${description ? `<span class="featured-card__sub">${escapeHtml(description)}</span>` : ''}</span></div>${validity ? `<span class="home-service-offer__validity"><strong>${escapeHtml(i18n.t('home.validUntil'))}:</strong> ${escapeHtml(validity)}</span>` : ''}${howTo ? `<span class="home-service-offer__redeem"><span aria-hidden="true">✓</span><span><strong>${escapeHtml(i18n.t('home.howToRedeem'))}:</strong> ${escapeHtml(howTo)}</span></span>` : ''}<span class="home-service-offer__cta">${escapeHtml(i18n.t('home.viewOffer'))}<span class="home-service-offer__arrow" aria-hidden="true">→</span></span></div></a><div class="home-service-offer__actions"><a class="home-offer-action home-offer-action--share" href="${share}" target="_blank" rel="noopener noreferrer">${escapeHtml(i18n.t('home.shareOffer'))}</a></div></article>`;
-        }
+      track.innerHTML = offers.map(({ item, kind }) => {
         const localize = (entry) => typeof entry === 'string' ? entry : entry?.[i18n.getLanguage()] || entry?.en || '';
         const name = localize(item.name);
         const provider = localize(item.provider);
         const description = localize(item.description);
-        const valueLine = localize(value);
-        const categoryKey = kind === 'software' ? 'home.categorySoftware' : item.category === 'ai' ? 'home.categoryAI' : item.category === 'cloud' ? 'home.categoryCloud' : 'home.categoryDeveloper';
+        const categoryKey = kind === 'software' ? 'home.categorySoftware' : kind === 'service' ? 'home.categoryConnectivity' : item.category === 'ai' ? 'home.categoryAI' : item.category === 'cloud' ? 'home.categoryCloud' : 'home.categoryDeveloper';
         const categoryName = i18n.t(categoryKey);
-        const categoryClass = kind === 'software' ? 'software' : item.category === 'ai' ? 'ai' : 'developer';
-        const categoryIcon = kind === 'software' ? '&lt;/&gt;' : item.category === 'ai' ? '&#9733;' : '&#9729;';
-        const badgeText = item.id === 'vscode' ? i18n.t('home.valueDownload') : item.id === 'visual-studio-community' ? i18n.t('home.valueTerms') : item.id === 'github-pack' ? i18n.t('home.valueVaries') : item.id === 'jetbrains-students' ? i18n.t('home.valueFree') : item.id === 'google-ai-student-2026' ? i18n.t('home.valueNoCost') : '';
+        const categoryClass = kind === 'software' ? 'software' : kind === 'service' ? 'connectivity' : item.category === 'ai' ? 'ai' : item.category === 'cloud' ? 'cloud' : 'developer';
+        const badgeText = kind === 'service' ? i18n.t('home.valueExamplePrice') : item.id === 'visual-studio-community' ? i18n.t('home.valueTerms') : item.id === 'google-ai-student-2026' ? i18n.t('home.valueNoCost') : '';
+        const image = item.id === 'fastlink-student-internet' ? 'assets/images/image.fastLink.png' : item.id === 'visual-studio-community' ? 'assets/images/image.Visual.png' : item.id === 'google-ai-student-2026' ? 'assets/images/imagegemeni.png' : '';
+        const detailSection = kind === 'software' ? 'software' : kind === 'service' ? 'homeServices' : 'studentOffers';
         const validity = item.expiration || '';
-        const howTo = item.howToRedeem || '';
-        const safeLink = (url) => { try { const parsed = new URL(url); return parsed.protocol === 'https:' ? parsed.href : ''; } catch { return ''; } };
-        const officialUrl = safeLink(source);
-        const guideUrl = kind === 'software' && guide ? 'software-guides.html' : '';
-        const logo = item.id === 'vscode' ? 'assets/images/vs.logo.png' : item.id === 'visual-studio-community' ? 'assets/images/image.Visual.png' : item.id === 'google-ai-student-2026' ? 'assets/images/imagegemeni.png' : '';
-        const share = `https://wa.me/?text=${encodeURIComponent(`${name}\n${window.location.href}`)}`;
-        const image = logo ? `<img class="home-service-offer__logo" src="${logo}" alt="" loading="lazy">` : '';
-        const providerLine = provider ? `<span class="home-service-offer__provider">${escapeHtml(provider)}</span>` : '';
         const validityLine = validity ? `<span class="home-service-offer__validity"><strong>${escapeHtml(i18n.t('home.validUntil'))}:</strong> ${escapeHtml(validity)}</span>` : '';
-        const reviewedLine = item.lastVerified ? `<span class="home-service-offer__reviewed"><strong>${escapeHtml(i18n.t('common.lastVerified'))}:</strong> ${escapeHtml(item.lastVerified)}</span>` : '';
-        const redeemLine = howTo ? `<span class="home-service-offer__redeem"><span aria-hidden="true">✓</span><span><strong>${escapeHtml(i18n.t('home.howToRedeem'))}:</strong> ${escapeHtml(howTo)}</span></span>` : '';
-        return `<article class="featured-card home-service-offer"><div class="home-service-offer__topline"><span class="home-service-offer__category home-service-offer__category--${categoryClass}"><span aria-hidden="true">${categoryIcon}</span>${escapeHtml(categoryName)}</span><span class="home-service-offer__demo">${escapeHtml(i18n.t('home.demoData'))}</span></div><a class="home-service-offer__link" href="${officialUrl || '#'}"${officialUrl ? ' target="_blank" rel="noopener noreferrer"' : ''}><div class="featured-card__body"><div class="featured-card__top">${badgeText ? `<span class="featured-card__badge-pct home-service-offer__badge">${escapeHtml(badgeText)}</span>` : ''}<span class="featured-card__text">${image}${name ? `<strong class="featured-card__main" dir="auto">${escapeHtml(name)}</strong>` : ''}${providerLine}${description ? `<span class="featured-card__sub">${escapeHtml(description)}</span>` : ''}</span></div>${validityLine}${redeemLine}${reviewedLine}<span class="home-service-offer__cta">${escapeHtml(i18n.t('common.viewDetails'))}<span class="home-service-offer__arrow" aria-hidden="true">→</span></span></div></a><div class="home-service-offer__actions">${guideUrl ? `<a class="home-offer-action" href="${guideUrl}">${escapeHtml(i18n.t('benefits.installGuide'))}</a>` : ''}${officialUrl ? `<a class="home-offer-action" href="${officialUrl}" target="_blank" rel="noopener noreferrer">${escapeHtml(i18n.t('benefits.source'))}</a>` : ''}<a class="home-offer-action home-offer-action--share" href="${share}" target="_blank" rel="noopener noreferrer">${escapeHtml(i18n.t('home.shareOffer'))}</a></div></article>`;
+        const status = validity ? '' : kind === 'service' ? `<span class="home-service-offer__demo">${escapeHtml(i18n.t('home.demoData'))}</span>` : '';
+        const providerLine = provider && kind === 'service' ? `<span class="home-service-offer__provider">${escapeHtml(provider)}</span>` : '';
+        const href = `detail.html?section=${detailSection}&id=${encodeURIComponent(item.id)}`;
+        return `<article class="featured-card home-service-offer"><a class="home-service-offer__link" href="${href}"><div class="home-service-offer__image-frame"><img class="home-service-offer__image" src="${image}" alt="${escapeHtml(name)}" loading="lazy"><span class="featured-card__badge-pct home-service-offer__image-badge">${escapeHtml(badgeText)}</span></div><div class="featured-card__body"><div class="home-service-offer__labels"><span class="home-service-offer__category home-service-offer__category--${categoryClass}">${escapeHtml(categoryName)}</span>${status}</div><strong class="featured-card__main" dir="auto">${escapeHtml(name)}</strong>${providerLine}${description ? `<span class="featured-card__sub">${escapeHtml(description)}</span>` : ''}${validityLine}<span class="home-service-offer__cta">${escapeHtml(i18n.t('common.viewDetails'))}<span class="home-service-offer__arrow" aria-hidden="true">→</span></span></div></a></article>`;
       }).join('');
       cards = [...track.children];
       dotsContainer.innerHTML = offers.map((_, index) => `<button type="button" class="home-service-dot" data-home-service-dot="${index}"></button>`).join('');

@@ -4,14 +4,14 @@
 
 StudentHub is a responsive, multi-page student services website prototype. It brings student discounts, student benefits, housing options, and transportation information together in one interface. The current interface is localized in Arabic and English and adapts its page direction to the selected language.
 
-The project is implemented as a collection of plain HTML, CSS, and JavaScript files. It has no build step or installed JavaScript dependencies. Listings in `js/data.js` are fictional demo records. The separate `js/benefits-data.js` catalog includes source-checked public online offers; availability and eligibility remain subject to each provider's current terms and region. The project does not include a server-side application, account system, or live local-offer database.
+The project is implemented as a collection of plain HTML, CSS, and JavaScript files. It has no build step or installed JavaScript dependencies. Listings in `js/data.js` are fictional demo records. The separate `js/benefits-data.js` catalog includes source-checked public online offers and a clearly labeled illustrative Fastlink $5 student-internet example; the Fastlink example is not verified as a real offer, and its billing period and terms are unspecified. Availability and eligibility for source-checked offers remain subject to each provider's current terms and region. The project does not include a server-side application, account system, or live local-offer database.
 
 ## What visitors can do
 
 - Browse the homepage, which features student offers and previews housing and benefits content.
 - Browse offer, benefit, housing, and transportation sections.
 - View topic-specific pages for restaurant offers, gym offers, housing details, transport within Zakho, and transport between Zakho and other cities.
-- Open a shared navigation drawer to move between the main sections, contact the project, or switch between Arabic and English.
+- Open a shared navigation drawer to move between the main sections, contact the project, switch between Arabic and English, or enable night mode.
 - Open a record's detail view through a URL containing a section and record ID, for example `detail.html?section=deals&id=1`.
 
 The homepage currently begins with the heading “Top exclusive offers.” Its welcome intro is shown on the homepage only, once per browser session when session storage is available and reduced motion is not requested. The intro fades out after a brief display. Its text follows the current site language.
@@ -41,6 +41,8 @@ The central brand colors are navy (`#203F7A`), amber (`#F7B94B`), and gold (`#F4
 ## Language and direction support
 
 Arabic and English are the supported interface languages. `js/translations.js` stores interface strings and translated data. `js/i18n.js` manages the selected language, updates translated static content and page titles, and sets the root document's `lang` and `dir` attributes. Arabic uses right-to-left direction; English uses left-to-right direction. The language choice is saved in local storage when available.
+
+Night mode is available in the shared navigation drawer. Its theme choice is applied before the stylesheet loads and saved in local storage independently of the language preference.
 
 The shared drawer uses the document's direction attribute to choose its hidden edge and slide-in direction. The drawer also provides a backdrop, close control, keyboard dismissal, focus handling, and body scroll locking. The same navigation script initializes it on pages that have the shared header.
 

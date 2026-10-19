@@ -1,4 +1,10 @@
 (() => {
+  try {
+    document.documentElement.dataset.theme = window.localStorage.getItem('studenthubTheme') === 'dark' ? 'dark' : 'light';
+  } catch {
+    document.documentElement.dataset.theme = 'light';
+  }
+
   const translations = window.STUDENTHUB_TRANSLATIONS || { ui: {}, data: {} };
   const storageKey = 'studenthubLanguage';
   const aliases = new Map();
@@ -65,7 +71,8 @@
     Minibus: 'category.minibus', 'Shared taxi': 'category.sharedTaxi',
     deals: 'category.deals', benefits: 'category.benefits', housing: 'category.housing',
     transportation: 'category.transportation',
-    'Free plan': 'benefit.freePlan', 'Student discount': 'benefit.studentDiscount', Trial: 'benefit.trial'
+    'Free plan': 'benefit.freePlan', 'Student discount': 'benefit.studentDiscount', Trial: 'benefit.trial',
+    Internet: 'home.categoryConnectivity'
   };
 
   function category(value) {

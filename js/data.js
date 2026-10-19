@@ -27,6 +27,7 @@ const dealsData = [
     id: 2,
     business_name: "Demo Cafe Aroma",
     category: "cafe",
+    image: "assets/images/golverdi.png",
     discount: "10% OFF",
     description:
       "Get 10% off any hot or cold drink at Demo Cafe Aroma. A cozy spot for studying with free Wi-Fi and plenty of seating.",
@@ -87,9 +88,23 @@ const dealsData = [
     id: 7,
     business_name: "Demo Restaurant Offer",
     category: "restaurant",
+    image: "assets/images/image.JB.png",
     discount: "20% OFF",
     description:
       "Example student restaurant offer: 20% off. This is illustrative content, not a verified promotion.",
+    terms: "",
+    valid_until: "",
+    location: "",
+    how_to_use: "",
+  },
+  {
+    id: 8,
+    business_name: "Y5 coffee shop",
+    category: "cafe",
+    image: "assets/images/Y5cafe.png",
+    discount: "Special offer",
+    description:
+      "Special offer on selected drinks at Y5 coffee shop. Specific drinks and offer terms were not provided.",
     terms: "",
     valid_until: "",
     location: "",

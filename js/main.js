@@ -151,6 +151,7 @@ function offerStatusHtml(value) {
 }
 
 function dealImage(item) {
+  if (typeof item.image === 'string' && /^assets\//i.test(item.image)) return item.image;
   if (Number(item.id) === 1) return 'assets/images/image.4B.png';
   const images = {
     restaurant: 'assets/images/image1.png',
@@ -864,6 +865,7 @@ function initDetailPage() {
     transportation: { data: transportationData,  render: renderTransportDetail },
     books:          { data: window.STUDENTHUB_BENEFITS?.books || [], render: renderBookDetail, back: 'book-discounts.html' },
     studentOffers:  { data: window.STUDENTHUB_BENEFITS?.offers || [], render: renderStudentOfferDetail, back: 'digital-offers.html' },
+    homeServices:   { data: window.STUDENTHUB_BENEFITS?.homeServices || [], render: renderStudentOfferDetail, back: 'index.html' },
     software:       { data: window.STUDENTHUB_BENEFITS?.software || [], render: renderSoftwareDetail, back: 'software-guides.html' },
   };
 
@@ -901,7 +903,7 @@ function initDetailPage() {
 function getItemTitle(section, item) {
   if (section === 'deals')          return dataValue(section, item, 'business_name');
   if (section === 'benefits')       return dataValue(section, item, 'name');
-  if (section === 'books' || section === 'studentOffers' || section === 'software') return typeof item.name === 'string' ? item.name : item.name?.[window.StudentHubI18n?.getLanguage() || 'en'] || item.name?.en || '';
+  if (section === 'books' || section === 'studentOffers' || section === 'homeServices' || section === 'software') return typeof item.name === 'string' ? item.name : item.name?.[window.StudentHubI18n?.getLanguage() || 'en'] || item.name?.en || '';
   if (section === 'housing')        return dataValue(section, item, 'title');
   if (section === 'transportation') return dataValue(section, item, 'route_name');
   return t('pageTitle.detail');
@@ -998,6 +1000,7 @@ function renderStudentOfferDetail(item) {
   const lang = window.StudentHubI18n?.getLanguage() || 'en';
   const localize = (value) => typeof value === 'string' ? value : value?.[lang] || value?.en || '';
   const safeUrl = (value) => { try { const url = new URL(value); return url.protocol === 'https:' ? url.href : ''; } catch { return ''; } };
+  const name = localize(item.name);
   const description = localize(item.description);
   const duration = localize(item.duration);
   const price = localize(item.price);
@@ -1007,7 +1010,18 @@ function renderStudentOfferDetail(item) {
   const expiration = item.expiration || '';
   const expiry = offerExpiry(expiration);
   const status = expiration && expiry ? `${expiry < new Date() ? t('offers.expired') : t('common.valid')} ${expiration}` : t('offers.statusUnknown');
-  return `<div class="detail-card"><h2 class="detail-card__title">${item.name}</h2><div class="detail-meta">${item.provider ? `<span class="badge badge--blue">${item.provider}</span>` : ''}${item.category ? `<span class="badge badge--gray">${window.StudentHubI18n.category(item.category)}</span>` : ''}${item.offerType ? `<span class="badge badge--amber">${t(`benefits.type.${item.offerType}`)}</span>` : ''}</div>${detailSectionHtml(t('offers.description'), description ? `<p>${description}</p>` : '')}${detailSectionHtml(t('offers.offerDetails'), `${detailRowHtml(t('benefits.price'), price)}${detailRowHtml(t('benefits.eligibility'), eligibility)}${detailRowHtml(t('benefits.duration'), duration)}${detailRowHtml(t('offers.status'), status)}${detailRowHtml(t('benefits.lastVerified'), item.lastVerified)}`)}${activation ? `<a class="btn btn--primary btn--sm" href="${activation}" target="_blank" rel="noopener noreferrer">${t('benefits.apply')}</a>` : ''}${source ? `<a class="btn btn--ghost btn--sm" href="${source}" target="_blank" rel="noopener noreferrer">${t('benefits.source')}</a>` : ''}</div>`;
+  const image = serviceImage(item);
+  const demoNotice = item.verificationStatus === 'demo' ? `<div class="detail-notice">⚠️ ${t('common.demoNotice')}</div>` : '';
+  return `${image ? `<div class="detail-photo-wrapper"><img src="${image}" alt="${name}" class="detail-photo" loading="lazy"></div>` : ''}<div class="detail-card"><h2 class="detail-card__title">${name}</h2><div class="detail-meta">${item.provider ? `<span class="badge badge--blue">${item.provider}</span>` : ''}${item.category ? `<span class="badge badge--gray">${window.StudentHubI18n.category(item.category)}</span>` : ''}${item.offerType ? `<span class="badge badge--amber">${t(`benefits.type.${item.offerType}`)}</span>` : ''}</div>${detailSectionHtml(t('offers.description'), description ? `<p>${description}</p>` : '')}${detailSectionHtml(t('offers.offerDetails'), `${detailRowHtml(t('benefits.price'), price)}${detailRowHtml(t('benefits.eligibility'), eligibility)}${detailRowHtml(t('benefits.duration'), duration)}${detailRowHtml(t('offers.status'), status)}${detailRowHtml(t('benefits.lastVerified'), item.lastVerified)}`)}${activation ? `<a class="btn btn--primary btn--sm" href="${activation}" target="_blank" rel="noopener noreferrer">${t('benefits.apply')}</a>` : ''}${source ? `<a class="btn btn--ghost btn--sm" href="${source}" target="_blank" rel="noopener noreferrer">${t('benefits.source')}</a>` : ''}</div>${demoNotice}`;
+}
+
+function serviceImage(item) {
+  const images = {
+    'fastlink-student-internet': 'assets/images/image.fastLink.png',
+    'visual-studio-community': 'assets/images/image.Visual.png',
+    'google-ai-student-2026': 'assets/images/imagegemeni.png',
+  };
+  return images[item.id] || '';
 }
 
 function renderSoftwareDetail(item) {
@@ -1017,7 +1031,8 @@ function renderSoftwareDetail(item) {
   const category = item.category ? window.StudentHubI18n.category(item.category) : '';
   const download = safeUrl(item.download);
   const guide = safeUrl(item.guide);
-  return `<div class="detail-card"><h2 class="detail-card__title">${item.name}</h2>${category ? `<div class="detail-meta"><span class="badge badge--gray">${category}</span></div>` : ''}${localize(item.description) ? `<p>${localize(item.description)}</p>` : ''}${detailRowHtml(t('benefits.requirements'), item.systems)}${detailRowHtml(t('benefits.license'), localize(item.license))}${detailRowHtml(t('benefits.studentInfo'), localize(item.student))}${download ? `<a class="btn btn--primary btn--sm" href="${download}" target="_blank" rel="noopener noreferrer">${t('benefits.download')}</a>` : ''}${guide ? `<a class="btn btn--ghost btn--sm" href="${guide}" target="_blank" rel="noopener noreferrer">${t('benefits.installGuide')}</a>` : ''}</div>`;
+  const image = serviceImage(item);
+  return `${image ? `<div class="detail-photo-wrapper"><img src="${image}" alt="${item.name}" class="detail-photo" loading="lazy"></div>` : ''}<div class="detail-card"><h2 class="detail-card__title">${item.name}</h2>${category ? `<div class="detail-meta"><span class="badge badge--gray">${category}</span></div>` : ''}${localize(item.description) ? `<p>${localize(item.description)}</p>` : ''}${detailRowHtml(t('benefits.requirements'), item.systems)}${detailRowHtml(t('benefits.license'), localize(item.license))}${detailRowHtml(t('benefits.studentInfo'), localize(item.student))}${download ? `<a class="btn btn--primary btn--sm" href="${download}" target="_blank" rel="noopener noreferrer">${t('benefits.download')}</a>` : ''}${guide ? `<a class="btn btn--ghost btn--sm" href="${guide}" target="_blank" rel="noopener noreferrer">${t('benefits.installGuide')}</a>` : ''}</div>`;
 }
 
 /* ── Housing detail ───────────────────────────────────────── */
@@ -1125,7 +1140,9 @@ document.addEventListener('DOMContentLoaded', () => {
   if (backBtn) {
     const params = new URLSearchParams(window.location.search);
     const section = params.get('section');
-    if (section === 'studentOffers') {
+    if (section === 'homeServices') {
+      backBtn.onclick = () => { window.location.href = 'index.html'; };
+    } else if (section === 'studentOffers') {
       backBtn.onclick = () => { window.location.href = 'digital-offers.html'; };
     } else if (section === 'software') {
       backBtn.onclick = () => { window.location.href = 'software-guides.html'; };
