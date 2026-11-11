@@ -17,7 +17,7 @@
     '#siteNavDrawer', '#cardContainer', '#housingResults', '#universityCategories', '#housingCount',
     '[data-benefit-filters]', '[data-benefit-types]', '[data-benefit-results]',
     '[data-home-local-offer]', '[data-home-offers-carousel]', '[data-home-service-showcase]',
-    '[data-home-upcoming-events]', '#eventsFeatured', '#eventsResults', '#eventsFilters', '#eventsCount', '.home-gemini-offer'
+    '[data-home-upcoming-events]', '#eventsFeatured', '#eventsResults', '#eventsCount', '.home-gemini-offer'
   ].join(', ');
   const pageTitleKeys = {
     'index.html': 'pageTitle.home', 'about.html': 'pageTitle.about', 'deals.html': 'pageTitle.deals',

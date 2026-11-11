@@ -7,6 +7,8 @@ StudentHub is a static website built with plain HTML, CSS, and vanilla JavaScrip
 ```text
 .
 ├── index.html
+├── manifest.webmanifest
+├── service-worker.js
 ├── about.html
 ├── benefits.html
 ├── book-discounts.html
@@ -43,7 +45,8 @@ StudentHub is a static website built with plain HTML, CSS, and vanilla JavaScrip
 │   └── shared/
 │       ├── catalog-pages.js
 │       ├── events.js
-│       └── navigation.js
+│       ├── navigation.js
+│       └── pwa.js
 ├── scripts/
 │   ├── test-events.js
 │   ├── test-benefits.js
@@ -54,6 +57,10 @@ StudentHub is a static website built with plain HTML, CSS, and vanilla JavaScrip
 │   │   ├── building-complex.svg
 │   │   ├── bus.svg
 │   │   ├── calendar.svg
+│   │   ├── app-icon-192.png
+│   │   ├── app-icon-512.png
+│   │   ├── app-icon-maskable-512.png
+│   │   ├── apple-touch-icon.png
 │   │   ├── graduation-cap.svg
 │   │   ├── house.svg
 │   │   ├── info.svg
@@ -106,9 +113,16 @@ The backup folder and three root-level photos on some local checkouts are ignore
 | `transportation.html` | Transportation directory. |
 | `transport-zakho.html`, `transport-external.html` | Local and intercity transportation listings. |
 | `detail.html` | Shared detail view selected by URL query parameters. |
-| `events.html` | Searchable, filterable Events & Activities directory and featured demo event. |
+| `events.html` | Searchable, filterable Events & Activities directory with demo listings and user-supplied poster listings. |
 
-All pages use `css/style.css`. Pages include only the data and behavior scripts they need, then load `js/shared/navigation.js` for shared navigation. HTML pages intentionally stay at the root to preserve existing links and direct page URLs.
+All pages use `css/style.css`, load `js/shared/pwa.js` for optional PWA registration, and include only the data and behavior scripts they need. Pages with an app bar also load `js/shared/navigation.js`. HTML pages intentionally stay at the root to preserve existing links and direct page URLs.
+
+## Progressive Web App foundation
+
+- `manifest.webmanifest` declares the StudentHub app name, standalone display mode, brand colors, relative launch URL/scope, and install icons. Its `./` paths support deployment from a subdirectory.
+- `assets/icons/app-icon-192.png` and `app-icon-512.png` are standard install icons generated from the existing logo. `app-icon-maskable-512.png` places the logo within the maskable safe zone. `apple-touch-icon.png` is the iOS home-screen icon.
+- `js/shared/pwa.js` is loaded by all 16 HTML pages. It feature-detects service-worker support and registers the worker using a URL derived from the script's location, preserving subdirectory deployment. Registration errors are logged without blocking page behavior.
+- `service-worker.js` currently establishes the install/activate lifecycle and cache version name only. It does not cache requests or provide an offline fallback; those behaviors are reserved for the next implementation phase.
 
 ## JavaScript responsibilities
 
@@ -116,7 +130,7 @@ All pages use `css/style.css`. Pages include only the data and behavior scripts 
 |---|---|
 | `js/data/local-records.js` | Classic-script data arrays for deals, legacy benefits, housing, and transportation. Its top-level `const` bindings are consumed by `js/shared/catalog-pages.js` and, on the homepage, `js/pages/home/offers.js`. Load it before those consumers. |
 | `js/data/benefits-catalog.js` | `window.STUDENTHUB_BENEFITS`: book/study listings, online offers, software, and home-service records. |
-| `js/data/events.js` | `window.eventsData`: fictional event records with dates, categories, locations, and registration metadata. |
+| `js/data/events.js` | `window.eventsData`: demo and poster-based event records with dates, categories, locations, and registration metadata. |
 | `js/localization/translations.js` | `window.STUDENTHUB_TRANSLATIONS`, with interface (`ui`) and record (`data`) translations. It must load before `js/localization/i18n.js`. |
 | `js/localization/i18n.js` | Language persistence, static and dynamic translation lookup, document language/direction, page titles, and language-change subscribers. |
 | `js/shared/catalog-pages.js` | Deals, housing, transportation and shared detail-page initialization/rendering, search, and filter utilities. |
@@ -125,7 +139,10 @@ All pages use `css/style.css`. Pages include only the data and behavior scripts 
 | `js/pages/benefits/benefits.js` | Search, sort, category/type filters, cards, and results for the three benefits subcatalogs. |
 | `js/pages/home/offers.js` | Homepage skeleton cleanup, offer detail cards, carousels, and student-service showcase. Loaded only on `index.html`. |
 | `js/shared/navigation.js` | Shared navigation drawer, language controls, theme switch, keyboard handling, and page links. Runs on pages with an `.app-bar`. |
+| `js/shared/pwa.js` | Feature-detects and registers the root-scoped service worker; does not affect pages when service workers are unavailable. |
 | `js/pages/home/intro.js` | Homepage-only welcome intro. Uses session storage, the `welcome=1` query flag for replay, and the reduced-motion preference. |
+
+`service-worker.js` owns the service-worker lifecycle and the `CACHE_VERSION`/`CACHE_NAME` constants. No caching strategy is active yet.
 
 Scripts are ordinary browser scripts, not modules. Preserve each page's existing dependency order; avoid loading page-specific behavior on unrelated pages. Existing classic-script globals are a deliberate compatibility pattern for this no-build project. The shared catalog renderer remains together because its search, category, detail, housing, and transportation behavior share helpers and data.
 
@@ -133,11 +150,11 @@ Scripts are ordinary browser scripts, not modules. Preserve each page's existing
 
 - `js/data/local-records.js` contains `dealsData`, `benefitsData`, `housingData`, and `transportationData`. Numeric record IDs are used in detail links and should remain stable.
 - `js/data/benefits-catalog.js` contains the separate `STUDENTHUB_BENEFITS` catalogs, whose IDs are strings.
-- `js/data/events.js` contains fictional event examples only. Their runtime status is derived from each event's date and time; registration links are empty unless a real HTTPS destination is verified.
+- `js/data/events.js` contains fictional demo events and poster-based listings. Poster details are not independently verified. Runtime status is derived from dates/times, including date-only ranges; registration links remain empty unless an official HTTPS destination is verified.
 - Deal cards and related listings link to `detail.html?section=<section>&id=<id>`.
 - Event cards link to the same renderer with `detail.html?section=events&id=<id>`. Event detail requests use `js/shared/catalog-pages.js`, without a separate detail-page architecture.
 - `js/shared/catalog-pages.js` maps `section` to the correct data source and renderer. It compares IDs as strings, displays a translated error for invalid sections or missing records, and selects section-specific back links where configured.
-- Keep demo deals visibly identified as illustrative. Do not infer or imply that a discount or medical service is real unless it has been verified.
+- Keep demo deals visibly identified as illustrative. Names and images supplied for new local businesses can be listed, but do not infer or imply that a discount, medical service, or business detail is verified unless it has been confirmed.
 
 ## Localization and direction
 
@@ -160,7 +177,7 @@ The translation dictionary currently contains a small set of repeated source phr
 
 For Deals, add a record to `dealsData` in `js/data/local-records.js`, add its category to the category list in `initDealsPage()` in `js/shared/catalog-pages.js`, add a label under `ui` in `js/localization/translations.js`, map the category in `js/localization/i18n.js`, and add it to `categoryKeyMap` in `scripts/validate-localization.js`. Add localized record fields under the matching `data.deals.<id>` key.
 
-For events, add a stable-ID record to `js/data/events.js`, add its title, organizer, description, location, and participation requirements under `data.events.<id>` in `js/localization/translations.js`, and use an existing event category or add its translated category key. Provide an ISO date and 24-hour local start/end times; status is computed from these fields. Use an empty registration URL unless an official HTTPS URL is verified. Mark every prototype record as fictional demo content.
+For events, add a stable-ID record to `js/data/events.js`, add its title, organizer, description, location, and participation requirements under `data.events.<id>` in `js/localization/translations.js`, and use an existing event category or add its translated category key. Provide an ISO date and 24-hour local start/end times, or an `endDate` for a poster-based date range without times. Status is computed from these fields. Use an empty registration URL unless an official HTTPS URL is verified. Keep fictional demos distinct from poster details that have not been independently verified.
 
 For benefits subcatalogs, add data in `js/data/benefits-catalog.js` and update the relevant category map and labels in `js/pages/benefits/benefits.js` and `js/localization/translations.js`. Keep provider status and illustrative records distinct.
 

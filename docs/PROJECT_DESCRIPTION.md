@@ -4,13 +4,13 @@
 
 StudentHub is a responsive, multi-page student services website prototype. It brings student discounts, student benefits, housing options, and transportation information together in one interface. The current interface is localized in Arabic, English, and Bahdini Kurdish (Arabic script), and adapts its page direction to the selected language.
 
-The project is implemented as a collection of plain HTML, CSS, and JavaScript files. It has no build step or installed JavaScript dependencies. Listings in `js/data/local-records.js` are fictional demo records. The separate `js/data/benefits-catalog.js` catalog includes source-checked public online offers and a clearly labeled illustrative Fastlink $5 student-internet example; the Fastlink example is not verified as a real offer, and its billing period and terms are unspecified. Availability and eligibility for source-checked offers remain subject to each provider's current terms and region. The project does not include a server-side application, account system, or live local-offer database.
+The project is implemented as a collection of plain HTML, CSS, and JavaScript files. It has no build step or installed JavaScript dependencies. Listings in `js/data/local-records.js` include fictional demos and business names shown in user-supplied images; no student discount or business details are claimed for the image-based listings. The separate `js/data/benefits-catalog.js` catalog includes source-checked public online offers and a clearly labeled illustrative Fastlink $5 student-internet example; the Fastlink example is not verified as a real offer, and its billing period and terms are unspecified. Availability and eligibility for source-checked offers remain subject to each provider's current terms and region. The project does not include a server-side application, account system, or live local-offer database.
 
 ## What visitors can do
 
 - Browse the homepage, which features student offers and previews housing and benefits content.
 - Browse offer, benefit, housing, and transportation sections.
-- Browse fictional Events & Activities examples, filter by category, location, or date-derived status, and search titles and organizers.
+- Browse fictional Events & Activities examples and event details transcribed from user-supplied posters; filter by category, location, or date-derived status, and search titles and organizers.
 - View topic-specific pages for restaurant offers, gym offers, housing details, transport within Zakho, and transport between Zakho and other cities.
 - Open a shared navigation drawer to move between the main sections, contact the project, switch between Arabic, English, and Bahdini Kurdish, or enable night mode.
 - Open a record's detail view through a URL containing a section and record ID, for example `detail.html?section=deals&id=1`.
@@ -36,7 +36,7 @@ The homepage currently begins with the heading “Top exclusive offers.” Its w
 | `restaurant-offers.html` | Restaurant offers. |
 | `gym-offers.html` | Gym offers. |
 | `detail.html` | Shared detail view that selects a record from the URL's `section` and `id` parameters. |
-| `events.html` | Searchable Events & Activities directory, with upcoming and past demo examples. |
+| `events.html` | Searchable Events & Activities directory with demo examples and unverified poster-based listings. |
 
 ## Interface and visual design
 
@@ -56,7 +56,7 @@ The welcome intro is created by `js/pages/home/intro.js`; it is separate from th
 
 ## Data and page behavior
 
-`js/data/local-records.js` contains fictional structured demo records for deals, benefits, housing, and transportation. `js/data/events.js` contains fictional event examples; edit its records and the matching `data.events.<id>` translations in `js/localization/translations.js` together. Event status is computed from each record's ISO date and local start/end times. The shared detail-page logic in `js/shared/catalog-pages.js` reads the `section` and `id` query parameters, finds the corresponding record, and renders the relevant details.
+`js/data/local-records.js` contains structured records for deals, benefits, housing, and transportation. Deal entries based on supplied business images are labeled as listings only; no discount or location is inferred. `js/data/events.js` contains fictional demo events and listings transcribed from supplied event posters. Poster details are marked as unverified. Edit each event record and its matching `data.events.<id>` translations in `js/localization/translations.js` together. Event status is computed from each record's ISO date and local start/end times or date range. The shared detail-page logic in `js/shared/catalog-pages.js` reads the `section` and `id` query parameters, finds the corresponding record, and renders the relevant details.
 
 The project is a front-end prototype. Offer and service content should be treated as illustrative rather than verified, current listings. No real transaction, account, or provider integration is configured in the project files.
 

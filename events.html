@@ -10,6 +10,11 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Readex+Pro:wght@400;600;700&family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="css/style.css" />
+  <link rel="manifest" href="manifest.webmanifest" />
+  <meta name="theme-color" content="#203F7A" />
+  <link rel="icon" type="image/png" sizes="192x192" href="assets/icons/app-icon-192.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="assets/icons/apple-touch-icon.png" />
+  <script src="js/shared/pwa.js" defer></script>
 </head>
 <body>
   <div class="app-container">
@@ -32,7 +37,6 @@
       <section class="events-controls" aria-labelledby="eventsHeading">
         <label class="events-search-label" id="eventsSearchLabel" for="eventsSearch"></label>
         <input class="events-search" id="eventsSearch" type="search" autocomplete="off">
-        <div class="events-filters" id="eventsFilters" role="group"></div>
         <div class="events-selects">
           <label><span id="eventsLocationLabel"></span><select id="eventsLocation"></select></label>
           <label><span id="eventsStatusLabel"></span><select id="eventsStatus"></select></label>

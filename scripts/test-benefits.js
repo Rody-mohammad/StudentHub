@@ -39,6 +39,10 @@ for (const [section, records] of Object.entries(allTranslations.data || {})) {
 const i18nRuntimeSource = fs.readFileSync(path.join(root, 'js/localization/i18n.js'), 'utf8');
 const dealsDataContext = {};
 vm.runInNewContext(`${fs.readFileSync(path.join(root, 'js/data/local-records.js'), 'utf8')}\nglobalThis.__deals = dealsData;`, dealsDataContext);
+const removedDemoDealNames = ['Demo Book Corner', 'Demo Print & Copy', 'Demo Pizza Stop'];
+for (const name of removedDemoDealNames) {
+  assert.ok(!dealsDataContext.__deals.some((deal) => deal.business_name === name), `${name} is no longer listed as a deal`);
+}
 const healthMedicalDeals = dealsDataContext.__deals.filter((deal) => deal.category === 'health-medical');
 assert.equal(healthMedicalDeals.length, 3, 'the Health & Medical category has optical, dental and eye clinic demo offers');
 assert.match(fs.readFileSync(path.join(root, 'js/shared/catalog-pages.js'), 'utf8'), /'health-medical'/, 'the Deals category filters include Health & Medical');

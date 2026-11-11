@@ -642,19 +642,44 @@ window.STUDENTHUB_TRANSLATIONS = {
       "ku": "چالاکی و ڤەبوون"
     },
     "events.intro": {
-      "ar": "اكتشف مؤتمرات وورش عمل وأنشطة طلابية تجريبية.",
-      "en": "Discover demo conferences, workshops, and student activities.",
-      "ku": "کۆنفڕانس، کارگەه و چالاکیێن قوتابیان یێن تاقیکرنێ ببینە."
+      "ar": "اكتشف فعاليات تجريبية ومعلومات الفعاليات الظاهرة في الملصقات المقدمة.",
+      "en": "Browse fictional demo events and details transcribed from supplied event posters.",
+      "ku": "چالاکیێن تاقیکرنێ و زانیاریێن ژ پۆستەرێن هاتینە پێشکێشکرن ببینە."
     },
     "events.demoNotice": {
       "ar": "فعاليات توضيحية خيالية — ليست فرصًا حقيقية أو دعوات للتسجيل.",
       "en": "Fictional demo events — these are not real opportunities or registration invitations.",
       "ku": "چالاکیێن خەیاڵی یێن تاقیکرنێ — نە دەرفەتێن راستەقینە نە ژی بانگەوازێن تۆمارکرنێ نە."
     },
+    "events.directoryNotice": {
+      "ar": "الفعاليات التجريبية خيالية. تفاصيل الملصقات مستمدة من الصور المقدمة ولم يتم التحقق منها بشكل مستقل.",
+      "en": "Demo events are fictional. Poster details are transcribed from supplied images and have not been independently verified.",
+      "ku": "چالاکیێن تاقیکرنێ خەیاڵیین. زانیاریێن پۆستەران ژ وێنەیێن هاتینە پێشکێشکرن هاتینە وەرگرتن و نەهاتینە پشتڕاستکرنا سەربەخۆ."
+    },
+    "events.posterNotice": {
+      "ar": "هذه التفاصيل من ملصق مقدم من المستخدم ولم يتم التحقق منها بشكل مستقل؛ تحقق من الجهة المنظمة قبل الحضور.",
+      "en": "Details are transcribed from a user-supplied poster and have not been independently verified; confirm with the organizer before attending.",
+      "ku": "ئەڤ زانیارییە ژ پۆستەرەکێ هاتیە وەرگرتن کو بەکارهێنەر پێشکێشکریە و نەهاتە پشتڕاستکرنا سەربەخۆ؛ بەرێ خۆ بدە ڕێکخەرێ بەرێ خۆ بدەی."
+    },
     "events.demoLabel": {
       "ar": "فعالية تجريبية",
       "en": "Demo event",
       "ku": "چالاکیا تاقیکرنێ"
+    },
+    "events.posterLabel": {
+      "ar": "من ملصق مقدم",
+      "en": "From supplied poster",
+      "ku": "ژ پۆستەرەکا پێشکێشکری"
+    },
+    "events.posterParticipation": {
+      "ar": "لم ترد معلومات عن الدخول أو التسجيل في الملصق.",
+      "en": "The poster does not specify entry or registration details.",
+      "ku": "پۆستەر زانیاری ل سەر چوونەژوور یان تۆمارکرنێ نادات."
+    },
+    "events.posterRegistrationUnavailable": {
+      "ar": "لم يرد رابط أو تفاصيل تسجيل في الملصق.",
+      "en": "No registration link or details were included in the poster.",
+      "ku": "ل پۆستەری لینک یان زانیاریێن تۆمارکرنێ نەهاتینە دانان."
     },
     "events.featured": {
       "ar": "فعالية مقترحة",
@@ -761,6 +786,21 @@ window.STUDENTHUB_TRANSLATIONS = {
       "en": "Open to students (demo)",
       "ku": "بۆ قوتابیان ڤەکرییە (تاقیکرنە)"
     },
+    "events.freeEntryShort": {
+      "ar": "دخول مجاني",
+      "en": "Free Entry",
+      "ku": "چوون بێبەرامبەر"
+    },
+    "events.paidEntryShort": {
+      "ar": "مدفوع",
+      "en": "Paid",
+      "ku": "بەرامبەر"
+    },
+    "events.participationUnknown": {
+      "ar": "التفاصيل غير محددة",
+      "en": "Not specified",
+      "ku": "نەدیارە"
+    },
     "events.organizer": {
       "ar": "الجهة المنظمة",
       "en": "Organizer",
@@ -810,6 +850,11 @@ window.STUDENTHUB_TRANSLATIONS = {
       "ar": "{date}، {start}–{end}",
       "en": "{date}, {start}–{end}",
       "ku": "{date}، {start}–{end}"
+    },
+    "events.calendarRange": {
+      "ar": "من {start} إلى {end}",
+      "en": "{start} – {end}",
+      "ku": "ژ {start} تا {end}"
     },
     "events.clearFilters": {
       "ar": "مسح عوامل التصفية",
@@ -877,9 +922,14 @@ window.STUDENTHUB_TRANSLATIONS = {
       "ku": "چالاکیێن داهاتی"
     },
     "home.eventsIntro": {
-      "ar": "اكتشف أنشطة طلابية تجريبية قادمة.",
-      "en": "Explore upcoming demo activities for students.",
-      "ku": "چالاکیێن داهاتی یێن تاقیکرنێ ببینە."
+      "ar": "اكتشف الفعالية القادمة؛ تفاصيل الملصقات المقدمة غير مؤكدة.",
+      "en": "Discover the next upcoming event; details from supplied posters are unverified.",
+      "ku": "چالاکیا داهاتی ببینە؛ زانیاریێن پۆستەرێن پێشکێشکری نەهاتینە پشتڕاستکرن."
+    },
+    "home.eventsExplore": {
+      "ar": "استكشف الفعاليات القادمة",
+      "en": "Explore Upcoming Events",
+      "ku": "چالاکیێن داهاتی ببینە"
     },
     "media.altStudentTransport": {
       "ar": "النقل الطلابي",
@@ -2839,6 +2889,60 @@ window.STUDENTHUB_TRANSLATIONS = {
           "en": "Fictional past event; no registration or current activity is available.",
           "ku": "چالاکییەکا بوری یا خەیاڵی؛ تۆمارکرن یان چالاکییەکا نوکە نینە."
         }
+      },
+      "poster-zakho-book-fair-2026": {
+        "title": {
+          "ar": "معرض زاخو الدولي الثاني للكتاب",
+          "en": "2nd Zakho International Book Fair",
+          "ku": "دووەمین پێشانگەها نێڤدەوڵەتی یا کتێبان ل زاخۆ"
+        },
+        "organizer": {
+          "ar": "لم تُذكر الجهة المنظمة في الملصق المقدم.",
+          "en": "Organizer not specified on the supplied poster.",
+          "ku": "ل پۆستەرا پێشکێشکری ڕێکخەر نەهاتە دیارکرن."
+        },
+        "description": {
+          "ar": "العنوان والتواريخ من الملصق المقدم؛ لم تُذكر تفاصيل المكان أو الجهة المنظمة أو البرنامج، ولم يتم التحقق منها بشكل مستقل.",
+          "en": "The title and dates are transcribed from the supplied poster. Venue, organizer, and schedule details were not shown or independently verified.",
+          "ku": "ناڤ و ڕێکەفت ژ پۆستەرا پێشکێشکری هاتینە وەرگرتن؛ زانیاریێن جه، ڕێکخەر و بەرنامێ نەهاتینە نیشاندان یان پشتڕاستکرن."
+        },
+        "location": {
+          "ar": "لم يحدد الملصق المقدم المكان؛ زاخو مذكورة في اسم الفعالية.",
+          "en": "Venue not specified; Zakho appears in the event title.",
+          "ku": "پۆستەر جه دیار ناکەت؛ زاخۆ د ناڤێ چالاکیێ دا هاتیە."
+        },
+        "requirements": {
+          "ar": "لم يوضح الملصق متطلبات المشاركة أو التسجيل؛ يرجى التحقق من الجهة المنظمة.",
+          "en": "The poster does not specify participation or registration requirements; confirm with the organizer.",
+          "ku": "پۆستەر مەرجێن بەشداربوون یان تۆمارکرنێ دیار ناکەت؛ ل گەل ڕێکخەر پشتڕاست بکە."
+        }
+      },
+      "poster-zakho-trade-fair-2026": {
+        "title": {
+          "ar": "معرض زاخو الدولي العام الثاني للتجارة",
+          "en": "2nd Zakho International General Trade Fair",
+          "ku": "دووەمین پێشانگەها نێڤدەوڵەتی یا بازرگانی یا گشتی ل زاخۆ"
+        },
+        "organizer": {
+          "ar": "لم تُذكر الجهة المنظمة في الملصق المقدم.",
+          "en": "Organizer not specified on the supplied poster.",
+          "ku": "ل پۆستەرا پێشکێشکری ڕێکخەر نەهاتە دیارکرن."
+        },
+        "description": {
+          "ar": "العنوان والتواريخ من الملصق المقدم؛ لم تُذكر تفاصيل المكان أو الجهة المنظمة أو البرنامج، ولم يتم التحقق منها بشكل مستقل.",
+          "en": "The title and dates are transcribed from the supplied poster. Venue, organizer, and schedule details were not shown or independently verified.",
+          "ku": "ناڤ و ڕێکەفت ژ پۆستەرا پێشکێشکری هاتینە وەرگرتن؛ زانیاریێن جه، ڕێکخەر و بەرنامێ نەهاتینە نیشاندان یان پشتڕاستکرن."
+        },
+        "location": {
+          "ar": "لم يحدد الملصق المقدم المكان؛ زاخو مذكورة في اسم الفعالية.",
+          "en": "Venue not specified; Zakho appears in the event title.",
+          "ku": "پۆستەر جه دیار ناکەت؛ زاخۆ د ناڤێ چالاکیێ دا هاتیە."
+        },
+        "requirements": {
+          "ar": "لم يوضح الملصق متطلبات المشاركة أو التسجيل؛ يرجى التحقق من الجهة المنظمة.",
+          "en": "The poster does not specify participation or registration requirements; confirm with the organizer.",
+          "ku": "پۆستەر مەرجێن بەشداربوون یان تۆمارکرنێ دیار ناکەت؛ ل گەل ڕێکخەر پشتڕاست بکە."
+        }
       }
     },
     "deals": {
@@ -2931,102 +3035,6 @@ window.STUDENTHUB_TRANSLATIONS = {
           "ar": "جادة تجريبية 8، الحي الرياضي، زاخو (موقع خيالي)",
           "en": "Demo Boulevard 8, Sports District, Zakho (fictional)",
           "ku": "بولڤارا تاقیکرنێ 8، ناڤچەیا وەرزشێ، زاخۆ (خەیاڵی)"
-        },
-        "how_to_use": {
-          "ar": "أبرز هويتك الجامعية عند المحاسبة.",
-          "en": "Show your university ID at the counter.",
-          "ku": "ناسناما زانکۆیێ خۆ ل کۆنتێری نیشان بدە."
-        }
-      },
-      "4": {
-        "discount": {
-          "ar": "خصم 25%",
-          "en": "25% OFF",
-          "ku": "25% داشکاندن"
-        },
-        "description": {
-          "ar": "خصم 25% على القرطاسية والدفاتر ومستلزمات الدراسة في Demo Book Corner. مناسب لتجهيز احتياجات بداية الفصل الدراسي.",
-          "en": "25% off all stationery, notebooks and study supplies at Demo Book Corner. Perfect for students stocking up at the start of term.",
-          "ku": "25% داشکاندن ل هەمی کەرەستەیێن نووسینێ، دەفتەر و پێداویستیێن خوێندنێ ل Demo Book Corner. بۆ قوتابیێن دڤێن ل دەستپێکا وەرزێ پێدڤیێن خۆ پەیدا بکەن گونجایە."
-        },
-        "terms": {
-          "ar": "يسري على المنتجات غير المخفضة فقط. الحد الأقصى للشراء 50,000 دينار عراقي في الزيارة.",
-          "en": "Discount applies to non-sale items only. Maximum purchase: 50,000 IQD per visit.",
-          "ku": "تەنێ بۆ کاڵایێن نەداشکاندی دروستە. کێمترین کرین: 50,000 IQD بۆ هەر سەردانەکێ."
-        },
-        "valid_until": {
-          "ar": "تاريخ تجريبي — سبتمبر 2025",
-          "en": "Demo Date – Sep 2025",
-          "ku": "Demo Date – Sep 2025"
-        },
-        "location": {
-          "ar": "ممر السوق التجريبي 3، البلدة القديمة، زاخو (موقع خيالي)",
-          "en": "Demo Market Lane 3, Old Town, Zakho (fictional)",
-          "ku": "ڕێکا بازاڕا تاقیکرنێ 3، باژێرێ کەڤن، زاخۆ (خەیاڵی)"
-        },
-        "how_to_use": {
-          "ar": "أبرز هويتك الجامعية عند المحاسبة.",
-          "en": "Show your university ID at the counter.",
-          "ku": "ناسناما زانکۆیێ خۆ ل کۆنتێری نیشان بدە."
-        }
-      },
-      "5": {
-        "discount": {
-          "ar": "خصم 30%",
-          "en": "30% OFF",
-          "ku": "30% داشکاندن"
-        },
-        "description": {
-          "ar": "اطبع الواجبات والرسائل العلمية والملصقات بخصم طلابي قدره 30%. تتوفر الطباعة الملونة والأبيض والأسود.",
-          "en": "Print assignments, theses and posters at 30% student discount. Color and black-and-white printing available.",
-          "ku": "ب 30% داشکاندنا قوتابیان کارێن وانە، نامەیێن زانستی و پۆستەران چاپ بکە. چاپکرنا ڕەنگین و ڕەش و سپی بەردەستە."
-        },
-        "terms": {
-          "ar": "يسري على الطباعة العادية بحجم A4، ولا يشمل الطباعة كبيرة الحجم.",
-          "en": "Applies to standard A4 prints. Large-format printing excluded.",
-          "ku": "تەنێ بۆ چاپکرنا ئاسایی یا A4 دروستە. چاپکرنا قەبارەیێ مەزن نەدەتە ناڤ."
-        },
-        "valid_until": {
-          "ar": "تاريخ تجريبي — ديسمبر 2025",
-          "en": "Demo Date – Dec 2025",
-          "ku": "Demo Date – Dec 2025"
-        },
-        "location": {
-          "ar": "ساحة تجريبية 1، منطقة بوابة الجامعة، زاخو (موقع خيالي)",
-          "en": "Demo Plaza 1, University Gate Area, Zakho (fictional)",
-          "ku": "مەیدانا تاقیکرنێ 1، ناوچەیا دەرگەهێ زانکۆیێ، زاخۆ (خەیاڵی)"
-        },
-        "how_to_use": {
-          "ar": "أبرز هويتك الجامعية عند المحاسبة.",
-          "en": "Show your university ID at the counter.",
-          "ku": "ناسناما زانکۆیێ خۆ ل کۆنتێری نیشان بدە."
-        }
-      },
-      "6": {
-        "discount": {
-          "ar": "اشترِ 2 واحصل على 1",
-          "en": "Buy 2 Get 1",
-          "ku": "2 بکڕە، 1 وەرگرە"
-        },
-        "description": {
-          "ar": "اشترِ أي شريحتين واحصل على الثالثة مجانًا في Demo Pizza Stop. خيار مناسب لاستراحة الدراسة الجماعية.",
-          "en": "Buy any two slices and get the third free at Demo Pizza Stop. Great for group study breaks.",
-          "ku": "هەر دوو پارچەیان بکڕە و یا سێیێ بێبەرامبەر ل Demo Pizza Stop وەرگرە. بۆ دەمێ پشووا خوێندنا کۆمەکی یا گونجایە."
-        },
-        "terms": {
-          "ar": "يجب أن تكون الشريحة الثالثة مساوية للأولى أو أقل سعرًا. داخل المطعم فقط.",
-          "en": "Third slice must be of equal or lesser value. Dine-in only.",
-          "ku": "پێدڤییە پارچەیا سێیێ هەمان نرخ یان نرخەکا کێمتر هەبیت. تەنێ ل ناڤ چێشتخانێ."
-        },
-        "valid_until": {
-          "ar": "تاريخ تجريبي — يناير 2026",
-          "en": "Demo Date – Jan 2026",
-          "ku": "Demo Date – Jan 2026"
-        },
-        "location": {
-          "ar": "الطريق الدائري التجريبي 7، الجهة الغربية، زاخو (موقع خيالي)",
-          "en": "Demo Ring Road 7, West Side, Zakho (fictional)",
-          "ku": "ڕێکا بازنەیی یا تاقیکرنێ 7، لایێ ڕۆژئاڤای، زاخۆ (خەیاڵی)"
         },
         "how_to_use": {
           "ar": "أبرز هويتك الجامعية عند المحاسبة.",
@@ -3162,6 +3170,106 @@ window.STUDENTHUB_TRANSLATIONS = {
           "ar": "للعرض التجريبي فقط — لا يمكن استخدام هذا العرض فعليًا.",
           "en": "Demo only — this offer cannot be redeemed.",
           "ku": "تەنێ بۆ تاقیکرنێ — ئەڤ ئۆفەرە ناهێتە بەکارهینان."
+        }
+      },
+      "12": {
+        "business_name": { "ar": "مقهى EVAR", "en": "EVAR Café", "ku": "کافێیا EVAR" },
+        "discount": { "ar": "بيانات فقط — لا يوجد عرض مؤكد", "en": "Listing only — no offer verified", "ku": "تەنێ لیستە — هیچ ئۆفەرەک نەهاتە پشتڕاستکرن" },
+        "description": {
+          "ar": "الاسم والصورة من صورة مقدمة. لم تُقدم تفاصيل عرض طلابي أو موقع، ولم يتم التحقق من تفاصيل النشاط بشكل مستقل.",
+          "en": "Name and image are from a supplied image. No student offer or location was provided, and business details have not been independently verified.",
+          "ku": "ناڤ و وێنە ژ وێنەیەکا پێشکێشکری نە. هیچ زانیارییەکا ئۆفەرا قوتابیان یان جهێ نەهاتە پێشکێشکرن و زانیاریێن کارێ نەهاتینە پشتڕاستکرنا سەربەخۆ."
+        },
+        "terms": {
+          "ar": "لم تُقدم تفاصيل عرض طلابي؛ لا ندّعي وجود خصم.",
+          "en": "No student offer details were provided; no discount is claimed.",
+          "ku": "زانیاریێن ئۆفەرا قوتابیان نەهاتینە پێشکێشکرن؛ هیچ داشکاندنەک ناهێتە بانگەشەکرن."
+        },
+        "location": { "ar": "غير مذكور", "en": "Not provided", "ku": "نەهاتە پێشکێشکرن" },
+        "how_to_use": {
+          "ar": "لم تُقدم معلومات عن استخدام عرض.",
+          "en": "No offer redemption information was provided.",
+          "ku": "زانیاری ل سەر بەکارهینانا ئۆفەرەکێ نەهاتە پێشکێشکرن."
+        }
+      },
+      "13": {
+        "business_name": { "ar": "مقهى NIN", "en": "NIN Café", "ku": "کافێیا NIN" },
+        "discount": { "ar": "بيانات فقط — لا يوجد عرض مؤكد", "en": "Listing only — no offer verified", "ku": "تەنێ لیستە — هیچ ئۆفەرەک نەهاتە پشتڕاستکرن" },
+        "description": {
+          "ar": "الاسم والصورة من صورة مقدمة. لم تُقدم تفاصيل عرض طلابي أو موقع، ولم يتم التحقق من تفاصيل النشاط بشكل مستقل.",
+          "en": "Name and image are from a supplied image. No student offer or location was provided, and business details have not been independently verified.",
+          "ku": "ناڤ و وێنە ژ وێنەیەکا پێشکێشکری نە. هیچ زانیارییەکا ئۆفەرا قوتابیان یان جهێ نەهاتە پێشکێشکرن و زانیاریێن کارێ نەهاتینە پشتڕاستکرنا سەربەخۆ."
+        },
+        "terms": {
+          "ar": "لم تُقدم تفاصيل عرض طلابي؛ لا ندّعي وجود خصم.",
+          "en": "No student offer details were provided; no discount is claimed.",
+          "ku": "زانیاریێن ئۆفەرا قوتابیان نەهاتینە پێشکێشکرن؛ هیچ داشکاندنەک ناهێتە بانگەشەکرن."
+        },
+        "location": { "ar": "غير مذكور", "en": "Not provided", "ku": "نەهاتە پێشکێشکرن" },
+        "how_to_use": {
+          "ar": "لم تُقدم معلومات عن استخدام عرض.",
+          "en": "No offer redemption information was provided.",
+          "ku": "زانیاری ل سەر بەکارهینانا ئۆفەرەکێ نەهاتە پێشکێشکرن."
+        }
+      },
+      "14": {
+        "business_name": { "ar": "Friet Zone", "en": "Friet Zone", "ku": "Friet Zone" },
+        "discount": { "ar": "بيانات فقط — لا يوجد عرض مؤكد", "en": "Listing only — no offer verified", "ku": "تەنێ لیستە — هیچ ئۆفەرەک نەهاتە پشتڕاستکرن" },
+        "description": {
+          "ar": "الاسم والصورة من صورة مقدمة. لم تُقدم تفاصيل عرض طلابي أو موقع، ولم يتم التحقق من تفاصيل النشاط بشكل مستقل.",
+          "en": "Name and image are from a supplied image. No student offer or location was provided, and business details have not been independently verified.",
+          "ku": "ناڤ و وێنە ژ وێنەیەکا پێشکێشکری نە. هیچ زانیارییەکا ئۆفەرا قوتابیان یان جهێ نەهاتە پێشکێشکرن و زانیاریێن کارێ نەهاتینە پشتڕاستکرنا سەربەخۆ."
+        },
+        "terms": {
+          "ar": "لم تُقدم تفاصيل عرض طلابي؛ لا ندّعي وجود خصم.",
+          "en": "No student offer details were provided; no discount is claimed.",
+          "ku": "زانیاریێن ئۆفەرا قوتابیان نەهاتینە پێشکێشکرن؛ هیچ داشکاندنەک ناهێتە بانگەشەکرن."
+        },
+        "location": { "ar": "غير مذكور", "en": "Not provided", "ku": "نەهاتە پێشکێشکرن" },
+        "how_to_use": {
+          "ar": "لم تُقدم معلومات عن استخدام عرض.",
+          "en": "No offer redemption information was provided.",
+          "ku": "زانیاری ل سەر بەکارهینانا ئۆفەرەکێ نەهاتە پێشکێشکرن."
+        }
+      },
+      "15": {
+        "business_name": { "ar": "Best Choice Bookstore", "en": "Best Choice Bookstore", "ku": "Best Choice Bookstore" },
+        "discount": { "ar": "بيانات فقط — لا يوجد عرض مؤكد", "en": "Listing only — no offer verified", "ku": "تەنێ لیستە — هیچ ئۆفەرەک نەهاتە پشتڕاستکرن" },
+        "description": {
+          "ar": "الاسم والصورة من صورة مقدمة. لم تُقدم تفاصيل عرض طلابي أو موقع، ولم يتم التحقق من تفاصيل النشاط بشكل مستقل.",
+          "en": "Name and image are from a supplied image. No student offer or location was provided, and business details have not been independently verified.",
+          "ku": "ناڤ و وێنە ژ وێنەیەکا پێشکێشکری نە. هیچ زانیارییەکا ئۆفەرا قوتابیان یان جهێ نەهاتە پێشکێشکرن و زانیاریێن کارێ نەهاتینە پشتڕاستکرنا سەربەخۆ."
+        },
+        "terms": {
+          "ar": "لم تُقدم تفاصيل عرض طلابي؛ لا ندّعي وجود خصم.",
+          "en": "No student offer details were provided; no discount is claimed.",
+          "ku": "زانیاریێن ئۆفەرا قوتابیان نەهاتینە پێشکێشکرن؛ هیچ داشکاندنەک ناهێتە بانگەشەکرن."
+        },
+        "location": { "ar": "غير مذكور", "en": "Not provided", "ku": "نەهاتە پێشکێشکرن" },
+        "how_to_use": {
+          "ar": "لم تُقدم معلومات عن استخدام عرض.",
+          "en": "No offer redemption information was provided.",
+          "ku": "زانیاری ل سەر بەکارهینانا ئۆفەرەکێ نەهاتە پێشکێشکرن."
+        }
+      },
+      "16": {
+        "business_name": { "ar": "Alpha Fitness", "en": "Alpha Fitness", "ku": "Alpha Fitness" },
+        "discount": { "ar": "بيانات فقط — لا يوجد عرض مؤكد", "en": "Listing only — no offer verified", "ku": "تەنێ لیستە — هیچ ئۆفەرەک نەهاتە پشتڕاستکرن" },
+        "description": {
+          "ar": "الاسم والصورة من صورة مقدمة. لم تُقدم تفاصيل عرض طلابي أو موقع، ولم يتم التحقق من تفاصيل النشاط بشكل مستقل.",
+          "en": "Name and image are from a supplied image. No student offer or location was provided, and business details have not been independently verified.",
+          "ku": "ناڤ و وێنە ژ وێنەیەکا پێشکێشکری نە. هیچ زانیارییەکا ئۆفەرا قوتابیان یان جهێ نەهاتە پێشکێشکرن و زانیاریێن کارێ نەهاتینە پشتڕاستکرنا سەربەخۆ."
+        },
+        "terms": {
+          "ar": "لم تُقدم تفاصيل عرض طلابي؛ لا ندّعي وجود خصم.",
+          "en": "No student offer details were provided; no discount is claimed.",
+          "ku": "زانیاریێن ئۆفەرا قوتابیان نەهاتینە پێشکێشکرن؛ هیچ داشکاندنەک ناهێتە بانگەشەکرن."
+        },
+        "location": { "ar": "غير مذكور", "en": "Not provided", "ku": "نەهاتە پێشکێشکرن" },
+        "how_to_use": {
+          "ar": "لم تُقدم معلومات عن استخدام عرض.",
+          "en": "No offer redemption information was provided.",
+          "ku": "زانیاری ل سەر بەکارهینانا ئۆفەرەکێ نەهاتە پێشکێشکرن."
         }
       }
     },

@@ -1,11 +1,11 @@
 /**
  * js/data/local-records.js
  * ============================================================
- * ALL demo content lives here.
+ * Manually maintained local deals, benefits, housing, and transport records live here.
  * To add, remove or edit items: update the arrays below,
  * save the file, and refresh the browser. No build step needed.
  *
- * REMINDER: This data is entirely fictional and for demo purposes only.
+ * Demo records are fictional. Image-based business names are unverified and carry no claimed offer.
  * ============================================================
  */
 
@@ -40,48 +40,13 @@ const dealsData = [
     id: 3,
     business_name: "Demo FitZone Gym",
     category: "gym",
+    image: "assets/images/gym2.jfif",
     discount: "20% OFF",
     description:
       "Students get 20% off monthly membership fees at Demo FitZone Gym. Includes access to cardio machines, weights and group classes.",
     terms: "Student must enroll for a minimum of one month. ID verified at registration.",
     valid_until: "Demo Date – Jun 2026",
     location: "Demo Boulevard 8, Sports District, Zakho (fictional)",
-    how_to_use: "Show your university ID at the counter.",
-  },
-  {
-    id: 4,
-    business_name: "Demo Book Corner",
-    category: "shop",
-    discount: "25% OFF",
-    description:
-      "25% off all stationery, notebooks and study supplies at Demo Book Corner. Perfect for students stocking up at the start of term.",
-    terms: "Discount applies to non-sale items only. Maximum purchase: 50,000 IQD per visit.",
-    valid_until: "Demo Date – Sep 2025",
-    location: "Demo Market Lane 3, Old Town, Zakho (fictional)",
-    how_to_use: "Show your university ID at the counter.",
-  },
-  {
-    id: 5,
-    business_name: "Demo Print & Copy",
-    category: "other",
-    discount: "30% OFF",
-    description:
-      "Print assignments, theses and posters at 30% student discount. Color and black-and-white printing available.",
-    terms: "Applies to standard A4 prints. Large-format printing excluded.",
-    valid_until: "Demo Date – Dec 2025",
-    location: "Demo Plaza 1, University Gate Area, Zakho (fictional)",
-    how_to_use: "Show your university ID at the counter.",
-  },
-  {
-    id: 6,
-    business_name: "Demo Pizza Stop",
-    category: "restaurant",
-    discount: "Buy 2 Get 1",
-    description:
-      "Buy any two slices and get the third free at Demo Pizza Stop. Great for group study breaks.",
-    terms: "Third slice must be of equal or lesser value. Dine-in only.",
-    valid_until: "Demo Date – Jan 2026",
-    location: "Demo Ring Road 7, West Side, Zakho (fictional)",
     how_to_use: "Show your university ID at the counter.",
   },
   {
@@ -114,6 +79,7 @@ const dealsData = [
     id: 9,
     business_name: "Demo Optical Store",
     category: "health-medical",
+    image: "assets/images/glasess.jfif",
     discount: "Demo: 20% OFF prescription glasses",
     description:
       "Demo student offer: 20% off prescription glasses at a fictional optical store. No real provider or discount is verified.",
@@ -126,6 +92,7 @@ const dealsData = [
     id: 10,
     business_name: "Demo Dental Clinic",
     category: "health-medical",
+    image: "assets/images/dental.jfif",
     discount: "Demo: 15% OFF consultation",
     description:
       "Demo student offer: 15% off a dental consultation at a fictional clinic. No real provider or discount is verified.",
@@ -138,6 +105,7 @@ const dealsData = [
     id: 11,
     business_name: "Demo Eye Clinic",
     category: "health-medical",
+    image: "assets/images/Eyes.jfif",
     discount: "Demo: Free eye checkup",
     description:
       "Demo student offer: a free basic eye checkup or discounted consultation at a fictional eye clinic. No real provider or service is verified.",
@@ -145,6 +113,71 @@ const dealsData = [
     valid_until: "",
     location: "Fictional Zakho location (demo only)",
     how_to_use: "Demo only — this offer cannot be redeemed.",
+  },
+  {
+    id: 12,
+    business_name: "EVAR Café",
+    category: "cafe",
+    image: "assets/images/evar_cafe.png",
+    discount: "Listing only",
+    description:
+      "Name and image are shown from a supplied image. No student offer, location, or other business details were provided or independently verified.",
+    terms: "No student offer details were provided; no discount is being claimed.",
+    valid_until: "",
+    location: "Not provided",
+    how_to_use: "No offer information was provided.",
+  },
+  {
+    id: 13,
+    business_name: "NIN Café",
+    category: "cafe",
+    image: "assets/images/nin_cafe.png",
+    discount: "Listing only",
+    description:
+      "Name and image are shown from a supplied image. No student offer, location, or other business details were provided or independently verified.",
+    terms: "No student offer details were provided; no discount is being claimed.",
+    valid_until: "",
+    location: "Not provided",
+    how_to_use: "No offer information was provided.",
+  },
+  {
+    id: 14,
+    business_name: "Friet Zone",
+    category: "restaurant",
+    image: "assets/images/friet_zone.png",
+    discount: "Listing only",
+    description:
+      "Name and image are shown from a supplied image. No student offer, location, or other business details were provided or independently verified.",
+    terms: "No student offer details were provided; no discount is being claimed.",
+    valid_until: "",
+    location: "Not provided",
+    how_to_use: "No offer information was provided.",
+  },
+  {
+    id: 15,
+    business_name: "Best Choice Bookstore",
+    category: "shop",
+    image: "assets/images/bookstore.png",
+    discount: "Listing only",
+    description:
+      "Name and image are shown from a supplied image. No student offer, location, or other business details were provided or independently verified.",
+    terms: "No student offer details were provided; no discount is being claimed.",
+    valid_until: "",
+    location: "Not provided",
+    how_to_use: "No offer information was provided.",
+  },
+  {
+    id: 16,
+    business_name: "Alpha Fitness",
+    category: "gym",
+    image: "assets/images/gym1.jfif",
+    discount: "Listing only",
+    description:
+      "Name and image are shown from a supplied image. No student offer, location, or other business details were provided or independently verified.",
+    terms: "No student offer details were provided; no discount is being claimed.",
+    valid_until: "",
+    location: "Not provided",
+    how_to_use: "No offer information was provided.",
   },
 ];
 

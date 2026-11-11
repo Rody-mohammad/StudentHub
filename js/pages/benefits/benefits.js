@@ -55,21 +55,18 @@
 
   function bookCard(item) {
     const name = localize(item.name);
-    const description = localize(item.description).split(/[.!?]/)[0];
-    return `<article class="benefit-card" data-kind="${escape(item.kind)}"><a class="benefit-card__link" href="detail.html?section=books&id=${encodeURIComponent(item.id)}"><div class="benefit-card__top"><span class="benefit-mark" aria-hidden="true">${escape(item.mark || name.slice(0, 2))}</span><span class="benefit-badge">${escape(translate(item.kind === 'study' ? 'benefits.studySpace' : 'benefits.seller'))}</span></div><h2>${escape(name)}</h2>${description ? `<p class="benefit-card__description">${escape(description)}.</p>` : ''}<span class="benefit-link">${escape(translate('common.viewDetails'))}</span></a></article>`;
+    return `<article class="benefit-card" data-kind="${escape(item.kind)}"><a class="benefit-card__link" href="detail.html?section=books&id=${encodeURIComponent(item.id)}"><div class="benefit-card__top"><span class="benefit-mark" aria-hidden="true">${escape(item.mark || name.slice(0, 2))}</span><span class="benefit-badge">${escape(translate(item.kind === 'study' ? 'benefits.studySpace' : 'benefits.seller'))}</span></div><h2>${escape(name)}</h2><span class="benefit-link">${escape(translate('common.viewDetails'))}</span></a></article>`;
   }
 
   function offerCard(item) {
     const price = localize(item.price);
     const free = /free|no cost/i.test(price);
-    const summary = localize(item.description).split(/[.!?]/)[0];
-    return `<article class="benefit-card" data-kind="offer"><a class="benefit-card__link" href="detail.html?section=studentOffers&id=${encodeURIComponent(item.id)}"><div class="benefit-card__top"><span class="benefit-mark" aria-hidden="true">${escape(item.name.split(/\s+/).map((part) => part[0]).join('').slice(0, 3))}</span><span class="benefit-badge">${escape(translate(`benefits.type.${item.offerType}`))}</span></div><h2>${escape(item.name)}</h2>${item.provider ? `<p class="benefit-provider">${escape(item.provider)}</p>` : ''}${price.trim() ? `<p class="benefit-value ${free ? 'benefit-value--free' : 'benefit-value--limited'}">${free ? '✓ ' : ''}${escape(price)}</p>` : ''}${summary ? `<p class="benefit-card__description">${escape(summary)}.</p>` : ''}${expiryLabel(item.expiration)}<span class="benefit-link">${escape(translate('common.viewDetails'))}</span></a></article>`;
+    return `<article class="benefit-card" data-kind="offer"><a class="benefit-card__link" href="detail.html?section=studentOffers&id=${encodeURIComponent(item.id)}"><div class="benefit-card__top"><span class="benefit-mark" aria-hidden="true">${escape(item.name.split(/\s+/).map((part) => part[0]).join('').slice(0, 3))}</span><span class="benefit-badge">${escape(translate(`benefits.type.${item.offerType}`))}</span></div><h2>${escape(item.name)}</h2>${item.provider ? `<p class="benefit-provider">${escape(item.provider)}</p>` : ''}${price.trim() ? `<p class="benefit-value ${free ? 'benefit-value--free' : 'benefit-value--limited'}">${free ? '✓ ' : ''}${escape(price)}</p>` : ''}<span class="benefit-link">${escape(translate('common.viewDetails'))}</span></a></article>`;
   }
 
   function softwareCard(item) {
     const category = translate(`benefits.softwareCategory.${item.category}`);
-    const summary = localize(item.description).split(/[.!?]/)[0];
-    return `<article class="benefit-card" data-kind="software"><a class="benefit-card__link" href="detail.html?section=software&id=${encodeURIComponent(item.id)}"><div class="benefit-card__top"><span class="benefit-mark" aria-hidden="true">${escape(item.mark || item.name.slice(0, 2))}</span><span class="benefit-badge">${escape(category)}</span></div><h2>${escape(item.name)}</h2>${summary ? `<p class="benefit-card__description">${escape(summary)}.</p>` : ''}<span class="benefit-link">${escape(translate('common.viewDetails'))}</span></a></article>`;
+    return `<article class="benefit-card" data-kind="software"><a class="benefit-card__link" href="detail.html?section=software&id=${encodeURIComponent(item.id)}"><div class="benefit-card__top"><span class="benefit-mark" aria-hidden="true">${escape(item.mark || item.name.slice(0, 2))}</span><span class="benefit-badge">${escape(category)}</span></div><h2>${escape(item.name)}</h2><span class="benefit-link">${escape(translate('common.viewDetails'))}</span></a></article>`;
   }
 
   function metadata(rows) {

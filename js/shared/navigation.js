@@ -4,8 +4,8 @@
   let darkMode = document.documentElement.dataset.theme === 'dark';
 
   const fallbackLinks = [
-    ['index.html', 'الرئيسية'], ['deals.html', 'العروض'], ['benefits.html', 'المزايا'],
-    ['transportation.html', 'النقل'], ['housing.html', 'السكن'], ['events.html', 'الفعاليات والأنشطة']
+    ['index.html', 'الرئيسية'], ['deals.html', 'العروض'], ['events.html', 'الفعاليات والأنشطة'],
+    ['benefits.html', 'المزايا'], ['transportation.html', 'النقل'], ['housing.html', 'السكن']
   ];
   const linkKeys = {
     'index.html': 'navigation.home', 'deals.html': 'navigation.deals',
@@ -57,6 +57,11 @@
       eventsLabel.textContent = window.StudentHubI18n?.t('navigation.events') || 'Events & Activities';
       eventsLink.append(eventsLabel);
       pageLinks.push(eventsLink);
+    }
+    const eventsIndex = pageLinks.findIndex((link) => link.getAttribute('href') === 'events.html');
+    const benefitsIndex = pageLinks.findIndex((link) => link.getAttribute('href') === 'benefits.html');
+    if (eventsIndex !== -1 && benefitsIndex !== -1 && eventsIndex > benefitsIndex) {
+      pageLinks.splice(benefitsIndex, 0, pageLinks.splice(eventsIndex, 1)[0]);
     }
 
     const menuButton = document.createElement('button');

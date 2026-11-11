@@ -123,12 +123,6 @@ function detailSectionHtml(heading, content) {
   return content ? `<section class="detail-section"><h3>${heading}</h3>${content}</section>` : '';
 }
 
-function shortCardDescription(value) {
-  const text = String(value || '').trim();
-  const firstSentence = text.match(/^.*?[.!?](?:\s|$)/);
-  return (firstSentence ? firstSentence[0] : text).trim();
-}
-
 function offerExpiry(value) {
   const normalized = normalizeTransportDigits(String(value || ''));
   const iso = normalized.match(/\b(\d{4})-(\d{1,2})-(\d{1,2})\b/);
@@ -296,7 +290,6 @@ function initDealsPage() {
 
 function renderDealCard(item) {
   const name = dataValue('deals', item, 'business_name');
-  const description = shortCardDescription(dataValue('deals', item, 'description'));
   const category = window.StudentHubI18n.category(item.category);
   const expiry = dataValue('deals', item, 'valid_until');
   const href = `detail.html?section=deals&id=${encodeURIComponent(item.id)}`;
@@ -311,7 +304,6 @@ function renderDealCard(item) {
         <div class="card__body">
           <span class="badge badge--gray">${category}</span>
           <h3 class="card__title">${name}</h3>
-          ${description ? `<p class="card__desc">${description}</p>` : ''}
           ${offerStatusHtml(expiry)}
           <span class="btn btn--primary btn--sm">${t('common.viewDetails')}</span>
         </div>
@@ -339,7 +331,6 @@ function initBenefitsPage() {
 function renderBenefitCard(item) {
   const typeColor = item.benefit_type === 'Free' ? 'badge--amber' : 'badge--blue';
   const name = dataValue('benefits', item, 'name');
-  const description = shortCardDescription(dataValue('benefits', item, 'description'));
   return `
     <article class="card card--compact" aria-label="${name}">
       <a class="card__link card__link--benefit" href="detail.html?section=benefits&id=${encodeURIComponent(item.id)}">
@@ -349,7 +340,6 @@ function renderBenefitCard(item) {
           <span class="badge badge--gray">${window.StudentHubI18n.category(item.category)}</span>
           </div>
           <h3 class="card__title">${name}</h3>
-          ${description ? `<p class="card__desc">${description}</p>` : ''}
           <span class="card__status">${t('common.verified')} ${dataValue('benefits', item, 'last_verified')}</span>
           <span class="btn btn--primary btn--sm">${t('common.viewDetails')}</span>
         </div>
@@ -573,7 +563,6 @@ function housingIcon(kind) {
 function renderHousingCard(item) {
   const title = dataValue('housing', item, 'title');
   const neighborhood = dataValue('housing', item, 'neighborhood');
-  const description = shortCardDescription(dataValue('housing', item, 'description'));
   const isUniversity = housingIsUniversityHousing(item);
   const discount = housingDiscount(item);
   const price = isUniversity && housingIsFree(item) ? `<span class="housing-free">${t('benefit.free')}</span>` : discount
@@ -592,7 +581,6 @@ function renderHousingCard(item) {
           <h2 class="housing-listing__title">${title}</h2>
           ${price}
           ${location}
-          ${description ? `<p class="housing-listing__description">${description}</p>` : ''}
           <span class="btn btn--primary btn--sm">${t('common.viewDetails')}</span>
         </div>
       </a>
@@ -606,7 +594,6 @@ function initTransportationPage() {
   const container   = document.getElementById('cardContainer');
   const searchInput = document.getElementById('searchInput');
   const chipsEl     = document.getElementById('filterChips');
-  const suggestionsEl = document.getElementById('searchSuggestions');
   const sortInput = document.getElementById('transportSort');
   const countEl = document.getElementById('transportCount');
   if (!container) return;
@@ -650,20 +637,6 @@ function initTransportationPage() {
   }
   drawChips();
 
-  function drawSuggestions() {
-    const suggestions = [...new Set(transportationData.flatMap(item => [
-      dataValue('transportation', item, 'pickup_point'), dataValue('transportation', item, 'dropoff_point'),
-    ]))].slice(0, 3);
-    if (suggestionsEl) suggestionsEl.innerHTML = suggestions.map(value => `<button type="button" class="transport-suggestion">${String(value).replace(/\s*\(fictional\)/i, '').replace(/Demo\s+/i, '')}</button>`).join('');
-  }
-  drawSuggestions();
-  suggestionsEl?.addEventListener('click', event => {
-    const button = event.target.closest('.transport-suggestion');
-    if (!button || !searchInput) return;
-    searchInput.value = button.textContent;
-    searchTerm = button.textContent.toLowerCase().trim();
-    renderTransport();
-  });
   sortInput?.addEventListener('change', () => { sortMode = sortInput.value; renderTransport(); });
 
   if (searchInput) {
@@ -718,7 +691,7 @@ function initTransportationPage() {
   }
 
   renderTransport();
-  window.StudentHubI18n?.onChange(() => { drawChips(); drawSuggestions(); renderTransport(); });
+  window.StudentHubI18n?.onChange(() => { drawChips(); renderTransport(); });
 }
 
 function renderTransportCard(item) {
@@ -936,6 +909,7 @@ function renderEventDetail(item) {
   const value = (field) => escapeHtml(dataValue('events', item, field) ?? '');
   const status = window.StudentHubEvents.status(item);
   const fee = Number(item.price) || 0;
+  const posterBased = item.source === 'poster';
   let registrationUrl = '';
   try {
     const candidate = new URL(item.registrationUrl);
@@ -944,16 +918,16 @@ function renderEventDetail(item) {
 
   return `<div class="detail-photo-wrapper events-detail-cover"><img src="${escapeHtml(item.image)}" alt="" class="detail-photo"></div>
     <div class="detail-card events-detail-card">
-      <div class="detail-meta"><span class="badge badge--gray">${escapeHtml(i18n.t(`events.category.${item.category}`))}</span><span class="badge events-state events-state--${status}">${escapeHtml(i18n.t(`events.state.${status}`))}</span><span class="badge badge--amber">${escapeHtml(i18n.t('events.demoLabel'))}</span></div>
+      <div class="detail-meta"><span class="badge badge--gray">${escapeHtml(i18n.t(`events.category.${item.category}`))}</span><span class="badge events-state events-state--${status}">${escapeHtml(i18n.t(`events.state.${status}`))}</span><span class="badge badge--amber">${escapeHtml(i18n.t(posterBased ? 'events.posterLabel' : 'events.demoLabel'))}</span></div>
       <h2 class="detail-card__title">${value('title')}</h2>
-      <div class="events-detail-notice">${escapeHtml(i18n.t('events.demoNotice'))}</div>
+      <div class="events-detail-notice">${escapeHtml(i18n.t(posterBased ? 'events.posterNotice' : 'events.demoNotice'))}</div>
       ${detailSectionHtml(i18n.t('events.aboutEvent'), `<p>${value('description')}</p>`)}
       ${detailSectionHtml(i18n.t('events.organizer'), `<p>${value('organizer')}</p>`)}
       ${detailSectionHtml(i18n.t('events.dateTime'), `<p>${escapeHtml(window.StudentHubEvents.dateTime(item, i18n.getLanguage()))}</p>`)}
       ${detailSectionHtml(i18n.t('events.venue'), `<p>${value('location')} · ${escapeHtml(i18n.t(`events.city.${item.city.toLowerCase()}`))}</p>`)}
       ${detailSectionHtml(i18n.t('events.requirements'), `<p>${value('requirements')}</p>`)}
-      ${detailSectionHtml(i18n.t('events.participation'), `<p>${escapeHtml(fee > 0 ? `${i18n.t('events.paidEntry')}: ${new Intl.NumberFormat(i18n.getLanguage() === 'ku' ? 'ar' : i18n.getLanguage(), { style: 'currency', currency: 'USD' }).format(fee)}` : i18n.t('events.freeEntry'))}</p><p>${escapeHtml(item.registrationRequired ? i18n.t('events.registrationRequired') : i18n.t('events.openToStudents'))}</p>${fee > 0 ? `<p>${escapeHtml(i18n.t('events.demoFeeNote'))}</p>` : ''}`)}
-      ${detailSectionHtml(i18n.t('events.registration'), registrationUrl ? `<a class="btn btn--ghost btn--sm" href="${escapeHtml(registrationUrl)}" target="_blank" rel="noopener noreferrer">${escapeHtml(i18n.t('events.registration'))}</a>` : `<p>${escapeHtml(i18n.t('events.registrationUnavailable'))}</p>`)}
+      ${detailSectionHtml(i18n.t('events.participation'), posterBased ? `<p>${escapeHtml(i18n.t('events.posterParticipation'))}</p>` : `<p>${escapeHtml(fee > 0 ? `${i18n.t('events.paidEntry')}: ${new Intl.NumberFormat(i18n.getLanguage() === 'ku' ? 'ar' : i18n.getLanguage(), { style: 'currency', currency: 'USD' }).format(fee)}` : i18n.t('events.freeEntry'))}</p><p>${escapeHtml(item.registrationRequired ? i18n.t('events.registrationRequired') : i18n.t('events.openToStudents'))}</p>${fee > 0 ? `<p>${escapeHtml(i18n.t('events.demoFeeNote'))}</p>` : ''}`)}
+      ${detailSectionHtml(i18n.t('events.registration'), registrationUrl ? `<a class="btn btn--ghost btn--sm" href="${escapeHtml(registrationUrl)}" target="_blank" rel="noopener noreferrer">${escapeHtml(i18n.t('events.registration'))}</a>` : `<p>${escapeHtml(i18n.t(posterBased ? 'events.posterRegistrationUnavailable' : 'events.registrationUnavailable'))}</p>`)}
     </div>`;
 }
 

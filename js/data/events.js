@@ -1,4 +1,4 @@
-// Fictional sample events only. Dates are for demonstrating the interface, not real listings.
+// Demo events are fictional. Poster-based records only reflect supplied images and are unverified.
 window.eventsData = [
   {
     id: 'demo-tech-conference',
@@ -103,5 +103,35 @@ window.eventsData = [
     registrationUrl: '',
     price: 0,
     status: 'past',
+  },
+  {
+    id: 'poster-zakho-book-fair-2026',
+    category: 'exhibitions',
+    date: '2026-11-15',
+    endDate: '2026-11-20',
+    startTime: '',
+    endTime: '',
+    city: 'Zakho',
+    image: 'assets/images/book_event.png',
+    registrationRequired: null,
+    registrationUrl: '',
+    price: null,
+    status: 'upcoming',
+    source: 'poster',
+  },
+  {
+    id: 'poster-zakho-trade-fair-2026',
+    category: 'exhibitions',
+    date: '2026-09-21',
+    endDate: '2026-09-24',
+    startTime: '',
+    endTime: '',
+    city: 'Zakho',
+    image: 'assets/images/ZAKHO INTERNATIONAL FAIR.png',
+    registrationRequired: null,
+    registrationUrl: '',
+    price: null,
+    status: 'past',
+    source: 'poster',
   },
 ];

@@ -10,6 +10,11 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Readex+Pro:wght@400;600;700&family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="css/style.css" />
+  <link rel="manifest" href="manifest.webmanifest" />
+  <meta name="theme-color" content="#203F7A" />
+  <link rel="icon" type="image/png" sizes="192x192" href="assets/icons/app-icon-192.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="assets/icons/apple-touch-icon.png" />
+  <script src="js/shared/pwa.js" defer></script>
 </head>
 <body>
 
@@ -111,6 +116,15 @@
       </section>
       <!-- === END FEATURE: home offers carousel === -->
 
+      <section class="home-upcoming-events" data-home-upcoming-events aria-labelledby="homeEventsHeading">
+        <div class="home-upcoming-events__heading">
+          <h2 class="section-heading" id="homeEventsHeading" data-home-events-heading></h2>
+          <p data-home-events-intro></p>
+        </div>
+        <div class="home-events-list" data-home-events-list></div>
+        <a class="btn btn--primary btn--sm home-upcoming-events__link" href="events.html" data-home-events-link></a>
+      </section>
+
       <!-- Student Housing Section -->
       <section class="home-skeleton-scope" data-home-skeleton-scope aria-busy="true">
         <h2 class="section-heading">خدمات الطلاب</h2>
@@ -146,15 +160,6 @@
         </div>
       </section>
       <!-- === END FEATURE: rotating student services === -->
-
-      <section class="home-upcoming-events" data-home-upcoming-events aria-labelledby="homeEventsHeading">
-        <div class="home-upcoming-events__heading">
-          <h2 class="section-heading" id="homeEventsHeading" data-home-events-heading></h2>
-          <p data-home-events-intro></p>
-        </div>
-        <div class="home-events-list" data-home-events-list></div>
-        <a class="home-upcoming-events__link" href="events.html" data-home-events-link></a>
-      </section>
 
       <!-- Student Benefits Section -->
       <section>

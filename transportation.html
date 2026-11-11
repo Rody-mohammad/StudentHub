@@ -10,6 +10,11 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Readex+Pro:wght@400;600;700&family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="css/style.css" />
+  <link rel="manifest" href="manifest.webmanifest" />
+  <meta name="theme-color" content="#203F7A" />
+  <link rel="icon" type="image/png" sizes="192x192" href="assets/icons/app-icon-192.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="assets/icons/apple-touch-icon.png" />
+  <script src="js/shared/pwa.js" defer></script>
 </head>
 <body>
 
@@ -39,7 +44,6 @@
         <div class="transport-directory__tools">
           <label class="transport-directory__search-label" id="transportSearchLabel" for="searchInput">ابحث حسب نقطة الانطلاق أو الوصول</label>
           <div class="transport-directory__search-wrap"><span class="transport-directory__search-icon" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg></span><input class="transport-directory__search" id="searchInput" type="search" placeholder="اكتب اسم منطقة أو وجهة" autocomplete="off"></div>
-          <div class="transport-directory__suggestions" id="searchSuggestions" aria-label="اقتراحات البحث"></div>
           <div class="transport-directory__filters" id="filterChips" aria-label="تصفية حسب نوع النقل"></div>
           <div class="transport-directory__sort-row"><label for="transportSort">ترتيب حسب</label><select id="transportSort" class="transport-directory__sort"><option value="default">افتراضي</option><option value="cheapest">الأقل أجراً</option><option value="available">متاح الآن</option></select><p id="transportCount" class="transport-directory__count" aria-live="polite"></p></div>
         </div>
