@@ -62,7 +62,8 @@
     const languageSwitch = document.createElement('div');
     languageSwitch.className = 'app-bar__language';
     languageSwitch.setAttribute('role', 'group');
-    languageSwitch.setAttribute('aria-label', 'Language');
+    const kurdishOption = document.createElement('button');
+    languageSwitch.setAttribute('aria-label', window.StudentHubI18n?.t('navigation.languageSelect') || 'Language');
     const englishOption = document.createElement('button');
     englishOption.type = 'button';
     englishOption.className = 'app-bar__language-option';
@@ -76,7 +77,14 @@
     arabicOption.className = 'app-bar__language-option';
     arabicOption.lang = 'ar';
     arabicOption.textContent = 'عربي';
-    languageSwitch.append(englishOption, divider, arabicOption);
+    const kurdishDivider = document.createElement('span');
+    kurdishDivider.className = 'app-bar__language-divider';
+    kurdishDivider.setAttribute('aria-hidden', 'true');
+    kurdishOption.type = 'button';
+    kurdishOption.className = 'app-bar__language-option';
+    kurdishOption.lang = 'ku-Arab';
+    kurdishOption.textContent = 'کوردی';
+    languageSwitch.append(englishOption, divider, arabicOption, kurdishDivider, kurdishOption);
     function chooseLanguage(language) {
       const i18n = window.StudentHubI18n;
       if (!i18n) return;
@@ -88,6 +96,7 @@
     }
     englishOption.addEventListener('click', () => chooseLanguage('en'));
     arabicOption.addEventListener('click', () => chooseLanguage('ar'));
+    kurdishOption?.addEventListener('click', () => chooseLanguage('ku'));
     header.append(menuButton);
 
     const overlay = document.createElement('div');
@@ -179,26 +188,7 @@
       nav.append(link);
     });
 
-    const contact = document.createElement('section');
-    contact.className = 'site-nav__contact';
-    contact.setAttribute('aria-labelledby', 'siteNavContactTitle');
-    const contactTitle = document.createElement('h2');
-    contactTitle.className = 'site-nav__contact-title';
-    contactTitle.id = 'siteNavContactTitle';
-    contactTitle.textContent = window.StudentHubI18n?.t('navigation.contact') || 'تواصل معنا';
-    const email = document.createElement('a');
-    email.className = 'site-nav__contact-email';
-    email.href = 'mailto:studenthub@gmail.com';
-    email.textContent = 'studenthub@gmail.com';
-    const developer = document.createElement('p');
-    developer.className = 'site-nav__developer';
-    const developerPrefix = document.createTextNode(window.StudentHubI18n?.t('navigation.developedBy') || 'تطوير ');
-    const developerName = document.createElement('span');
-    developerName.className = 'site-nav__developer-name';
-    developerName.textContent = 'Rody';
-    developer.append(developerPrefix, developerName);
-    contact.append(contactTitle, email, developer);
-    drawer.append(drawerHeader, themeRow, nav, contact);
+    drawer.append(drawerHeader, themeRow, nav);
     overlay.append(drawer);
     document.body.append(overlay);
 
@@ -215,16 +205,20 @@
       closeButton.setAttribute('aria-label', i18n.t('navigation.close'));
       drawer.setAttribute('aria-label', i18n.t('navigation.drawer'));
       nav.setAttribute('aria-label', i18n.t('navigation.label'));
-      contactTitle.textContent = i18n.t('navigation.contact');
-      developerPrefix.textContent = i18n.t('navigation.developedBy');
       themeText.textContent = i18n.t('navigation.nightMode');
-      const en = i18n.getLanguage() === 'en';
+      languageSwitch.setAttribute('aria-label', i18n.t('navigation.languageSelect'));
+      const language = i18n.getLanguage();
+      const en = language === 'en';
+      const ku = language === 'ku';
       englishOption.classList.toggle('is-current', en);
-      arabicOption.classList.toggle('is-current', !en);
+      arabicOption.classList.toggle('is-current', !en && !ku);
       englishOption.setAttribute('aria-pressed', String(en));
-      arabicOption.setAttribute('aria-pressed', String(!en));
+      arabicOption.setAttribute('aria-pressed', String(!en && !ku));
       englishOption.setAttribute('aria-label', i18n.t('navigation.languageEnglish'));
       arabicOption.setAttribute('aria-label', i18n.t('navigation.languageArabic'));
+      kurdishOption.classList.toggle('is-current', ku);
+      kurdishOption.setAttribute('aria-pressed', String(ku));
+      kurdishOption.setAttribute('aria-label', i18n.t('navigation.languageKurdish'));
     }
     updateNavigationText();
     window.StudentHubI18n?.onChange(updateNavigationText);

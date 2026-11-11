@@ -1,11 +1,11 @@
 /* ============================================================
-   StudentHub — Application UI (Arabic RTL)
+   StudentHub — Application UI (Arabic and Badini RTL, English LTR)
    Colors: Primary Navy #203F7A · Amber #F59E0B · Gold #F4C542
    Background: #EEF2F5
-   Fonts : Inter, Readex Pro (Arabic)
+   Fonts : Inter, Readex Pro, Noto Sans Arabic (Kurdish script)
    ============================================================ */
 
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Readex+Pro:wght@400;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Noto+Sans+Arabic:wght@400;600;700&family=Readex+Pro:wght@400;600;700&display=swap');
 
 :root {
     --primary-navy: #203F7A;
@@ -40,6 +40,10 @@ body {
     word-break: normal;
 }
 
+html[lang="ku-Arab"] body {
+    font-family: 'Noto Sans Arabic', 'Readex Pro', 'Inter', system-ui, sans-serif;
+}
+
 /* ── Layout ────────────────────────────────────────────────── */
 .app-container {
     display: flex;
@@ -55,11 +59,11 @@ body {
 
 /* ── Header ────────────────────────────────────────────────── */
 .app-bar {
-    min-height: 64px;
+    min-height: calc(64px + env(safe-area-inset-top, 0px));
     background: var(--primary-navy);
     display: flex;
     align-items: center;
-    padding: 0 20px;
+    padding: env(safe-area-inset-top, 0px) 20px 0;
     gap: 12px;
     color: white;
     position: sticky;
@@ -300,6 +304,8 @@ body {
 .about-partnership__types { display: flex; flex-wrap: wrap; gap: 8px; padding: 0; list-style: none; }
 .about-partnership__types li { min-height: 36px; display: inline-flex; align-items: center; padding: 6px 11px; color: var(--primary-navy); background: #f1f4f8; border-radius: 999px; font-size: 12px; }
 .about-partnership__cta { min-height: 48px; display: inline-flex; align-items: center; justify-content: center; padding: 10px 20px; text-align: center; text-decoration: none; }
+.about-partnership__email { direction: ltr; unicode-bidi: isolate; }
+.about-partnership__email a { color: var(--primary-navy); text-underline-offset: 3px; }
 .about-partnership__note { font-size: 12px; }
 
 .about-partnership__cta:focus-visible { outline: 3px solid var(--primary-navy); outline-offset: 3px; }
@@ -1213,11 +1219,12 @@ html[dir="ltr"] .site-nav-drawer {
 }
 
 @media (max-width: 374px) {
-    .site-nav__header { gap: 8px; }
-    .site-nav__brand-group { gap: 4px; }
-    .site-nav__brand { width: 32px; height: 32px; flex-basis: 32px; }
-    .site-nav__brand-name { font-size: 13px; }
-    .site-nav__language .app-bar__language-option { min-width: 28px; padding-inline: 3px; font-size: 11px; }
+    .site-nav__header { gap: 4px; }
+    .site-nav__brand-group { gap: 2px; }
+    .site-nav__brand { width: 28px; height: 28px; flex-basis: 28px; }
+    .site-nav__brand-name { font-size: 11px; }
+    .site-nav__language .app-bar__language-option { min-width: 24px; padding-inline: 2px; font-size: 10px; }
+    .site-nav__close { flex-basis: 36px; width: 36px; height: 36px; }
 }
 
 .site-nav__close {
@@ -1312,48 +1319,6 @@ html[dir="ltr"] .site-nav-drawer {
 
 .site-nav__theme-switch:disabled { cursor: not-allowed; opacity: .6; }
 
-.site-nav__contact {
-    margin-block-start: auto;
-    padding: 22px 16px 26px;
-    color: var(--accent-amber);
-    background: var(--primary-navy);
-    border-radius: 14px;
-}
-
-.site-nav__contact-title {
-    margin-block-end: 10px;
-    color: #fff;
-    font-size: 16px;
-    font-weight: 600;
-}
-
-.site-nav__contact-email {
-    display: inline-block;
-    margin-block-end: 12px;
-    color: #fff;
-    text-decoration: none;
-    text-underline-offset: 3px;
-    overflow-wrap: anywhere;
-    direction: ltr;
-    unicode-bidi: isolate;
-}
-
-.site-nav__contact-email:hover,
-.site-nav__contact-email:focus-visible { text-decoration: underline; text-underline-offset: 3px; }
-
-.site-nav__developer {
-    color: rgba(255, 255, 255, 0.7);
-    font-size: 12px;
-    font-weight: 400;
-}
-
-html[lang="en"] .site-nav__developer { font-family: 'Inter', system-ui, sans-serif; }
-html[lang="ar"] .site-nav__developer { font-family: 'Readex Pro', 'Inter', system-ui, sans-serif; }
-
-.site-nav__developer-name {
-    margin-inline-start: 3px;
-}
-
 html:dir(rtl) .app-bar__back svg,
 html:dir(rtl) .back-link svg {
     transform: scaleX(-1);
@@ -1404,8 +1369,6 @@ html:dir(rtl) .back-link svg {
     outline: 2px solid #1E3A8A;
     outline-offset: 2px;
 }
-
-.site-nav__contact-email:focus-visible { outline: 2px solid #fff; outline-offset: 2px; }
 
 @media (prefers-reduced-motion: reduce) {
     .site-nav-overlay,
@@ -2579,6 +2542,9 @@ html[data-theme="dark"] .about-acknowledgements {
     border-inline-start-color: var(--accent-amber);
 }
 
+html[data-theme="dark"] .about-acknowledgements h2 { color: #d8e5ff; }
+html[data-theme="dark"] .about-acknowledgements li { color: var(--text-muted); }
+
 html[data-theme="dark"] .home-more-card {
     background-color: var(--card-white);
     border-color: var(--border-light);
@@ -2588,9 +2554,6 @@ html[data-theme="dark"] .home-more-card {
 html[data-theme="dark"] .home-more-card__copy h2 { color: #d8e5ff; }
 html[data-theme="dark"] .home-more-card__about { color: #d8e5ff; border-color: #6d8fc9; }
 html[data-theme="dark"] .home-more-card__contact { color: #fff; background: #315181; border-color: #6d8fc9; }
-
-html[data-theme="dark"] .about-acknowledgements h2 { color: #d8e5ff; }
-html[data-theme="dark"] .about-acknowledgements li { color: var(--text-muted); }
 
 html[data-theme="dark"] .detail-notice,
 html[data-theme="dark"] .detail-icon-circle,

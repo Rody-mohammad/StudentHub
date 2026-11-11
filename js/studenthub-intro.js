@@ -58,7 +58,7 @@
     if (!i18n) return;
     const currentLanguage = i18n.getLanguage();
     [brand, headline, supporting].forEach((element) => {
-      element.lang = currentLanguage;
+      element.lang = currentLanguage === 'ku' ? 'ku-Arab' : currentLanguage;
       element.dir = 'auto';
     });
     brand.textContent = i18n.t('intro.brand');

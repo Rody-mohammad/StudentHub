@@ -7,6 +7,8 @@
 
   const translations = window.STUDENTHUB_TRANSLATIONS || { ui: {}, data: {} };
   const storageKey = 'studenthubLanguage';
+  const aboutLanguageStorageKey = 'studenthubAboutLanguage';
+  const isAboutPage = window.location.pathname.split('/').pop() === 'about.html';
   const aliases = new Map();
   const staticText = new Map();
   const staticAttributes = new Map();
@@ -24,17 +26,24 @@
   Object.entries(translations.ui).forEach(([key, value]) => {
     if (value.ar) aliases.set(value.ar.trim(), key);
     if (value.en) aliases.set(value.en.trim(), key);
+    if (value.ku) aliases.set(value.ku.trim(), key);
   });
 
   let language = 'ar';
   try {
     const saved = window.localStorage.getItem(storageKey);
-    if (saved === 'ar' || saved === 'en') language = saved;
+    const savedAboutLanguage = window.localStorage.getItem(aboutLanguageStorageKey);
+    if (isAboutPage && savedAboutLanguage === 'ku' && saved !== 'ku') {
+      language = 'ku';
+      window.localStorage.setItem(storageKey, language);
+      window.localStorage.removeItem(aboutLanguageStorageKey);
+    } else if (saved === 'ar' || saved === 'en' || saved === 'ku') language = saved;
   } catch { /* Keep Arabic as the default when storage is unavailable. */ }
 
   function keyValue(key, lang = language, fallback = '') {
     const pair = translations.ui[key];
     if (pair && typeof pair[lang] === 'string' && pair[lang]) return pair[lang];
+    if (lang === 'ku' && pair && typeof pair.en === 'string' && pair.en) return pair.en;
     if (pair && typeof pair.ar === 'string' && pair.ar) return pair.ar;
     if (fallback) return fallback;
     console.warn(`[i18n] Missing translation key: ${key}`);
@@ -53,7 +62,13 @@
   function data(section, item, field, index) {
     const itemTranslations = translations.data?.[section]?.[item.id];
     const value = itemTranslations?.[field];
-    if (language === 'ar' && Array.isArray(value)) return value[index] ?? item[field]?.[index] ?? '';
+    if (Array.isArray(value)) {
+      const translated = value[index];
+      if (translated && typeof translated === 'object') return translated[language] ?? translated.en ?? item[field]?.[index] ?? '';
+      if (language === 'ar') return translated ?? item[field]?.[index] ?? '';
+      return item[field]?.[index] ?? '';
+    }
+    if (value && typeof value === 'object') return value[language] ?? value.en ?? '';
     if (language === 'ar' && typeof value === 'string') return value;
     const original = item[field];
     if (Array.isArray(original)) return original[index] ?? '';
@@ -128,8 +143,8 @@
   }
 
   function updateRootLanguage() {
-    document.documentElement.lang = language;
-    document.documentElement.dir = language === 'ar' ? 'rtl' : 'ltr';
+    document.documentElement.lang = language === 'ku' ? 'ku-Arab' : language;
+    document.documentElement.dir = language === 'en' ? 'ltr' : 'rtl';
   }
 
   function applyLanguage() {
@@ -139,9 +154,12 @@
   }
 
   function setLanguage(nextLanguage) {
-    if (nextLanguage !== 'ar' && nextLanguage !== 'en') return;
+    if (!['ar', 'en', 'ku'].includes(nextLanguage)) return;
     language = nextLanguage;
-    try { window.localStorage.setItem(storageKey, language); } catch { /* The current page still updates. */ }
+    try {
+      window.localStorage.setItem(storageKey, language);
+      window.localStorage.removeItem(aboutLanguageStorageKey);
+    } catch { /* The current page still updates. */ }
     applyLanguage();
     subscribers.forEach((callback) => callback(language));
     document.dispatchEvent(new CustomEvent('studenthub:languagechange', { detail: { language } }));
