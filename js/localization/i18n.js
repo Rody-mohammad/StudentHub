@@ -13,10 +13,17 @@
   const staticText = new Map();
   const staticAttributes = new Map();
   const subscribers = new Set();
+  const dynamicContentSelector = [
+    '#siteNavDrawer', '#cardContainer', '#housingResults', '#universityCategories', '#housingCount',
+    '[data-benefit-filters]', '[data-benefit-types]', '[data-benefit-results]',
+    '[data-home-local-offer]', '[data-home-offers-carousel]', '[data-home-service-showcase]',
+    '[data-home-upcoming-events]', '#eventsFeatured', '#eventsResults', '#eventsFilters', '#eventsCount', '.home-gemini-offer'
+  ].join(', ');
   const pageTitleKeys = {
     'index.html': 'pageTitle.home', 'about.html': 'pageTitle.about', 'deals.html': 'pageTitle.deals',
     'benefits.html': 'pageTitle.benefits', 'housing.html': 'pageTitle.housing',
     'transportation.html': 'pageTitle.transportation', 'detail.html': 'pageTitle.detail',
+    'events.html': 'pageTitle.events',
     'gym-offers.html': 'pageTitle.gymOffers', 'restaurant-offers.html': 'pageTitle.restaurantOffers',
     'housing-details.html': 'pageTitle.housingDetails', 'transport-zakho.html': 'pageTitle.transportZakho',
     'transport-external.html': 'pageTitle.transportExternal', 'book-discounts.html': 'pageTitle.bookDiscounts',
@@ -79,6 +86,7 @@
   const categoryKeys = {
     All: 'filters.all', restaurant: 'category.restaurant', cafe: 'category.cafe',
     gym: 'category.gym', shop: 'category.shop', other: 'category.other',
+    'health-medical': 'category.healthMedical',
     'AI tools': 'category.aiTools', Development: 'category.development', Cloud: 'category.cloud',
     Productivity: 'category.productivity', Design: 'category.design', Single: 'category.single',
     Shared: 'category.shared', Apartment: 'category.apartment', Bus: 'category.bus',
@@ -86,6 +94,11 @@
     Minibus: 'category.minibus', 'Shared taxi': 'category.sharedTaxi',
     deals: 'category.deals', benefits: 'category.benefits', housing: 'category.housing',
     transportation: 'category.transportation',
+    events: 'pageTitle.events',
+    conferences: 'events.category.conferences', exhibitions: 'events.category.exhibitions',
+    university: 'events.category.university', competitions: 'events.category.competitions',
+    sports: 'events.category.sports', workshops: 'events.category.workshops',
+    volunteering: 'events.category.volunteering',
     'Free plan': 'benefit.freePlan', 'Student discount': 'benefit.studentDiscount', Trial: 'benefit.trial',
     Internet: 'home.categoryConnectivity'
   };
@@ -101,6 +114,7 @@
       acceptNode(node) {
         const parent = node.parentElement;
         if (!parent || /^(SCRIPT|STYLE|NOSCRIPT|SVG)$/i.test(parent.tagName)) return NodeFilter.FILTER_REJECT;
+        if (parent.closest(dynamicContentSelector)) return NodeFilter.FILTER_REJECT;
         return node.nodeValue.trim() ? NodeFilter.FILTER_ACCEPT : NodeFilter.FILTER_REJECT;
       }
     });
@@ -113,6 +127,7 @@
     }
 
     document.querySelectorAll('body *, meta[name="description"]').forEach((element) => {
+      if (element.closest?.(dynamicContentSelector)) return;
       ['aria-label', 'alt', 'title', 'placeholder', 'content'].forEach((attribute) => {
         if (!element.hasAttribute(attribute)) return;
         const source = element.getAttribute(attribute).trim();

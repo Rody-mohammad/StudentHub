@@ -1,5 +1,5 @@
 /**
- * js/data.js
+ * js/data/local-records.js
  * ============================================================
  * ALL demo content lives here.
  * To add, remove or edit items: update the arrays below,
@@ -109,6 +109,42 @@ const dealsData = [
     valid_until: "",
     location: "",
     how_to_use: "",
+  },
+  {
+    id: 9,
+    business_name: "Demo Optical Store",
+    category: "health-medical",
+    discount: "Demo: 20% OFF prescription glasses",
+    description:
+      "Demo student offer: 20% off prescription glasses at a fictional optical store. No real provider or discount is verified.",
+    terms: "Fictional demo offer only. Product, prescription and eligibility terms are illustrative, not real.",
+    valid_until: "",
+    location: "Fictional Zakho location (demo only)",
+    how_to_use: "Demo only — this offer cannot be redeemed.",
+  },
+  {
+    id: 10,
+    business_name: "Demo Dental Clinic",
+    category: "health-medical",
+    discount: "Demo: 15% OFF consultation",
+    description:
+      "Demo student offer: 15% off a dental consultation at a fictional clinic. No real provider or discount is verified.",
+    terms: "Fictional demo offer only. Services, eligibility and availability are illustrative, not real.",
+    valid_until: "",
+    location: "Fictional Zakho location (demo only)",
+    how_to_use: "Demo only — this offer cannot be redeemed.",
+  },
+  {
+    id: 11,
+    business_name: "Demo Eye Clinic",
+    category: "health-medical",
+    discount: "Demo: Free eye checkup",
+    description:
+      "Demo student offer: a free basic eye checkup or discounted consultation at a fictional eye clinic. No real provider or service is verified.",
+    terms: "Fictional demo offer only. No actual medical service or consultation is provided.",
+    valid_until: "",
+    location: "Fictional Zakho location (demo only)",
+    how_to_use: "Demo only — this offer cannot be redeemed.",
   },
 ];
 

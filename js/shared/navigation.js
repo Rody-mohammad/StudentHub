@@ -5,16 +5,16 @@
 
   const fallbackLinks = [
     ['index.html', 'الرئيسية'], ['deals.html', 'العروض'], ['benefits.html', 'المزايا'],
-    ['transportation.html', 'النقل'], ['housing.html', 'السكن']
+    ['transportation.html', 'النقل'], ['housing.html', 'السكن'], ['events.html', 'الفعاليات والأنشطة']
   ];
   const linkKeys = {
     'index.html': 'navigation.home', 'deals.html': 'navigation.deals',
     'benefits.html': 'navigation.benefits', 'transportation.html': 'navigation.transportation',
-    'housing.html': 'navigation.housing', 'about.html': 'navigation.about'
+    'housing.html': 'navigation.housing', 'about.html': 'navigation.about', 'events.html': 'navigation.events'
   };
   const iconFiles = {
     'index.html': 'house', 'deals.html': 'badge-percent', 'benefits.html': 'graduation-cap',
-    'transportation.html': 'bus', 'housing.html': 'building-2', 'about.html': 'info'
+    'transportation.html': 'bus', 'housing.html': 'building-2', 'about.html': 'info', 'events.html': 'calendar'
   };
   const icon = (name) => `<span class="lucide-icon lucide-icon--${name}" aria-hidden="true"></span>`;
 
@@ -49,6 +49,14 @@
       aboutLabel.textContent = window.StudentHubI18n?.t('navigation.about') || 'About StudentHub';
       aboutLink.append(aboutLabel);
       pageLinks.push(aboutLink);
+    }
+    if (!pageLinks.some((link) => link.getAttribute('href') === 'events.html')) {
+      const eventsLink = document.createElement('a');
+      eventsLink.href = 'events.html';
+      const eventsLabel = document.createElement('span');
+      eventsLabel.textContent = window.StudentHubI18n?.t('navigation.events') || 'Events & Activities';
+      eventsLink.append(eventsLabel);
+      pageLinks.push(eventsLink);
     }
 
     const menuButton = document.createElement('button');

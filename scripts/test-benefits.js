@@ -5,7 +5,7 @@ const vm = require('node:vm');
 
 const root = path.resolve(__dirname, '..');
 const catalogContext = { window: {} };
-vm.runInNewContext(fs.readFileSync(path.join(root, 'js/benefits-data.js'), 'utf8'), catalogContext);
+vm.runInNewContext(fs.readFileSync(path.join(root, 'js/data/benefits-catalog.js'), 'utf8'), catalogContext);
 const catalog = catalogContext.window.STUDENTHUB_BENEFITS;
 function assertBahdiniVariants(value, location = 'STUDENTHUB_BENEFITS') {
   if (Array.isArray(value)) {
@@ -21,7 +21,7 @@ function assertBahdiniVariants(value, location = 'STUDENTHUB_BENEFITS') {
 }
 assertBahdiniVariants(catalog);
 const translationContext = { window: {} };
-vm.runInNewContext(fs.readFileSync(path.join(root, 'js/translations.js'), 'utf8'), translationContext);
+vm.runInNewContext(fs.readFileSync(path.join(root, 'js/localization/translations.js'), 'utf8'), translationContext);
 const allTranslations = translationContext.window.STUDENTHUB_TRANSLATIONS;
 assertBahdiniVariants(allTranslations.data, 'translations.data');
 const dictionary = translationContext.window.STUDENTHUB_TRANSLATIONS.ui;
@@ -36,7 +36,23 @@ for (const [section, records] of Object.entries(allTranslations.data || {})) {
     }
   }
 }
-const i18nRuntimeSource = fs.readFileSync(path.join(root, 'js/i18n.js'), 'utf8');
+const i18nRuntimeSource = fs.readFileSync(path.join(root, 'js/localization/i18n.js'), 'utf8');
+const dealsDataContext = {};
+vm.runInNewContext(`${fs.readFileSync(path.join(root, 'js/data/local-records.js'), 'utf8')}\nglobalThis.__deals = dealsData;`, dealsDataContext);
+const healthMedicalDeals = dealsDataContext.__deals.filter((deal) => deal.category === 'health-medical');
+assert.equal(healthMedicalDeals.length, 3, 'the Health & Medical category has optical, dental and eye clinic demo offers');
+assert.match(fs.readFileSync(path.join(root, 'js/shared/catalog-pages.js'), 'utf8'), /'health-medical'/, 'the Deals category filters include Health & Medical');
+assert.equal(dictionary['category.healthMedical']?.en, 'Health & Medical', 'Health & Medical has an English category label');
+assert.equal(dictionary['category.healthMedical']?.ar, 'الصحة والطب', 'Health & Medical has an Arabic category label');
+assert.ok(dictionary['category.healthMedical']?.ku, 'Health & Medical has a Bahdini Kurdish category label');
+for (const deal of healthMedicalDeals) {
+  const fields = allTranslations.data.deals[String(deal.id)];
+  for (const field of ['business_name', 'discount', 'description', 'terms', 'location', 'how_to_use']) {
+    assert.ok(fields[field]?.ar && fields[field]?.en, `health demo offer ${deal.id} has Arabic and English ${field} copy`);
+  }
+  assert.match(fields.discount.en, /^Demo:/, `health demo offer ${deal.id} is visibly labeled as a demo`);
+}
+
 function loadI18nRuntime(pathname, initialStorage = {}) {
   const values = new Map(Object.entries(initialStorage));
   const document = {
@@ -61,6 +77,16 @@ function loadI18nRuntime(pathname, initialStorage = {}) {
   });
   return { i18n: window.StudentHubI18n, document, values };
 }
+const dealsI18n = loadI18nRuntime('/deals.html', { studenthubLanguage: 'ar' });
+assert.equal(dealsI18n.i18n.category('health-medical'), dictionary['category.healthMedical'].ar, 'the health category filter is translated in Arabic');
+assert.equal(dealsI18n.i18n.data('deals', healthMedicalDeals[0], 'business_name'), allTranslations.data.deals['9'].business_name.ar, 'health offer cards use Arabic business names');
+dealsI18n.i18n.setLanguage('en');
+assert.equal(dealsI18n.document.documentElement.dir, 'ltr', 'the Deals page switches to LTR in English');
+assert.equal(dealsI18n.i18n.category('health-medical'), dictionary['category.healthMedical'].en, 'the health category filter is translated in English');
+assert.equal(dealsI18n.i18n.data('deals', healthMedicalDeals[0], 'business_name'), allTranslations.data.deals['9'].business_name.en, 'health offer cards use English business names');
+dealsI18n.i18n.setLanguage('ku');
+assert.equal(dealsI18n.document.documentElement.dir, 'rtl', 'the Deals page switches to RTL in Bahdini Kurdish');
+assert.equal(dealsI18n.i18n.category('health-medical'), dictionary['category.healthMedical'].ku, 'the health category filter is translated in Bahdini Kurdish');
 const aboutI18n = loadI18nRuntime('/about.html', { studenthubLanguage: 'en' });
 aboutI18n.i18n.setLanguage('ku');
 assert.equal(aboutI18n.document.documentElement.lang, 'ku-Arab', 'Bahdini uses its Arabic-based language tag');
@@ -85,11 +111,11 @@ assert.equal(migratedAboutI18n.values.get('studenthubLanguage'), 'ku', 'the migr
 assert.equal(migratedAboutI18n.values.has('studenthubAboutLanguage'), false, 'the legacy About-only language setting is removed after migration');
 const overviewHtml = fs.readFileSync(path.join(root, 'benefits.html'), 'utf8');
 const homepageHtml = fs.readFileSync(path.join(root, 'index.html'), 'utf8');
-const dealsSource = fs.readFileSync(path.join(root, 'js/data.js'), 'utf8');
-const homepageServicesSource = fs.readFileSync(path.join(root, 'js/home-offers.js'), 'utf8');
-const detailSource = fs.readFileSync(path.join(root, 'js/main.js'), 'utf8');
-const navigationSource = fs.readFileSync(path.join(root, 'js/navigation.js'), 'utf8');
-const i18nSource = fs.readFileSync(path.join(root, 'js/i18n.js'), 'utf8');
+const dealsSource = fs.readFileSync(path.join(root, 'js/data/local-records.js'), 'utf8');
+const homepageServicesSource = fs.readFileSync(path.join(root, 'js/pages/home/offers.js'), 'utf8');
+const detailSource = fs.readFileSync(path.join(root, 'js/shared/catalog-pages.js'), 'utf8');
+const navigationSource = fs.readFileSync(path.join(root, 'js/shared/navigation.js'), 'utf8');
+const i18nSource = fs.readFileSync(path.join(root, 'js/localization/i18n.js'), 'utf8');
 const aboutHtml = fs.readFileSync(path.join(root, 'about.html'), 'utf8');
 assert.doesNotMatch(homepageHtml, /<h[1-6][^>]*>\s*Offers\s*<\/h[1-6]>/i, 'the standalone Offers heading is removed from the cafe section');
 assert.match(homepageHtml, /data-home-local-offer data-home-offer-id="7"/, 'the third homepage card uses the restaurant offer record');
@@ -104,15 +130,15 @@ assert.match(homepageHtml, /assets\/images\/image\.JB\.png/, 'the third homepage
 assert.match(dealsSource, /id:\s*7,\s*business_name:\s*"Demo Restaurant Offer",\s*category:\s*"restaurant",\s*image:\s*"assets\/images\/image\.JB\.png",\s*discount:\s*"20% OFF"/, 'the homepage restaurant offer is a 20% restaurant deal with its detail image');
 assert.match(dealsSource, /id:\s*2,\s*business_name:\s*"Demo Cafe Aroma",\s*category:\s*"cafe",\s*image:\s*"assets\/images\/golverdi\.png"/, 'the cafe offer record uses its updated detail image');
 assert.match(dealsSource, /id:\s*8,\s*business_name:\s*"Y5 coffee shop",\s*category:\s*"cafe",\s*image:\s*"assets\/images\/Y5cafe\.png",\s*discount:\s*"Special offer"/, 'the Y5 drinks offer uses the supplied image without inventing a discount value');
-assert.match(fs.readFileSync(path.join(root, 'detail.html'), 'utf8'), /js\/benefits-data\.js/, 'the shared detail page loads student benefits records');
-assert.match(fs.readFileSync(path.join(root, 'js/main.js'), 'utf8'), /section === 'books'/, 'book and study cards have a shared detail renderer');
+assert.match(fs.readFileSync(path.join(root, 'detail.html'), 'utf8'), /js\/data\/benefits-catalog\.js/, 'the shared detail page loads student benefits records');
+assert.match(fs.readFileSync(path.join(root, 'js/shared/catalog-pages.js'), 'utf8'), /section === 'books'/, 'book and study cards have a shared detail renderer');
 for (const [file, section] of [['book-discounts.html', 'books'], ['digital-offers.html', 'offers'], ['software-guides.html', 'software']]) {
   assert.match(overviewHtml, new RegExp(`href="${file}"`), `${file} is linked from the overview`);
   assert.match(homepageHtml, new RegExp(`<a class="benefit-tile" href="${file}">`), `${file} is linked from the homepage benefits shortcut`);
   const pageHtml = fs.readFileSync(path.join(root, file), 'utf8');
   assert.match(pageHtml, new RegExp(`data-benefit-page="${section}"`), `${file} opens its own category directly`);
   assert.match(pageHtml, /href="benefits\.html"/, `${file} has a back link`);
-  assert.match(pageHtml, /js\/navigation\.js/, `${file} loads shared navigation`);
+  assert.match(pageHtml, /js\/shared\/navigation\.js/, `${file} loads shared navigation`);
   assert.ok(fs.existsSync(path.join(root, 'assets/images/StudentHubLogo.png')), `${file} logo image exists`);
 }
 const requiredOfferFields = ['id', 'name', 'provider', 'category', 'offerType', 'description', 'price', 'duration', 'expiration', 'eligibility', 'activation', 'information', 'lastVerified', 'verificationStatus'];
@@ -264,7 +290,7 @@ function mount(section) {
     onChange(callback) { callbacks.push(callback); }
   };
   const document = { querySelector: () => page, getElementById: () => elements.search, addEventListener() {} };
-  vm.runInNewContext(fs.readFileSync(path.join(root, 'js/benefits.js'), 'utf8'), { document, window: { StudentHubI18n: i18n, STUDENTHUB_BENEFITS: catalog }, URL, console });
+  vm.runInNewContext(fs.readFileSync(path.join(root, 'js/pages/benefits/benefits.js'), 'utf8'), { document, window: { StudentHubI18n: i18n, STUDENTHUB_BENEFITS: catalog }, URL, console });
   return { elements, i18n, callbacks, setLanguage(next) { language = next; callbacks.forEach((callback) => callback()); } };
 }
 

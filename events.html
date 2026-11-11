@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <script src="js/localization/translations.js"></script>
+  <script src="js/localization/i18n.js"></script>
+  <title>StudentHub - الفعاليات والأنشطة</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Readex+Pro:wght@400;600;700&family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <div class="app-container">
+    <header class="app-bar">
+      <div class="app-bar__logo-wrap">
+        <div class="app-bar__logo-icon"><img src="assets/images/StudentHubLogo.png" alt="Logo"></div>
+        <span class="app-bar__title"><span style="color: var(--accent-amber);">Student</span>Hub</span>
+      </div>
+    </header>
+
+    <main class="app-content events-page" data-events-page>
+      <header class="events-page__intro">
+        <h1 class="section-heading" id="eventsHeading"></h1>
+        <p id="eventsIntro"></p>
+        <p class="events-demo-notice" id="eventsDemoNotice" role="note"></p>
+      </header>
+
+      <section class="events-featured" id="eventsFeatured" aria-live="polite" hidden></section>
+
+      <section class="events-controls" aria-labelledby="eventsHeading">
+        <label class="events-search-label" id="eventsSearchLabel" for="eventsSearch"></label>
+        <input class="events-search" id="eventsSearch" type="search" autocomplete="off">
+        <div class="events-filters" id="eventsFilters" role="group"></div>
+        <div class="events-selects">
+          <label><span id="eventsLocationLabel"></span><select id="eventsLocation"></select></label>
+          <label><span id="eventsStatusLabel"></span><select id="eventsStatus"></select></label>
+        </div>
+        <p class="events-count" id="eventsCount" aria-live="polite"></p>
+      </section>
+
+      <div class="events-results" id="eventsResults" aria-live="polite"></div>
+    </main>
+
+    <nav class="bottom-nav" aria-label="Main navigation">
+      <a href="index.html" class="nav-item"><span class="lucide-icon lucide-icon--house" aria-hidden="true"></span><span>الرئيسية</span></a>
+      <a href="deals.html" class="nav-item"><span class="lucide-icon lucide-icon--badge-percent" aria-hidden="true"></span><span>العروض</span></a>
+      <a href="benefits.html" class="nav-item"><span class="lucide-icon lucide-icon--graduation-cap" aria-hidden="true"></span><span>المزايا</span></a>
+      <a href="transportation.html" class="nav-item"><span class="lucide-icon lucide-icon--bus" aria-hidden="true"></span><span>النقل</span></a>
+      <a href="housing.html" class="nav-item"><span class="lucide-icon lucide-icon--building-2" aria-hidden="true"></span><span>السكن</span></a>
+    </nav>
+  </div>
+
+  <script src="js/data/events.js"></script>
+  <script src="js/shared/events.js"></script>
+  <script src="js/pages/events/events.js"></script>
+  <script src="js/shared/navigation.js"></script>
+</body>
+</html>

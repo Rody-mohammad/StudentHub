@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-  <script src="js/translations.js"></script>
-  <script src="js/i18n.js"></script>
+  <script src="js/localization/translations.js"></script>
+  <script src="js/localization/i18n.js"></script>
   <title>StudentHub - الرئيسية</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -47,7 +47,7 @@
                 <div class="featured-card__sub">العرض صالح للطلاب فقط</div>
               </div>
             </div>
-            <button class="featured-card__btn">احصل على العرض</button>
+            <button class="featured-card__btn" type="button">احصل على العرض</button>
           </div>
         </div>
         <div class="home-skeleton home-skeleton--featured" aria-hidden="true"><span class="home-skeleton__image"></span><span class="home-skeleton__bar home-skeleton__bar--heading"></span><span class="home-skeleton__bar home-skeleton__bar--short"></span><span class="home-skeleton__bar home-skeleton__bar--action"></span></div>
@@ -65,7 +65,7 @@
                 <div class="featured-card__sub">العرض متاح كل يوم إثنين وأربعاء</div>
               </div>
             </div>
-            <button class="featured-card__btn">احصل على العرض</button>
+            <button class="featured-card__btn" type="button">احصل على العرض</button>
           </div>
         </div>
         <div class="home-skeleton home-skeleton--featured" aria-hidden="true"><span class="home-skeleton__image"></span><span class="home-skeleton__bar home-skeleton__bar--heading"></span><span class="home-skeleton__bar home-skeleton__bar--short"></span><span class="home-skeleton__bar home-skeleton__bar--action"></span></div>
@@ -147,6 +147,15 @@
       </section>
       <!-- === END FEATURE: rotating student services === -->
 
+      <section class="home-upcoming-events" data-home-upcoming-events aria-labelledby="homeEventsHeading">
+        <div class="home-upcoming-events__heading">
+          <h2 class="section-heading" id="homeEventsHeading" data-home-events-heading></h2>
+          <p data-home-events-intro></p>
+        </div>
+        <div class="home-events-list" data-home-events-list></div>
+        <a class="home-upcoming-events__link" href="events.html" data-home-events-link></a>
+      </section>
+
       <!-- Student Benefits Section -->
       <section>
         <h2 class="section-heading">مزايا الطلاب</h2>
@@ -208,10 +217,13 @@
 
   </div>
 
-  <script src="js/navigation.js"></script>
-  <script src="js/studenthub-intro.js"></script>
-  <script src="js/data.js"></script>
-  <script src="js/benefits-data.js"></script>
-  <script src="js/home-offers.js"></script>
+  <script src="js/shared/navigation.js"></script>
+  <script src="js/pages/home/intro.js"></script>
+  <script src="js/data/local-records.js"></script>
+  <script src="js/data/benefits-catalog.js"></script>
+  <script src="js/data/events.js"></script>
+  <script src="js/shared/events.js"></script>
+  <script src="js/pages/events/events.js"></script>
+  <script src="js/pages/home/offers.js"></script>
 </body>
 </html>

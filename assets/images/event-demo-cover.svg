@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 400" role="img" aria-labelledby="title description">
+  <title id="title">Illustrative event cover</title>
+  <desc id="description">Abstract navy, amber, and gold event artwork for fictional StudentHub demo listings.</desc>
+  <defs>
+    <linearGradient id="background" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#203F7A"/>
+      <stop offset="1" stop-color="#152a50"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="0" y1="1" x2="1" y2="0">
+      <stop offset="0" stop-color="#F7B94B"/>
+      <stop offset="1" stop-color="#F4C542"/>
+    </linearGradient>
+  </defs>
+  <rect width="720" height="400" fill="url(#background)"/>
+  <circle cx="602" cy="73" r="115" fill="#ffffff" opacity=".06"/>
+  <circle cx="98" cy="345" r="145" fill="#ffffff" opacity=".05"/>
+  <path d="M0 295 235 162l152 90 170-116 163 88v176H0Z" fill="#ffffff" opacity=".07"/>
+  <rect x="292" y="106" width="136" height="136" rx="34" fill="url(#accent)"/>
+  <rect x="321" y="137" width="78" height="70" rx="10" fill="none" stroke="#203F7A" stroke-width="8"/>
+  <path d="M321 158h78M340 126v22M380 126v22M339 180h8m17 0h8m17 0h8m-50 17h8m17 0h8" fill="none" stroke="#203F7A" stroke-linecap="round" stroke-width="7"/>
+  <circle cx="514" cy="280" r="9" fill="#F7B94B"/>
+  <circle cx="183" cy="113" r="7" fill="#F4C542"/>
+  <path d="m527 123 12 12-12 12-12-12Zm-343 165 9 9-9 9-9-9Z" fill="#F7B94B" opacity=".8"/>
+</svg>

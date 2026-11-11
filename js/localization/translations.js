@@ -456,6 +456,11 @@ window.STUDENTHUB_TRANSLATIONS = {
       "en": "Other",
       "ku": "یێن دی"
     },
+    "category.healthMedical": {
+      "ar": "الصحة والطب",
+      "en": "Health & Medical",
+      "ku": "تەندروستی و پزیشکی"
+    },
     "category.aiTools": {
       "ar": "أدوات الذكاء الاصطناعي",
       "en": "AI tools",
@@ -620,6 +625,266 @@ window.STUDENTHUB_TRANSLATIONS = {
       "ar": "النقل الخارجي",
       "en": "Intercity transport",
       "ku": "گواستنەوە بۆ دەرڤەی شار"
+    },
+    "pageTitle.events": {
+      "ar": "الفعاليات والأنشطة",
+      "en": "Events & Activities",
+      "ku": "چالاکی و ڤەبوون"
+    },
+    "navigation.events": {
+      "ar": "الفعاليات والأنشطة",
+      "en": "Events & Activities",
+      "ku": "چالاکی و ڤەبوون"
+    },
+    "events.heading": {
+      "ar": "الفعاليات والأنشطة",
+      "en": "Events & Activities",
+      "ku": "چالاکی و ڤەبوون"
+    },
+    "events.intro": {
+      "ar": "اكتشف مؤتمرات وورش عمل وأنشطة طلابية تجريبية.",
+      "en": "Discover demo conferences, workshops, and student activities.",
+      "ku": "کۆنفڕانس، کارگەه و چالاکیێن قوتابیان یێن تاقیکرنێ ببینە."
+    },
+    "events.demoNotice": {
+      "ar": "فعاليات توضيحية خيالية — ليست فرصًا حقيقية أو دعوات للتسجيل.",
+      "en": "Fictional demo events — these are not real opportunities or registration invitations.",
+      "ku": "چالاکیێن خەیاڵی یێن تاقیکرنێ — نە دەرفەتێن راستەقینە نە ژی بانگەوازێن تۆمارکرنێ نە."
+    },
+    "events.demoLabel": {
+      "ar": "فعالية تجريبية",
+      "en": "Demo event",
+      "ku": "چالاکیا تاقیکرنێ"
+    },
+    "events.featured": {
+      "ar": "فعالية مقترحة",
+      "en": "Featured event",
+      "ku": "چالاکیا هەلبژارتیدار"
+    },
+    "events.upcoming": {
+      "ar": "الفعاليات القادمة",
+      "en": "Upcoming events",
+      "ku": "چالاکیێن داهاتی"
+    },
+    "events.past": {
+      "ar": "فعاليات سابقة",
+      "en": "Past events",
+      "ku": "چالاکیێن بوری"
+    },
+    "events.searchLabel": {
+      "ar": "ابحث بالفعالية أو الجهة المنظمة",
+      "en": "Search events or organizers",
+      "ku": "ل چالاکی یان ڕێکخەرێ بگەڕێ"
+    },
+    "events.searchPlaceholder": {
+      "ar": "ابحث عن فعالية أو جهة منظمة...",
+      "en": "Search by event or organizer...",
+      "ku": "ل چالاکی یان ڕێکخەرێ بگەڕێ..."
+    },
+    "events.categoryLabel": {
+      "ar": "تصفية حسب الفئة",
+      "en": "Filter by category",
+      "ku": "ل گۆری پۆلێ پاڵاوتن"
+    },
+    "events.locationLabel": {
+      "ar": "الموقع",
+      "en": "Location",
+      "ku": "جه"
+    },
+    "events.locationAll": {
+      "ar": "كل المواقع",
+      "en": "All locations",
+      "ku": "هەمی جه"
+    },
+    "events.city.zakho": {
+      "ar": "زاخو",
+      "en": "Zakho",
+      "ku": "زاخۆ"
+    },
+    "events.city.duhok": {
+      "ar": "دهوك",
+      "en": "Duhok",
+      "ku": "دهۆک"
+    },
+    "events.statusLabel": {
+      "ar": "حالة الفعالية",
+      "en": "Event status",
+      "ku": "رەوشا چالاکیێ"
+    },
+    "events.status.all": {
+      "ar": "كل الفعاليات",
+      "en": "All events",
+      "ku": "هەمی چالاکی"
+    },
+    "events.status.upcoming": {
+      "ar": "القادمة والحالية",
+      "en": "Upcoming & ongoing",
+      "ku": "داهاتی و بەردەوام"
+    },
+    "events.status.past": {
+      "ar": "السابقة",
+      "en": "Past",
+      "ku": "بوری"
+    },
+    "events.state.upcoming": {
+      "ar": "قادمة",
+      "en": "Upcoming",
+      "ku": "داهاتی"
+    },
+    "events.state.ongoing": {
+      "ar": "جارية الآن",
+      "en": "Ongoing",
+      "ku": "نوکە بەردەوامە"
+    },
+    "events.state.past": {
+      "ar": "انتهت",
+      "en": "Past",
+      "ku": "بوری"
+    },
+    "events.freeEntry": {
+      "ar": "دخول مجاني (تجريبي)",
+      "en": "Free entry (demo)",
+      "ku": "چوونا بێبەرامبەر (تاقیکرنە)"
+    },
+    "events.paidEntry": {
+      "ar": "رسوم تجريبية",
+      "en": "Demo entry fee",
+      "ku": "خەرجییا تاقیکرنێ"
+    },
+    "events.registrationRequired": {
+      "ar": "التسجيل مطلوب (تجريبي)",
+      "en": "Registration required (demo)",
+      "ku": "تۆمارکرن پێدڤییە (تاقیکرنە)"
+    },
+    "events.openToStudents": {
+      "ar": "مفتوحة للطلاب (تجريبي)",
+      "en": "Open to students (demo)",
+      "ku": "بۆ قوتابیان ڤەکرییە (تاقیکرنە)"
+    },
+    "events.organizer": {
+      "ar": "الجهة المنظمة",
+      "en": "Organizer",
+      "ku": "ڕێکخەر"
+    },
+    "events.aboutEvent": {
+      "ar": "نبذة عن الفعالية",
+      "en": "About the event",
+      "ku": "دەربارەی چالاکیێ"
+    },
+    "events.dateTime": {
+      "ar": "التاريخ والوقت",
+      "en": "Date & time",
+      "ku": "ڕێکەفت و دەم"
+    },
+    "events.venue": {
+      "ar": "المكان",
+      "en": "Venue",
+      "ku": "جه"
+    },
+    "events.participation": {
+      "ar": "المشاركة",
+      "en": "Participation",
+      "ku": "بەشداربوون"
+    },
+    "events.requirements": {
+      "ar": "متطلبات المشاركة",
+      "en": "Participation requirements",
+      "ku": "پێدڤیێن بەشداربوونێ"
+    },
+    "events.registration": {
+      "ar": "التسجيل",
+      "en": "Registration",
+      "ku": "تۆمارکرن"
+    },
+    "events.registrationUnavailable": {
+      "ar": "لا يوجد تسجيل — هذا المحتوى تجريبي.",
+      "en": "Registration is unavailable — this is demo content.",
+      "ku": "تۆمارکرن نینە — ئەڤ ناڤەڕۆکە تاقیکرنە."
+    },
+    "events.demoFeeNote": {
+      "ar": "رسوم توضيحية فقط؛ لا توجد عملية دفع.",
+      "en": "Illustrative fee only; no payment is available.",
+      "ku": "تەنێ خەرجییەکا تاقیکرنێ؛ پارەدان نینە."
+    },
+    "events.dateRange": {
+      "ar": "{date}، {start}–{end}",
+      "en": "{date}, {start}–{end}",
+      "ku": "{date}، {start}–{end}"
+    },
+    "events.clearFilters": {
+      "ar": "مسح عوامل التصفية",
+      "en": "Clear filters",
+      "ku": "پاڵاوتنان پاک بکە"
+    },
+    "events.emptyTitle": {
+      "ar": "لا توجد فعاليات مطابقة",
+      "en": "No matching events",
+      "ku": "چالاکیێن گونجای نەهاتنە دیتن"
+    },
+    "events.emptyText": {
+      "ar": "جرّب تغيير البحث أو عوامل التصفية.",
+      "en": "Try changing your search or filters.",
+      "ku": "گەڕان یان پاڵاوتنان بگۆڕە."
+    },
+    "events.viewAll": {
+      "ar": "عرض كل الفعاليات",
+      "en": "View all events",
+      "ku": "هەمی چالاکییان ببینە"
+    },
+    "events.count": {
+      "ar": "{count} فعاليات",
+      "en": "{count} events",
+      "ku": "{count} چالاکی"
+    },
+    "events.category.conferences": {
+      "ar": "مؤتمرات",
+      "en": "Conferences",
+      "ku": "کۆنفڕانس"
+    },
+    "events.category.exhibitions": {
+      "ar": "معارض",
+      "en": "Exhibitions",
+      "ku": "پێشانگەه"
+    },
+    "events.category.university": {
+      "ar": "فعاليات جامعية",
+      "en": "University Events",
+      "ku": "چالاکیێن زانکۆیێ"
+    },
+    "events.category.competitions": {
+      "ar": "مسابقات",
+      "en": "Competitions",
+      "ku": "پێشبڕک"
+    },
+    "events.category.sports": {
+      "ar": "فعاليات رياضية",
+      "en": "Sports Events",
+      "ku": "چالاکیێن وەرزشێ"
+    },
+    "events.category.workshops": {
+      "ar": "ورش عمل",
+      "en": "Workshops",
+      "ku": "کارگەه"
+    },
+    "events.category.volunteering": {
+      "ar": "تطوع",
+      "en": "Volunteering",
+      "ku": "خۆبەخش"
+    },
+    "home.eventsHeading": {
+      "ar": "فعاليات قادمة",
+      "en": "Upcoming events",
+      "ku": "چالاکیێن داهاتی"
+    },
+    "home.eventsIntro": {
+      "ar": "اكتشف أنشطة طلابية تجريبية قادمة.",
+      "en": "Explore upcoming demo activities for students.",
+      "ku": "چالاکیێن داهاتی یێن تاقیکرنێ ببینە."
+    },
+    "media.altStudentTransport": {
+      "ar": "النقل الطلابي",
+      "en": "Student Transport",
+      "ku": "گواستنەوەیا قوتابیان"
     },
     "home.topOffers": {
       "ar": "أفضل العروض الحصرية.",
@@ -2350,9 +2615,232 @@ window.STUDENTHUB_TRANSLATIONS = {
       "ar": "النقل في زاخو",
       "en": "Zakho Transport",
       "ku": "گواستنەوە ل زاخۆ"
+    },
+    "media.altStudentTransport": {
+      "ar": "النقل الطلابي",
+      "en": "Student Transport",
+      "ku": "گواستنەوەیا قوتابیان"
     }
   },
   "data": {
+    "events": {
+      "demo-tech-conference": {
+        "title": {
+          "ar": "ملتقى الابتكار والتقنية التجريبي",
+          "en": "Demo Innovation & Technology Forum",
+          "ku": "کۆڕا تاقیکرنێ یا داهێنان و تەکنەلۆژیێ"
+        },
+        "organizer": {
+          "ar": "نادي التقنية الطلابي التجريبي",
+          "en": "Demo Student Technology Club",
+          "ku": "یەکیتیا تاقیکرنێ یا تەکنەلۆژیێ یا قوتابیان"
+        },
+        "description": {
+          "ar": "فعالية خيالية للتعريف بالابتكار والتقنية والعمل الأكاديمي، أُنشئت لعرض طريقة نشر الفعاليات في StudentHub.",
+          "en": "A fictional showcase of innovation, technology, and academic collaboration, created to demonstrate event listings in StudentHub.",
+          "ku": "چالاکییەکا خەیاڵی یا داهێنان، تەکنەلۆژی و هەڤکارییا ئەکادیمی نیشان ددەت، بۆ تاقیکرنا لیستکرنا چالاکییان ل StudentHub."
+        },
+        "location": {
+          "ar": "قاعة تجريبية داخل الحرم الجامعي",
+          "en": "Fictional hall on a demo campus",
+          "ku": "سالۆنەکا خەیاڵی ل ناڤ حەوشا زانکۆیێ"
+        },
+        "requirements": {
+          "ar": "المشاركة للطلاب في هذا المثال التوضيحي فقط.",
+          "en": "Student participation is part of this illustrative example only.",
+          "ku": "بەشداربوونا قوتابیان تەنێ بەشەک ژ ڤێ نموونەیا تاقیکرنێیە."
+        }
+      },
+      "demo-learning-exhibition": {
+        "title": {
+          "ar": "معرض التعلم والفرص التجريبي",
+          "en": "Demo Learning & Opportunities Exhibition",
+          "ku": "پێشانگەها تاقیکرنێ یا فێربوون و دەرفەتان"
+        },
+        "organizer": {
+          "ar": "مركز المعارض التجريبي",
+          "en": "Demo Exhibition Center",
+          "ku": "ناڤەندا تاقیکرنێ یا پێشانگەهان"
+        },
+        "description": {
+          "ar": "معرض خيالي يجمع عروضًا تعليمية ومهنية وتجارية بوصفها محتوى تجريبيًا غير حقيقي.",
+          "en": "A fictional exhibition combining educational, professional, and commercial displays as non-real demo content.",
+          "ku": "پێشانگەهەکا خەیاڵی یا پیشاندانێن فێرکاری، پیشەیی و بازرگانی ب ناڤەڕۆکەکا تاقیکرنێ یا نەراستەقینە."
+        },
+        "location": {
+          "ar": "مركز معارض تجريبي",
+          "en": "Fictional exhibition venue",
+          "ku": "جهەکێ خەیاڵی یێ پێشانگەهێ"
+        },
+        "requirements": {
+          "ar": "دخول مجاني في هذا المثال فقط؛ لا يوجد معرض فعلي.",
+          "en": "Free entry in this example only; no real exhibition is taking place.",
+          "ku": "چوونا بێبەرامبەر تەنێ ل ڤێ نموونەیێ؛ پێشانگەهەکا راستەقینە نینە."
+        }
+      },
+      "demo-university-welcome": {
+        "title": {
+          "ar": "يوم الأنشطة الجامعية التجريبي",
+          "en": "Demo University Activities Day",
+          "ku": "روژا تاقیکرنێ یا چالاکیێن زانکۆیێ"
+        },
+        "organizer": {
+          "ar": "رابطة طلابية تجريبية",
+          "en": "Demo Student Association",
+          "ku": "پەیوەندیا تاقیکرنێ یا قوتابیان"
+        },
+        "description": {
+          "ar": "مثال خيالي على يوم جامعي للتعارف والأنشطة التي تنظمها مجموعات طلابية.",
+          "en": "A fictional example of a campus day for meeting students and exploring student-group activities.",
+          "ku": "نموونەیەکا خەیاڵی یا روژەکا زانکۆیێ بۆ ناسینا قوتابیان و چالاکیێن کۆمێن قوتابیان."
+        },
+        "location": {
+          "ar": "الساحة الطلابية التجريبية",
+          "en": "Fictional student courtyard",
+          "ku": "حەوشا تاقیکرنێ یا قوتابیان"
+        },
+        "requirements": {
+          "ar": "مفتوح للطلاب في هذا المثال التوضيحي فقط.",
+          "en": "Open to students in this illustrative example only.",
+          "ku": "تەنێ ل ڤێ نموونەیا تاقیکرنێ بۆ قوتابیان ڤەکرییە."
+        }
+      },
+      "demo-student-hackathon": {
+        "title": {
+          "ar": "تحدي البرمجة الطلابي التجريبي",
+          "en": "Demo Student Coding Challenge",
+          "ku": "پێشبڕکێیا تاقیکرنێ یا کۆدکرنا قوتابیان"
+        },
+        "organizer": {
+          "ar": "مختبر الابتكار الطلابي التجريبي",
+          "en": "Demo Student Innovation Lab",
+          "ku": "لابراتوارا تاقیکرنێ یا داهێنانا قوتابیان"
+        },
+        "description": {
+          "ar": "مسابقة خيالية لتصميم حلول رقمية وتطوير نماذج أولية ضمن فرق طلابية.",
+          "en": "A fictional competition for designing digital solutions and building prototypes in student teams.",
+          "ku": "پێشبڕکێیەکا خەیاڵی بۆ دیزاینکرنا چارەسەرێن دیجیتاڵ و دروستکرنا نموونەیێن سەرەتایی ل گەل تیمێن قوتابیان."
+        },
+        "location": {
+          "ar": "مختبر حاسوب تجريبي",
+          "en": "Fictional computer lab",
+          "ku": "لابراتوارەکا خەیاڵی یا کۆمپیوتەران"
+        },
+        "requirements": {
+          "ar": "يتطلب المثال فريقًا طلابيًا؛ لا يوجد تسجيل حقيقي.",
+          "en": "This example assumes a student team; real registration is unavailable.",
+          "ku": "ڤێ نموونەیێ تیمەکا قوتابیان پێدڤییە؛ تۆمارکرنا راستەقینە نینە."
+        }
+      },
+      "demo-campus-sports-day": {
+        "title": {
+          "ar": "اليوم الرياضي الجامعي التجريبي",
+          "en": "Demo Campus Sports Day",
+          "ku": "روژا تاقیکرنێ یا وەرزشێ یا زانکۆیێ"
+        },
+        "organizer": {
+          "ar": "النادي الرياضي الطلابي التجريبي",
+          "en": "Demo Student Sports Club",
+          "ku": "یەکیتیا تاقیکرنێ یا وەرزشێ یا قوتابیان"
+        },
+        "description": {
+          "ar": "نشاط رياضي خيالي يضم ألعابًا جماعية وتحديات ودية للطلاب.",
+          "en": "A fictional sports activity featuring team games and friendly student challenges.",
+          "ku": "چالاکییەکا وەرزشێ یا خەیاڵی ل گەل یاریێن تیمی و ئاستەنگێن دۆستانە بۆ قوتابیان."
+        },
+        "location": {
+          "ar": "ملعب جامعي تجريبي",
+          "en": "Fictional university sports ground",
+          "ku": "یاریگەهەکا خەیاڵی یا زانکۆیێ"
+        },
+        "requirements": {
+          "ar": "يتطلب النشاط الافتراضي تسجيلًا مسبقًا؛ لا توجد فعالية فعلية.",
+          "en": "The fictional activity assumes advance registration; no real event is scheduled.",
+          "ku": "چالاکیا خەیاڵی تۆمارکرنا پێشوەخت پێدڤییە؛ چالاکییەکا راستەقینە نینە."
+        }
+      },
+      "demo-digital-skills-workshop": {
+        "title": {
+          "ar": "ورشة المهارات الرقمية التجريبية",
+          "en": "Demo Digital Skills Workshop",
+          "ku": "کارگەها تاقیکرنێ یا شارەزاییێن دیجیتاڵ"
+        },
+        "organizer": {
+          "ar": "مبادرة التعلم التجريبية",
+          "en": "Demo Learning Initiative",
+          "ku": "دەستپێشخەرییا تاقیکرنێ یا فێربوونێ"
+        },
+        "description": {
+          "ar": "ورشة خيالية للتدرب على أدوات رقمية ومهارات أساسية من خلال تمارين عملية.",
+          "en": "A fictional workshop for practicing digital tools and foundational skills through hands-on exercises.",
+          "ku": "کارگەهەکا خەیاڵی بۆ راهێنانا ئامرازێن دیجیتاڵ و شارەزاییێن بنەڕەتی ب ڕاهێنانێن کرداری."
+        },
+        "location": {
+          "ar": "قاعة تدريب تجريبية",
+          "en": "Fictional training room",
+          "ku": "ژوورەکا خەیاڵی یا راهێنانێ"
+        },
+        "requirements": {
+          "ar": "المقاعد والتسجيل افتراضيان في هذا المحتوى التجريبي.",
+          "en": "Seats and registration are fictional in this demo content.",
+          "ku": "جه و تۆمارکرن ل ڤی ناڤەڕۆکا تاقیکرنێ خەیاڵی نە."
+        }
+      },
+      "demo-community-volunteer-day": {
+        "title": {
+          "ar": "يوم خدمة المجتمع التطوعي التجريبي",
+          "en": "Demo Community Volunteer Day",
+          "ku": "روژا تاقیکرنێ یا خزمەتا کۆمەڵگەهێ"
+        },
+        "organizer": {
+          "ar": "فريق خدمة المجتمع التجريبي",
+          "en": "Demo Community Service Team",
+          "ku": "تیمی تاقیکرنێ یێ خزمەتا کۆمەڵگەهێ"
+        },
+        "description": {
+          "ar": "فرصة تطوع خيالية للمشاركة في مبادرة مجتمعية وتنمية روح التعاون بين الطلاب.",
+          "en": "A fictional volunteering opportunity for a community initiative and student collaboration.",
+          "ku": "دەرفەتەکا خەیاڵی یا خۆبەخشینی بۆ دەستپێشخەرییەکا کۆمەڵایەتی و هەڤکارییا قوتابیان."
+        },
+        "location": {
+          "ar": "مركز مجتمعي تجريبي",
+          "en": "Fictional community center",
+          "ku": "ناڤەندەکێ خەیاڵی یێ کۆمەڵگەهێ"
+        },
+        "requirements": {
+          "ar": "المشاركة تطوعية في المثال فقط؛ لا توجد جهة حقيقية للتسجيل.",
+          "en": "Participation is illustrative only; there is no real organization to register with.",
+          "ku": "بەشداربوون تەنێ تاقیکرنە؛ ڕێکخەرەکێ راستەقینە بۆ تۆمارکرنێ نینە."
+        }
+      },
+      "demo-campus-cleanup": {
+        "title": {
+          "ar": "مبادرة تنظيف الحرم الجامعي التجريبية",
+          "en": "Demo Campus Clean-up Initiative",
+          "ku": "دەستپێشخەرییا تاقیکرنێ یا پاککرنا حەوشا زانکۆیێ"
+        },
+        "organizer": {
+          "ar": "فريق طلابي تجريبي",
+          "en": "Demo Student Team",
+          "ku": "تیمی تاقیکرنێ یێ قوتابیان"
+        },
+        "description": {
+          "ar": "مثال توضيحي على نشاط تطوعي سابق للمساعدة في العناية بمساحة جامعية مشتركة.",
+          "en": "An illustrative past activity showing students caring for a shared campus space.",
+          "ku": "نموونەیەکا تاقیکرنێ یا چالاکییەکا خۆبەخش یا بوری بۆ چاڤدێریکرنا جهەکێ هاوبەش یێ زانکۆیێ."
+        },
+        "location": {
+          "ar": "المساحة الخضراء الجامعية التجريبية",
+          "en": "Fictional campus green space",
+          "ku": "جهەکێ سەوز یێ خەیاڵی یێ زانکۆیێ"
+        },
+        "requirements": {
+          "ar": "فعالية سابقة خيالية؛ لا يوجد تسجيل أو نشاط حالي.",
+          "en": "Fictional past event; no registration or current activity is available.",
+          "ku": "چالاکییەکا بوری یا خەیاڵی؛ تۆمارکرن یان چالاکییەکا نوکە نینە."
+        }
+      }
+    },
     "deals": {
       "1": {
         "discount": {
@@ -2578,6 +3066,102 @@ window.STUDENTHUB_TRANSLATIONS = {
           "ar": "عرض خاص على بعض المشروبات في مقهى Y5. لم تُحدد المشروبات المشمولة أو شروط العرض.",
           "en": "Special offer on selected drinks at Y5 coffee shop. Specific drinks and offer terms were not provided.",
           "ku": "ئۆفەرەکا تایبەت ل سەر هەندەک ڤەخوارنان ل کافێیا Y5. ڤەخوارنێن د ناڤ ئۆفەری دا و مەرجێن وی نەهاتینە دیارکرن."
+        }
+      },
+      "9": {
+        "business_name": {
+          "ar": "متجر نظارات تجريبي",
+          "en": "Demo Optical Store",
+          "ku": "دوکانا چاڤەکان یا تاقیکرنێ"
+        },
+        "discount": {
+          "ar": "تجريبي: خصم 20% على النظارات الطبية",
+          "en": "Demo: 20% OFF prescription glasses",
+          "ku": "تاقیکرنە: 20% داشکاندن ل سەر چاڤەکێن پزیشکی"
+        },
+        "description": {
+          "ar": "عرض طلابي تجريبي: خصم 20% على النظارات الطبية لدى متجر بصريات خيالي. لم يتم التحقق من مقدم خدمة أو خصم حقيقي.",
+          "en": "Demo student offer: 20% off prescription glasses at a fictional optical store. No real provider or discount is verified.",
+          "ku": "ئۆفەرەکا قوتابیان یا تاقیکرنێ: 20% داشکاندن ل سەر چاڤەکێن پزیشکی ل دوکانەکا خەیاڵی یا چاڤەکان. هیچ پێشکێشکەر یان داشکاندنەکا ڕاستەقینە نەهاتە پشتڕاستکرن."
+        },
+        "terms": {
+          "ar": "عرض خيالي للعرض التجريبي فقط. تفاصيل المنتجات والوصفات والأهلية توضيحية وليست حقيقية.",
+          "en": "Fictional demo offer only. Product, prescription and eligibility terms are illustrative, not real.",
+          "ku": "تەنێ ئۆفەرەکا خەیاڵی یا تاقیکرنێیە. مەرجێن کاڵا، ڕەچەتە و شایستەبوون نموونەیین و ڕاستەقینە نینن."
+        },
+        "location": {
+          "ar": "موقع خيالي في زاخو (للعرض التجريبي فقط)",
+          "en": "Fictional Zakho location (demo only)",
+          "ku": "جهەکێ خەیاڵی ل زاخۆ (تەنێ بۆ تاقیکرنێ)"
+        },
+        "how_to_use": {
+          "ar": "للعرض التجريبي فقط — لا يمكن استخدام هذا العرض فعليًا.",
+          "en": "Demo only — this offer cannot be redeemed.",
+          "ku": "تەنێ بۆ تاقیکرنێ — ئەڤ ئۆفەرە ناهێتە بەکارهینان."
+        }
+      },
+      "10": {
+        "business_name": {
+          "ar": "عيادة أسنان تجريبية",
+          "en": "Demo Dental Clinic",
+          "ku": "کلینیکا ددانان یا تاقیکرنێ"
+        },
+        "discount": {
+          "ar": "تجريبي: خصم 15% على الاستشارة",
+          "en": "Demo: 15% OFF consultation",
+          "ku": "تاقیکرنە: 15% داشکاندن ل سەر راوێژکاریێ"
+        },
+        "description": {
+          "ar": "عرض طلابي تجريبي: خصم 15% على استشارة أسنان لدى عيادة خيالية. لم يتم التحقق من مقدم خدمة أو خصم حقيقي.",
+          "en": "Demo student offer: 15% off a dental consultation at a fictional clinic. No real provider or discount is verified.",
+          "ku": "ئۆفەرەکا قوتابیان یا تاقیکرنێ: 15% داشکاندن ل سەر راوێژکارییا ددانان ل کلینیکەکا خەیاڵی. هیچ پێشکێشکەر یان داشکاندنەکا ڕاستەقینە نەهاتە پشتڕاستکرن."
+        },
+        "terms": {
+          "ar": "عرض خيالي للعرض التجريبي فقط. الخدمات والأهلية والتوفر توضيحية وليست حقيقية.",
+          "en": "Fictional demo offer only. Services, eligibility and availability are illustrative, not real.",
+          "ku": "تەنێ ئۆفەرەکا خەیاڵی یا تاقیکرنێیە. خزمەتگوزاری، شایستەبوون و بەردەستبوون نموونەیین و ڕاستەقینە نینن."
+        },
+        "location": {
+          "ar": "موقع خيالي في زاخو (للعرض التجريبي فقط)",
+          "en": "Fictional Zakho location (demo only)",
+          "ku": "جهەکێ خەیاڵی ل زاخۆ (تەنێ بۆ تاقیکرنێ)"
+        },
+        "how_to_use": {
+          "ar": "للعرض التجريبي فقط — لا يمكن استخدام هذا العرض فعليًا.",
+          "en": "Demo only — this offer cannot be redeemed.",
+          "ku": "تەنێ بۆ تاقیکرنێ — ئەڤ ئۆفەرە ناهێتە بەکارهینان."
+        }
+      },
+      "11": {
+        "business_name": {
+          "ar": "عيادة عيون تجريبية",
+          "en": "Demo Eye Clinic",
+          "ku": "کلینیکا چاڤان یا تاقیکرنێ"
+        },
+        "discount": {
+          "ar": "تجريبي: فحص عيون مجاني",
+          "en": "Demo: Free eye checkup",
+          "ku": "تاقیکرنە: پشکنینا چاڤان بێبەرامبەر"
+        },
+        "description": {
+          "ar": "عرض طلابي تجريبي: فحص أساسي مجاني للعيون أو استشارة مخفضة لدى عيادة خيالية. لم يتم التحقق من مقدم خدمة أو خدمة حقيقية.",
+          "en": "Demo student offer: a free basic eye checkup or discounted consultation at a fictional eye clinic. No real provider or service is verified.",
+          "ku": "ئۆفەرەکا قوتابیان یا تاقیکرنێ: پشکنینەکا سەرەتایی یا بێبەرامبەر بۆ چاڤان یان راوێژکارییەکا داشکاندی ل کلینیکەکا خەیاڵی یا چاڤان. هیچ پێشکێشکەر یان خزمەتگوزارییەکا ڕاستەقینە نەهاتە پشتڕاستکرن."
+        },
+        "terms": {
+          "ar": "عرض خيالي للعرض التجريبي فقط. لا تُقدم خدمة طبية أو استشارة فعلية.",
+          "en": "Fictional demo offer only. No actual medical service or consultation is provided.",
+          "ku": "تەنێ ئۆفەرەکا خەیاڵی یا تاقیکرنێیە. هیچ خزمەتگوزارییەکا پزیشکی یان راوێژکارییەکا ڕاستەقینە ناهێتە پێشکێشکرن."
+        },
+        "location": {
+          "ar": "موقع خيالي في زاخو (للعرض التجريبي فقط)",
+          "en": "Fictional Zakho location (demo only)",
+          "ku": "جهەکێ خەیاڵی ل زاخۆ (تەنێ بۆ تاقیکرنێ)"
+        },
+        "how_to_use": {
+          "ar": "للعرض التجريبي فقط — لا يمكن استخدام هذا العرض فعليًا.",
+          "en": "Demo only — this offer cannot be redeemed.",
+          "ku": "تەنێ بۆ تاقیکرنێ — ئەڤ ئۆفەرە ناهێتە بەکارهینان."
         }
       }
     },

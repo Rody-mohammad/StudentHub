@@ -1,5 +1,5 @@
 /**
- * js/main.js
+ * js/shared/catalog-pages.js
  * ============================================================
  * Handles:
  *  - List pages: card rendering, search, category filter chips
@@ -263,7 +263,7 @@ function capitalize(str) {
    DEALS PAGE
    ══════════════════════════════════════════════════════════ */
 function initDealsPage() {
-  const categories = ['All', 'restaurant', 'cafe', 'gym', 'shop', 'other'];
+  const categories = ['All', 'restaurant', 'cafe', 'gym', 'shop', 'other', 'health-medical'];
   const page = location.pathname.split('/').pop() || 'deals.html';
   const selectedCategory = page === 'restaurant-offers.html' ? 'restaurant'
     : page === 'gym-offers.html' ? 'gym' : 'All';
@@ -867,6 +867,7 @@ function initDetailPage() {
     studentOffers:  { data: window.STUDENTHUB_BENEFITS?.offers || [], render: renderStudentOfferDetail, back: 'digital-offers.html' },
     homeServices:   { data: window.STUDENTHUB_BENEFITS?.homeServices || [], render: renderStudentOfferDetail, back: 'index.html' },
     software:       { data: window.STUDENTHUB_BENEFITS?.software || [], render: renderSoftwareDetail, back: 'software-guides.html' },
+    events:         { data: window.eventsData || [], render: renderEventDetail, back: 'events.html' },
   };
 
   if (!section || !dataMap[section]) {
@@ -904,6 +905,7 @@ function getItemTitle(section, item) {
   if (section === 'deals')          return dataValue(section, item, 'business_name');
   if (section === 'benefits')       return dataValue(section, item, 'name');
   if (section === 'books' || section === 'studentOffers' || section === 'homeServices' || section === 'software') return typeof item.name === 'string' ? item.name : item.name?.[window.StudentHubI18n?.getLanguage() || 'en'] || item.name?.en || '';
+  if (section === 'events') return dataValue(section, item, 'title');
   if (section === 'housing')        return dataValue(section, item, 'title');
   if (section === 'transportation') return dataValue(section, item, 'route_name');
   return t('pageTitle.detail');
@@ -924,6 +926,35 @@ function renderBookDetail(item) {
   const services = localize(item.services);
   const location = typeof item.location === 'string' && item.location.startsWith('benefits.') ? t(item.location) : localize(item.location);
   return `<div class="detail-card"><h2 class="detail-card__title">${name}</h2>${item.kind ? `<div class="detail-meta"><span class="badge badge--gray">${window.StudentHubI18n.category(item.kind)}</span></div>` : ''}${detailSectionHtml(t('offers.description'), description ? `<p>${description}</p>` : '')}${detailSectionHtml(t('common.contact'), detailRowHtml(t('benefits.provider'), provider))}${detailSectionHtml(t('benefits.services'), detailRowHtml(t('benefits.services'), services))}${detailSectionHtml(t('common.location'), detailRowHtml(t('common.location'), location))}</div><div class="detail-notice">${t('common.demoNotice')}</div>`;
+}
+
+function renderEventDetail(item) {
+  const i18n = window.StudentHubI18n;
+  const escapeHtml = (value) => String(value ?? '').replace(/[&<>"']/g, (char) => ({
+    '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;',
+  })[char]);
+  const value = (field) => escapeHtml(dataValue('events', item, field) ?? '');
+  const status = window.StudentHubEvents.status(item);
+  const fee = Number(item.price) || 0;
+  let registrationUrl = '';
+  try {
+    const candidate = new URL(item.registrationUrl);
+    if (candidate.protocol === 'https:') registrationUrl = candidate.href;
+  } catch { /* Demo records commonly have no official registration URL. */ }
+
+  return `<div class="detail-photo-wrapper events-detail-cover"><img src="${escapeHtml(item.image)}" alt="" class="detail-photo"></div>
+    <div class="detail-card events-detail-card">
+      <div class="detail-meta"><span class="badge badge--gray">${escapeHtml(i18n.t(`events.category.${item.category}`))}</span><span class="badge events-state events-state--${status}">${escapeHtml(i18n.t(`events.state.${status}`))}</span><span class="badge badge--amber">${escapeHtml(i18n.t('events.demoLabel'))}</span></div>
+      <h2 class="detail-card__title">${value('title')}</h2>
+      <div class="events-detail-notice">${escapeHtml(i18n.t('events.demoNotice'))}</div>
+      ${detailSectionHtml(i18n.t('events.aboutEvent'), `<p>${value('description')}</p>`)}
+      ${detailSectionHtml(i18n.t('events.organizer'), `<p>${value('organizer')}</p>`)}
+      ${detailSectionHtml(i18n.t('events.dateTime'), `<p>${escapeHtml(window.StudentHubEvents.dateTime(item, i18n.getLanguage()))}</p>`)}
+      ${detailSectionHtml(i18n.t('events.venue'), `<p>${value('location')} · ${escapeHtml(i18n.t(`events.city.${item.city.toLowerCase()}`))}</p>`)}
+      ${detailSectionHtml(i18n.t('events.requirements'), `<p>${value('requirements')}</p>`)}
+      ${detailSectionHtml(i18n.t('events.participation'), `<p>${escapeHtml(fee > 0 ? `${i18n.t('events.paidEntry')}: ${new Intl.NumberFormat(i18n.getLanguage() === 'ku' ? 'ar' : i18n.getLanguage(), { style: 'currency', currency: 'USD' }).format(fee)}` : i18n.t('events.freeEntry'))}</p><p>${escapeHtml(item.registrationRequired ? i18n.t('events.registrationRequired') : i18n.t('events.openToStudents'))}</p>${fee > 0 ? `<p>${escapeHtml(i18n.t('events.demoFeeNote'))}</p>` : ''}`)}
+      ${detailSectionHtml(i18n.t('events.registration'), registrationUrl ? `<a class="btn btn--ghost btn--sm" href="${escapeHtml(registrationUrl)}" target="_blank" rel="noopener noreferrer">${escapeHtml(i18n.t('events.registration'))}</a>` : `<p>${escapeHtml(i18n.t('events.registrationUnavailable'))}</p>`)}
+    </div>`;
 }
 
 /* ── Deal detail ──────────────────────────────────────────── */
@@ -1148,6 +1179,8 @@ document.addEventListener('DOMContentLoaded', () => {
       backBtn.onclick = () => { window.location.href = 'software-guides.html'; };
     } else if (section === 'books') {
       backBtn.onclick = () => { window.location.href = 'book-discounts.html'; };
+    } else if (section === 'events') {
+      backBtn.onclick = () => { window.location.href = 'events.html'; };
     } else if (section) {
       backBtn.addEventListener('click', () => {
         window.location.href = `${section}.html`;
