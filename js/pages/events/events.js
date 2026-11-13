@@ -105,7 +105,6 @@
     function renderLabels() {
       page.querySelector('#eventsHeading').textContent = t('events.heading');
       page.querySelector('#eventsIntro').textContent = t('events.intro');
-      page.querySelector('#eventsDemoNotice').textContent = t('events.directoryNotice');
       page.querySelector('#eventsSearchLabel').textContent = t('events.searchLabel');
       search.placeholder = t('events.searchPlaceholder');
       page.querySelector('#eventsLocationLabel').textContent = t('events.locationLabel');

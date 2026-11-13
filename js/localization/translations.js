@@ -6,6 +6,56 @@ window.STUDENTHUB_TRANSLATIONS = {
       "en": "StudentHub",
       "ku": "StudentHub"
     },
+    "pwa.offlineMessage": {
+      "ar": "أنت غير متصل بالإنترنت. قد تكون المعلومات المحفوظة قديمة.",
+      "en": "You are offline. Saved information may be outdated.",
+      "ku": "تو نەیی گرێدایە؛ زانیاریێن پاشەکەفتی دبیتە کوڤار بن."
+    },
+    "pwa.staleMessage": {
+      "ar": "تعرض هذه الصفحة معلومات محفوظة وقد لا تكون محدثة. أعد تحميلها عند توفر الاتصال.",
+      "en": "This page is showing saved information that may be outdated. Reload when connected.",
+      "ku": "ئەڤ لاپەڕە زانیاریێن پاشەکەفتی نیشان ددەت و دبیتە کوڤار بن؛ دەمێ گرێدان هەبوو دوبارە بار بکە."
+    },
+    "offline.title": {
+      "ar": "غير متصل",
+      "en": "Offline",
+      "ku": "نەیی گرێدایە"
+    },
+    "offline.heading": {
+      "ar": "هذه الصفحة غير متاحة دون اتصال",
+      "en": "This page isn't available offline",
+      "ku": "ئەڤ لاپەڕە نەیی گرێدایە بەردەست نینە"
+    },
+    "offline.message": {
+      "ar": "تعذر فتح الصفحة المطلوبة أثناء عدم الاتصال. تحقق من اتصالك ثم أعد المحاولة.",
+      "en": "The requested page couldn't be opened while offline. Check your connection and try again.",
+      "ku": "نەشیا لاپەڕا هاتیه‌ داخواستن ل دەمێ نەگرێدایبوونێ ڤەکەت. گرێدانا خۆ پشکنین بکە و دوبارە هەول بدە."
+    },
+    "offline.retry": {
+      "ar": "إعادة المحاولة",
+      "en": "Try again",
+      "ku": "دوبارە هەول بدە"
+    },
+    "offline.home": {
+      "ar": "العودة إلى الرئيسية",
+      "en": "Go to home",
+      "ku": "ڤەگەڕە سەرەکی"
+    },
+    "offline.languageLabel": {
+      "ar": "اللغة",
+      "en": "Language",
+      "ku": "زمان"
+    },
+    "offline.themeDark": {
+      "ar": "تفعيل الوضع الداكن",
+      "en": "Turn on dark mode",
+      "ku": "دۆخا تاریک چالاک بکە"
+    },
+    "offline.themeLight": {
+      "ar": "تفعيل الوضع الفاتح",
+      "en": "Turn on light mode",
+      "ku": "دۆخا روناک چالاک بکە"
+    },
     "navigation.home": {
       "ar": "الرئيسية",
       "en": "Home",
@@ -180,11 +230,6 @@ window.STUDENTHUB_TRANSLATIONS = {
       "ar": "هذا الإعلان خيالي بالكامل ولأغراض العرض التجريبي فقط.",
       "en": "This listing is entirely fictional and for demo purposes only.",
       "ku": "ئەڤ ڕیکلامە هەمی خەیاڵییە و تەنێ بۆ تاقیکرنێ هاتییە دانان."
-    },
-    "common.fictionalTransportNotice": {
-      "ar": "المواعيد والأجور تجريبية، ولا تشير إلى خدمة نقل حقيقية.",
-      "en": "Demo schedule and fares. No real transport service is implied.",
-      "ku": "کات و کرێ تاقیکرنە؛ ئەڤ زانیارییە خزمەتگوزاریەکا گواستنەوەیێ یا ڕاستەقینە نیشان نادەت."
     },
     "common.demoReports": {
       "ar": "للعرض التجريبي فقط — لا يتم إرسال البلاغات.",
@@ -650,16 +695,6 @@ window.STUDENTHUB_TRANSLATIONS = {
       "ar": "فعاليات توضيحية خيالية — ليست فرصًا حقيقية أو دعوات للتسجيل.",
       "en": "Fictional demo events — these are not real opportunities or registration invitations.",
       "ku": "چالاکیێن خەیاڵی یێن تاقیکرنێ — نە دەرفەتێن راستەقینە نە ژی بانگەوازێن تۆمارکرنێ نە."
-    },
-    "events.directoryNotice": {
-      "ar": "الفعاليات التجريبية خيالية. تفاصيل الملصقات مستمدة من الصور المقدمة ولم يتم التحقق منها بشكل مستقل.",
-      "en": "Demo events are fictional. Poster details are transcribed from supplied images and have not been independently verified.",
-      "ku": "چالاکیێن تاقیکرنێ خەیاڵیین. زانیاریێن پۆستەران ژ وێنەیێن هاتینە پێشکێشکرن هاتینە وەرگرتن و نەهاتینە پشتڕاستکرنا سەربەخۆ."
-    },
-    "events.posterNotice": {
-      "ar": "هذه التفاصيل من ملصق مقدم من المستخدم ولم يتم التحقق منها بشكل مستقل؛ تحقق من الجهة المنظمة قبل الحضور.",
-      "en": "Details are transcribed from a user-supplied poster and have not been independently verified; confirm with the organizer before attending.",
-      "ku": "ئەڤ زانیارییە ژ پۆستەرەکێ هاتیە وەرگرتن کو بەکارهێنەر پێشکێشکریە و نەهاتە پشتڕاستکرنا سەربەخۆ؛ بەرێ خۆ بدە ڕێکخەرێ بەرێ خۆ بدەی."
     },
     "events.demoLabel": {
       "ar": "فعالية تجريبية",
@@ -1931,11 +1966,6 @@ window.STUDENTHUB_TRANSLATIONS = {
       "en": "Compare university housing and private apartments for students.",
       "ku": "نیشتەجێبوونا زانکۆیێ و شوقەیێن تایبەت بۆ قوتابیان ب یەک ڕاوەرد بکە."
     },
-    "housing.demoNotice": {
-      "ar": "هذه بيانات تجريبية. الأسعار والعناوين والجهات المعروضة خيالية.",
-      "en": "Demo data only. Prices, addresses, and providers shown here are fictional.",
-      "ku": "تەنێ زانیاریێن تاقیکرنێ. نرخ، ناڤنیشان و پێشکێشکەرێن هاتینە نیشاندان هەمی خەیاڵیین."
-    },
     "housing.tabUniversity": {
       "ar": "السكن الجامعي",
       "en": "University housing",
@@ -2165,11 +2195,6 @@ window.STUDENTHUB_TRANSLATIONS = {
       "ar": "استكشف أمثلة توضيحية للمسارات ونقاط الانطلاق والوصول في زاخو ومحيطها.",
       "en": "Explore illustrative routes, pickup points, and destinations in Zakho and nearby areas.",
       "ku": "نموونەیێن ڕێ، جهێن وەرگرتنێ و ئارمانجان ل زاخۆ و دەوروبەرا ببینە."
-    },
-    "transportation.directoryNotice": {
-      "ar": "هذه بيانات تجريبية. المواعيد والأجور والمسارات خيالية وغير مؤكدة، ولا تشير إلى خدمات حقيقية.",
-      "en": "Demo data only. Routes, schedules, and fares are fictional and unverified; they do not represent real services.",
-      "ku": "تەنێ زانیاریێن تاقیکرنێ. ڕێ، کات و کرێ خەیاڵی و نەهاتییە پشتڕاستکرن؛ خزمەتگوزاریێن ڕاستەقینە نیشان نادەن."
     },
     "transportation.sortLabel": {
       "ar": "ترتيب حسب",

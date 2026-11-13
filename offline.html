@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="theme-color" content="#203F7A" />
+  <title>StudentHub - غير متصل</title>
+  <link rel="icon" type="image/png" sizes="192x192" href="assets/icons/app-icon-192.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="assets/icons/apple-touch-icon.png" />
+  <link rel="manifest" href="manifest.webmanifest" />
+  <link rel="stylesheet" href="css/style.css" />
+  <script src="js/localization/translations.js"></script>
+  <script src="js/localization/i18n.js"></script>
+  <script src="js/shared/pwa.js" defer></script>
+</head>
+<body>
+  <div class="app-container">
+    <header class="app-bar">
+      <a class="app-bar__home-link" href="index.html">
+        <span class="app-bar__logo-icon"><img src="assets/images/StudentHubLogo.png" alt="" /></span>
+        <span class="app-bar__title"><span style="color:var(--accent-amber);">Student</span>Hub</span>
+      </a>
+    </header>
+
+    <main class="app-content offline-page">
+      <section class="offline-card" aria-labelledby="offlineHeading">
+        <div class="offline-card__icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 8v5m0 4h.01"/><circle cx="12" cy="12" r="10"/></svg></div>
+        <h1 class="section-heading" id="offlineHeading">هذه الصفحة غير متاحة دون اتصال</h1>
+        <p id="offlineMessage">تعذر فتح الصفحة المطلوبة أثناء عدم الاتصال. تحقق من اتصالك ثم أعد المحاولة.</p>
+        <div class="offline-card__actions">
+          <button type="button" class="btn btn--primary" id="offlineRetry">إعادة المحاولة</button>
+          <a class="btn btn--ghost" href="index.html" id="offlineHome">العودة إلى الرئيسية</a>
+        </div>
+        <div class="offline-card__settings">
+          <label for="offlineLanguage" id="offlineLanguageLabel">اللغة</label>
+          <select id="offlineLanguage" aria-labelledby="offlineLanguageLabel">
+            <option value="ar">العربية</option>
+            <option value="en">English</option>
+            <option value="ku">الكردية البهدينية</option>
+          </select>
+          <button type="button" class="btn btn--ghost btn--sm" id="offlineTheme" aria-pressed="false"></button>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script>
+    (() => {
+      const i18n = window.StudentHubI18n;
+      const languageSelect = document.getElementById('offlineLanguage');
+      const themeButton = document.getElementById('offlineTheme');
+      const isFallback = location.pathname.split('/').pop() !== 'offline.html';
+      const updateLabels = () => {
+        languageSelect.value = i18n.getLanguage();
+        if (isFallback) document.title = `StudentHub - ${i18n.t('offline.title')}`;
+        document.getElementById('offlineHeading').textContent = i18n.t('offline.heading');
+        document.getElementById('offlineMessage').textContent = i18n.t('offline.message');
+        document.getElementById('offlineRetry').textContent = i18n.t('offline.retry');
+        document.getElementById('offlineHome').textContent = i18n.t('offline.home');
+        document.getElementById('offlineLanguageLabel').textContent = i18n.t('offline.languageLabel');
+        const dark = document.documentElement.dataset.theme === 'dark';
+        themeButton.textContent = i18n.t(dark ? 'offline.themeLight' : 'offline.themeDark');
+        themeButton.setAttribute('aria-pressed', String(dark));
+      };
+
+      languageSelect.addEventListener('change', () => i18n.setLanguage(languageSelect.value));
+      themeButton.addEventListener('click', () => {
+        const dark = document.documentElement.dataset.theme !== 'dark';
+        document.documentElement.dataset.theme = dark ? 'dark' : 'light';
+        try {
+          localStorage.setItem('studenthubTheme', dark ? 'dark' : 'light');
+        } catch (error) {
+          console.warn('[StudentHub Offline] Theme preference could not be saved.', error);
+        }
+        updateLabels();
+      });
+      document.getElementById('offlineRetry').addEventListener('click', () => location.reload());
+      i18n.onChange(updateLabels);
+      document.addEventListener('DOMContentLoaded', updateLabels, { once: true });
+    })();
+  </script>
+</body>
+</html>

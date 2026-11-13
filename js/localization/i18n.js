@@ -20,7 +20,7 @@
     '[data-home-upcoming-events]', '#eventsFeatured', '#eventsResults', '#eventsCount', '.home-gemini-offer'
   ].join(', ');
   const pageTitleKeys = {
-    'index.html': 'pageTitle.home', 'about.html': 'pageTitle.about', 'deals.html': 'pageTitle.deals',
+    'index.html': 'pageTitle.home', 'offline.html': 'offline.title', 'about.html': 'pageTitle.about', 'deals.html': 'pageTitle.deals',
     'benefits.html': 'pageTitle.benefits', 'housing.html': 'pageTitle.housing',
     'transportation.html': 'pageTitle.transportation', 'detail.html': 'pageTitle.detail',
     'events.html': 'pageTitle.events',

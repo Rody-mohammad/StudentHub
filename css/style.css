@@ -2612,6 +2612,88 @@ html[data-theme="dark"] .deals-directory__filters .chip[aria-pressed="true"] {
   .home-offer-detail-link .featured-card__body { padding: 14px; }
 }
 
+.pwa-offline-notice {
+    position: sticky;
+    top: 0;
+    z-index: 101;
+    padding: 7px 14px;
+    background: #fff4d6;
+    color: #59400a;
+    border-bottom: 1px solid #f0d48e;
+    text-align: center;
+    font-size: 12px;
+    line-height: 1.4;
+}
+
+.pwa-offline-notice[hidden] { display: none; }
+
+html[data-theme="dark"] .pwa-offline-notice {
+    background: #3b321d;
+    color: #f7e7b6;
+    border-color: #65552e;
+}
+
+.offline-page {
+    display: grid;
+    place-items: center;
+    min-height: min(72vh, 760px);
+    padding-block: 32px;
+}
+
+.offline-card {
+    width: min(100%, 620px);
+    padding: clamp(22px, 5vw, 40px);
+    border: 1px solid var(--border-light);
+    border-radius: 18px;
+    background: var(--card-white);
+    text-align: center;
+    box-shadow: 0 8px 28px rgba(32, 63, 122, 0.08);
+}
+
+.offline-card__icon {
+    display: grid;
+    place-items: center;
+    width: 54px;
+    height: 54px;
+    margin: 0 auto 16px;
+    border-radius: 50%;
+    background: var(--primary-navy);
+    color: #fff;
+    font-size: 25px;
+    font-weight: 700;
+}
+
+.offline-card .section-heading { margin-bottom: 10px; }
+.offline-card > p { color: var(--text-muted); }
+.offline-card__actions,
+.offline-card__settings {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.offline-card__settings {
+    padding-top: 16px;
+    border-top: 1px solid var(--border-light);
+}
+
+.offline-card__settings select {
+    min-height: 40px;
+    padding: 6px 10px;
+    border: 1px solid var(--border-light);
+    border-radius: 9px;
+    background: var(--card-white);
+    color: var(--text-dark);
+    font: inherit;
+}
+
+@media (max-width: 480px) {
+    .offline-card__actions > * { width: 100%; }
+}
+
 @media (max-width: 600px) {
     .deals-directory__filters {
         flex-wrap: nowrap;

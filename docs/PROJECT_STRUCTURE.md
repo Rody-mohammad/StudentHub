@@ -8,6 +8,7 @@ StudentHub is a static website built with plain HTML, CSS, and vanilla JavaScrip
 .
 ├── index.html
 ├── manifest.webmanifest
+├── offline.html
 ├── service-worker.js
 ├── about.html
 ├── benefits.html
@@ -115,14 +116,19 @@ The backup folder and three root-level photos on some local checkouts are ignore
 | `detail.html` | Shared detail view selected by URL query parameters. |
 | `events.html` | Searchable, filterable Events & Activities directory with demo listings and user-supplied poster listings. |
 
-All pages use `css/style.css`, load `js/shared/pwa.js` for optional PWA registration, and include only the data and behavior scripts they need. Pages with an app bar also load `js/shared/navigation.js`. HTML pages intentionally stay at the root to preserve existing links and direct page URLs.
+All application pages use `css/style.css`, load `js/shared/pwa.js` for PWA registration and offline status, and include only the data and behavior scripts they need. `offline.html` is the network-failure fallback. Pages with an app bar also load `js/shared/navigation.js`. HTML pages intentionally stay at the root to preserve existing links and direct page URLs.
 
 ## Progressive Web App foundation
 
 - `manifest.webmanifest` declares the StudentHub app name, standalone display mode, brand colors, relative launch URL/scope, and install icons. Its `./` paths support deployment from a subdirectory.
 - `assets/icons/app-icon-192.png` and `app-icon-512.png` are standard install icons generated from the existing logo. `app-icon-maskable-512.png` places the logo within the maskable safe zone. `apple-touch-icon.png` is the iOS home-screen icon.
-- `js/shared/pwa.js` is loaded by all 16 HTML pages. It feature-detects service-worker support and registers the worker using a URL derived from the script's location, preserving subdirectory deployment. Registration errors are logged without blocking page behavior.
-- `service-worker.js` currently establishes the install/activate lifecycle and cache version name only. It does not cache requests or provide an offline fallback; those behaviors are reserved for the next implementation phase.
+- `js/shared/pwa.js` feature-detects service-worker support, registers the worker using a URL derived from the script's location, and displays a localized notice while the browser is offline.
+- `offline.html` is the cached fallback for an unvisited page requested without a network connection. It supports Arabic, English, Kurdish, RTL/LTR, saved theme preferences, and retry.
+- `service-worker.js` uses network-first for HTML navigation, caching each successful page by path (not query string) so the shared detail page can resolve different `section`/`id` parameters offline. Unvisited HTML falls back to `offline.html`.
+- The worker precaches the offline shell, shared CSS/JavaScript, manifest, app icons, and logo. Other same-origin CSS/JS and icons use cache-first; requested images are cached only from the app image directory when the response has a declared size of 350 KB or less, with a bounded image cache. External requests, failed responses, opaque responses, and non-HTML dynamic endpoints are not cached.
+- Cache names are versioned with `CACHE_VERSION`. Activation removes only outdated caches whose names start with `studenthub-`; unrelated browser caches are preserved. The worker does not force activation with `skipWaiting()` or `clients.claim()`, so updates wait for controlled tabs to close.
+- Increment `CACHE_VERSION` when changing the precached JavaScript, CSS, or data records so the new worker installs a fresh static cache. New navigations are network-first and replace their path cache after a successful response.
+- Cached pages and assets can be stale while offline. The page-level notice appears when `navigator.onLine` is false or the worker serves a cached navigation; online navigation otherwise remains network-first.
 
 ## JavaScript responsibilities
 
@@ -142,7 +148,7 @@ All pages use `css/style.css`, load `js/shared/pwa.js` for optional PWA registra
 | `js/shared/pwa.js` | Feature-detects and registers the root-scoped service worker; does not affect pages when service workers are unavailable. |
 | `js/pages/home/intro.js` | Homepage-only welcome intro. Uses session storage, the `welcome=1` query flag for replay, and the reduced-motion preference. |
 
-`service-worker.js` owns the service-worker lifecycle and the `CACHE_VERSION`/`CACHE_NAME` constants. No caching strategy is active yet.
+`service-worker.js` owns cache versioning, the static shell cache, the bounded runtime page/image caches, and the navigation/static asset strategies.
 
 Scripts are ordinary browser scripts, not modules. Preserve each page's existing dependency order; avoid loading page-specific behavior on unrelated pages. Existing classic-script globals are a deliberate compatibility pattern for this no-build project. The shared catalog renderer remains together because its search, category, detail, housing, and transportation behavior share helpers and data.
 

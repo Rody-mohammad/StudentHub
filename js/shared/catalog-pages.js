@@ -609,13 +609,11 @@ function initTransportationPage() {
   const updateLabels = () => {
     const heading = document.getElementById('transportHeading');
     const intro = document.getElementById('transportIntro');
-    const banner = document.getElementById('transportDemoNotice');
     const searchLabel = document.getElementById('transportSearchLabel');
     const searchBox = document.getElementById('searchInput');
     if (heading) heading.textContent = page === 'transport-zakho.html' ? t('transportation.localTitle')
       : page === 'transport-external.html' ? t('transportation.external') : t('pageTitle.transportation');
     if (intro) intro.textContent = t('transportation.intro');
-    if (banner) banner.textContent = t('common.fictionalTransportNotice');
     if (searchLabel) searchLabel.textContent = t('transportation.searchLabel');
     if (searchBox) searchBox.placeholder = t('transportation.searchPlaceholder');
     chipsEl?.setAttribute('aria-label', t('transportation.filterLabel'));
@@ -920,7 +918,6 @@ function renderEventDetail(item) {
     <div class="detail-card events-detail-card">
       <div class="detail-meta"><span class="badge badge--gray">${escapeHtml(i18n.t(`events.category.${item.category}`))}</span><span class="badge events-state events-state--${status}">${escapeHtml(i18n.t(`events.state.${status}`))}</span><span class="badge badge--amber">${escapeHtml(i18n.t(posterBased ? 'events.posterLabel' : 'events.demoLabel'))}</span></div>
       <h2 class="detail-card__title">${value('title')}</h2>
-      <div class="events-detail-notice">${escapeHtml(i18n.t(posterBased ? 'events.posterNotice' : 'events.demoNotice'))}</div>
       ${detailSectionHtml(i18n.t('events.aboutEvent'), `<p>${value('description')}</p>`)}
       ${detailSectionHtml(i18n.t('events.organizer'), `<p>${value('organizer')}</p>`)}
       ${detailSectionHtml(i18n.t('events.dateTime'), `<p>${escapeHtml(window.StudentHubEvents.dateTime(item, i18n.getLanguage()))}</p>`)}
@@ -1095,7 +1092,6 @@ function renderHousingDetail(item, section) {
 /* ── Transport detail ─────────────────────────────────────── */
 function renderTransportDetail(item, section) {
   const routeName = dataValue(section, item, 'route_name');
-  const isDemo = /demo|fictional/i.test(JSON.stringify(item));
   return `
     ${detailImage(item, routeName, section)}
     <div class="detail-card">
@@ -1103,7 +1099,6 @@ function renderTransportDetail(item, section) {
       <div class="detail-meta">
         <span class="badge badge--blue">${window.StudentHubI18n.category(item.type)}</span>
       </div>
-      ${isDemo ? `<p>${t('common.fictionalTransportNotice')}</p>` : ''}
       ${detailRowHtml(t('common.pickup'), optionalValue(section, item, 'pickup_point'))}
       ${detailRowHtml(t('common.dropoff'), optionalValue(section, item, 'dropoff_point'))}
       ${detailRowHtml(t('common.schedule'), optionalValue(section, item, 'schedule_note'))}
@@ -1111,9 +1106,6 @@ function renderTransportDetail(item, section) {
       ${detailRowHtml(t('common.fare'), optionalValue(section, item, 'fare'))}
       ${detailRowHtml(t('common.notes'), optionalValue(section, item, 'notes'))}
       ${detailRowHtml(t('common.contact'), optionalValue(section, item, 'contact'))}
-    </div>
-    <div class="detail-notice">
-      ⚠️ ${t('common.fictionalTransportNotice')}
     </div>`;
 }
 
