@@ -2782,3 +2782,34 @@ html[data-theme="dark"] .home-offer-redeem__icon { color: #9fe3b1; background: #
 html[data-theme="dark"] .detail-icon-circle { color: #d8e5ff; }
 html[data-theme="dark"] .btn--ghost { color: #d8e5ff; }
 html[data-theme="dark"] .demo-banner { color: #f6d58b; background: #342a16; border-color: #59451e; }
+
+.android-launch-splash {
+    position: fixed;
+    inset: 0;
+    z-index: 10000;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    background: #FFFFFF;
+    opacity: 1;
+    transition: opacity 180ms ease;
+}
+
+html.android-pwa .android-launch-splash { display: flex; }
+
+.android-launch-splash__logo {
+    display: block;
+    width: min(86vw, 74vh, 440px);
+    aspect-ratio: 1;
+    object-fit: cover;
+    object-position: center;
+}
+
+.android-launch-splash.is-dismissed {
+    opacity: 0;
+    pointer-events: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .android-launch-splash { transition: none; }
+}

@@ -3,6 +3,20 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <script>
+    (() => {
+      const isAndroidStandalone = /Android/i.test(navigator.userAgent)
+        && window.matchMedia?.('(display-mode: standalone)').matches;
+      if (!isAndroidStandalone) return;
+      document.documentElement.classList.add('android-pwa');
+      const preload = document.createElement('link');
+      preload.rel = 'preload';
+      preload.as = 'image';
+      preload.type = 'image/webp';
+      preload.href = 'assets/images/inter_face.webp';
+      document.head.appendChild(preload);
+    })();
+  </script>
   <script src="js/localization/translations.js"></script>
   <script src="js/localization/i18n.js"></script>
   <title>StudentHub - الرئيسية</title>
@@ -20,6 +34,10 @@
   <script src="js/shared/pwa.js" defer></script>
 </head>
 <body>
+
+  <div id="androidLaunchSplash" class="android-launch-splash" aria-hidden="true">
+    <img class="android-launch-splash__logo" src="assets/images/inter_face.webp" alt="" decoding="sync" fetchpriority="high" />
+  </div>
 
   <div class="app-container">
 

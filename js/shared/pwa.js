@@ -3,6 +3,24 @@
   let updateRequested = false;
   let updateNotice;
 
+  const launchSplash = document.getElementById('androidLaunchSplash');
+  if (launchSplash && document.documentElement.classList.contains('android-pwa')) {
+    const launchSplashStartedAt = performance.now();
+    const dismissLaunchSplash = () => {
+      const remainingTime = Math.max(0, 600 - (performance.now() - launchSplashStartedAt));
+      window.setTimeout(() => {
+        launchSplash.classList.add('is-dismissed');
+        window.setTimeout(() => launchSplash.remove(), 220);
+      }, remainingTime);
+    };
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', dismissLaunchSplash, { once: true });
+    } else {
+      dismissLaunchSplash();
+    }
+  }
+
   if ('serviceWorker' in navigator && navigator.serviceWorker && !window.__studentHubPwaRegistration) {
     const scriptUrl = document.currentScript?.src;
     if (!scriptUrl) {

@@ -1,6 +1,6 @@
 'use strict';
 
-const CACHE_VERSION = 6;
+const CACHE_VERSION = 7;
 const CACHE_PREFIX = 'studenthub-';
 const STATIC_CACHE = `${CACHE_PREFIX}static-v${CACHE_VERSION}`;
 const PAGE_CACHE = `${CACHE_PREFIX}pages-v${CACHE_VERSION}`;
@@ -27,8 +27,12 @@ const CORE_ASSETS = [
   'assets/icons/app-icon-192.png',
   'assets/icons/app-icon-512.png',
   'assets/icons/app-icon-maskable-512.png',
+  'assets/icons/app-icon-full-192.png',
+  'assets/icons/app-icon-full-512.png',
+  'assets/icons/app-icon-full-maskable-512.png',
   'assets/icons/apple-touch-icon.png',
   'assets/images/StudentHubLogo.png',
+  'assets/images/inter_face.webp',
 ];
 
 function isSuccessfulSameOriginResponse(response, origin) {

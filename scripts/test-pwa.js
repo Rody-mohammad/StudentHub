@@ -64,6 +64,7 @@ async function main() {
     readyState: 'loading',
     body: { prepend(element) { noticeParents.push(element); } },
     querySelector() { return null; },
+    getElementById() { return null; },
     createElement(tagName) {
       return new Element(tagName);
     },
@@ -97,6 +98,9 @@ async function main() {
     ['assets/icons/app-icon-192.png', 192],
     ['assets/icons/app-icon-512.png', 512],
     ['assets/icons/app-icon-maskable-512.png', 512],
+    ['assets/icons/app-icon-full-192.png', 192],
+    ['assets/icons/app-icon-full-512.png', 512],
+    ['assets/icons/app-icon-full-maskable-512.png', 512],
     ['assets/icons/apple-touch-icon.png', 180],
   ]);
   for (const [file, size] of expectedIcons) {
@@ -105,8 +109,18 @@ async function main() {
     assert.equal(png.readUInt32BE(16), size, `${file} has the expected width`);
     assert.equal(png.readUInt32BE(20), size, `${file} has the expected height`);
   }
-  const maskableIcon = manifest.icons.find((icon) => icon.src === 'assets/icons/app-icon-maskable-512.png');
+  assert.equal(manifest.background_color, '#FFFFFF', 'Android launch background is pure white');
+  const standardIcons = manifest.icons.filter((icon) => icon.purpose === 'any');
+  assert.ok(standardIcons.some((icon) => icon.src === 'assets/icons/app-icon-full-192.png'));
+  assert.ok(standardIcons.some((icon) => icon.src === 'assets/icons/app-icon-full-512.png'));
+  const maskableIcon = manifest.icons.find((icon) => icon.src === 'assets/icons/app-icon-full-maskable-512.png');
   assert.equal(maskableIcon?.purpose, 'maskable', 'the 512px maskable icon is declared correctly');
+  const indexHtml = fs.readFileSync(path.join(__dirname, '..', 'index.html'), 'utf8');
+  assert.match(indexHtml, /id="androidLaunchSplash"/, 'the homepage provides the Android launch overlay');
+  assert.match(indexHtml, /assets\/images\/inter_face\.webp/, 'the Android splash uses the supplied full logo');
+  assert.match(indexHtml, /display-mode: standalone/, 'the custom splash is restricted to installed mode');
+  const workerSource = fs.readFileSync(path.join(__dirname, '..', 'service-worker.js'), 'utf8');
+  assert.match(workerSource, /assets\/images\/inter_face\.webp/, 'the full logo is available from the offline cache');
   const htmlPages = fs.readdirSync(path.join(__dirname, '..')).filter((name) => name.endsWith('.html'));
   assert.equal(htmlPages.filter((name) => name !== 'offline.html').length, 16, 'all application pages are included');
   for (const name of htmlPages) {
@@ -139,6 +153,40 @@ async function main() {
   assert.equal(updateWorker.messages[0].type, 'STUDENTHUB_SKIP_WAITING');
   serviceWorkerListeners.controllerchange();
   assert.equal(reloadCount, 1, 'the page reloads only after the user applies the update');
+
+  const launchTimers = [];
+  const launchListeners = [];
+  const launchClasses = [];
+  const performanceTimes = [100, 250];
+  let splashRemoved = false;
+  const launchSplash = {
+    classList: { add(name) { launchClasses.push(name); } },
+    remove() { splashRemoved = true; },
+  };
+  const launchContext = {
+    document: {
+      readyState: 'loading',
+      getElementById() { return launchSplash; },
+      documentElement: { classList: { contains(name) { return name === 'android-pwa'; } } },
+      addEventListener(type, listener) {
+        if (type === 'DOMContentLoaded') launchListeners.push(listener);
+      },
+    },
+    navigator: {},
+    performance: { now() { return performanceTimes.shift(); } },
+    window: {
+      setTimeout(callback, delay) {
+        launchTimers.push({ callback, delay });
+      },
+    },
+  };
+  vm.runInNewContext(source, launchContext);
+  launchListeners[0]();
+  assert.equal(launchTimers[0].delay, 450, 'the Android splash remains visible for the minimum display time');
+  launchTimers[0].callback();
+  assert.ok(launchClasses.includes('is-dismissed'), 'the Android splash fades after the page is ready');
+  launchTimers[1].callback();
+  assert.equal(splashRemoved, true, 'the dismissed splash is removed from the page');
 
   const workerListeners = {};
   let skipWaitingCalled = false;

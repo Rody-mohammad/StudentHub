@@ -62,6 +62,9 @@ StudentHub is a static website built with plain HTML, CSS, and vanilla JavaScrip
 │   │   ├── app-icon-192.png
 │   │   ├── app-icon-512.png
 │   │   ├── app-icon-maskable-512.png
+│   │   ├── app-icon-full-192.png
+│   │   ├── app-icon-full-512.png
+│   │   ├── app-icon-full-maskable-512.png
 │   │   ├── apple-touch-icon.png
 │   │   ├── graduation-cap.svg
 │   │   ├── house.svg
@@ -73,6 +76,7 @@ StudentHub is a static website built with plain HTML, CSS, and vanilla JavaScrip
 │       ├── CREDITS.md
 │       ├── event-demo-cover.svg
 │       ├── StudentHubLogo.png
+│       ├── inter_face.webp
 │       ├── Y5cafe.png
 │       ├── golverdi.png
 │       ├── image copy.png
@@ -121,16 +125,16 @@ All application pages use `css/style.css`, load `js/shared/pwa.js` for PWA regis
 
 ## Progressive Web App foundation
 
-- `manifest.webmanifest` declares the StudentHub app name, standalone display mode, brand colors, relative launch URL/scope, and install icons. Its `./` paths support deployment from a subdirectory. Audit checks verified valid JSON, icon paths and PNG dimensions, and matching browser theme colors across all 16 app pages.
-- The four existing icons are valid, opaque PNGs: the standard icons are 192x192 and 512x512, the maskable icon is 512x512, and the Apple touch icon is 180x180. The maskable logo artwork fits inside the central safe area with a full-bleed navy background. They remain legible at their supplied sizes, so no additional variants were added.
-- Android Chrome uses the manifest's `StudentHub` name, standalone display mode, and standard/maskable icons. There is no custom install button; Chrome controls whether and when its own install UI is available. When Chrome considers the site eligible, users can also check its menu for “Install app” or “Add to Home screen” (wording varies). Production installation requires a secure HTTPS origin. Android installation and standalone launch were not physically tested.
-- All HTML pages include the Apple touch icon, standalone capability, app title, and default status-bar metadata. On iOS, users add the site from Safari's Share menu; there is no Android-style `beforeinstallprompt` flow. The status-bar style is Safari's `default`, not a promise that it follows the page theme. iOS Add to Home Screen and standalone behavior were not device-tested.
+- `manifest.webmanifest` declares the StudentHub app name, standalone display mode, brand theme color, a pure-white `background_color`, relative launch URL/scope, and install icons. Its `./` paths support deployment from a subdirectory.
+- Android install icons `app-icon-full-192.png` and `app-icon-full-512.png` use manifest purpose `any`; `app-icon-full-maskable-512.png` uses purpose `maskable`. They are square PNGs derived from the supplied full-wordmark `assets/images/inter_face.webp`. They preserve the sun, graduation cap, and “STUDENT HUB” text on white; the maskable artwork stays within the central safe area. The existing browser favicon and 180px Apple touch icon are unchanged.
+- Android Chrome uses the manifest's `StudentHub` name, standalone display mode, and standard/maskable full-logo icons. Since Android's native splash is based on the manifest icon and cannot reliably show the complete wordmark at a useful size, `index.html` adds an Android-standalone-only in-app splash using the supplied logo. It is centered on `#FFFFFF`, shown after the native splash, then fades after the page is ready. It is not shown in a browser tab or on iOS. There is no custom install button; Chrome controls whether and when its own install UI is available. Production installation requires a secure HTTPS origin. The updated Android launch screen has not been physically tested.
+- All HTML pages include the Apple touch icon, standalone capability, app title, and default status-bar metadata. The iOS icon and its metadata are unchanged. On iOS, users add the site from Safari's Share menu; there is no Android-style `beforeinstallprompt` flow. The status-bar style is Safari's `default`, not a promise that it follows the page theme. iOS Add to Home Screen and standalone behavior were not device-tested.
 - `js/shared/pwa.js` feature-detects service-worker support, registers the worker using a URL derived from the script's location, and displays localized offline/stale notices and an update action when a new worker is waiting.
 - `offline.html` is the cached fallback for an unvisited page requested without a network connection. It supports Arabic, English, Kurdish, RTL/LTR, saved theme preferences, and retry.
 - `service-worker.js` uses network-first for HTML navigation, caching each successful page by path (not query string) so the shared detail page can resolve different `section`/`id` parameters offline. Unvisited HTML falls back to `offline.html`.
-- The worker precaches the offline shell, shared CSS/data JavaScript, manifest, app icons, and logo. Other same-origin CSS/JS and icons use cache-first; requested images are cached only from `assets/images/` when the response declares a size of 350 KB or less, with a maximum of 24 runtime images. External requests, failed responses, opaque responses, and non-HTML dynamic endpoints are not cached.
+- The worker precaches the offline shell, shared CSS/data JavaScript, manifest, app icons, full-logo Android splash image, and existing logo. Other same-origin CSS/JS and icons use cache-first; requested images are cached only from `assets/images/` when the response declares a size of 350 KB or less, with a maximum of 24 runtime images. External requests, failed responses, opaque responses, and non-HTML dynamic endpoints are not cached.
 - Cache names are versioned with `CACHE_VERSION`. Activation removes only outdated caches whose names start with `studenthub-`; unrelated browser caches are preserved. A new worker waits rather than replacing an active app silently. Clients running this version show a localized update action; choosing it activates the worker and reloads the page after control changes. Clients still running an older cached page script retain the previous wait-for-tabs-to-close behavior until the new worker activates.
-- Increment `CACHE_VERSION` when changing the precached JavaScript, CSS, or data records so the new worker installs a fresh static cache. New navigations are network-first and replace their path cache after a successful response.
+- Increment `CACHE_VERSION` when changing the precached JavaScript, CSS, image, or data records so the new worker installs a fresh static cache. The Android launch screen update uses cache version 7. New navigations are network-first and replace their path cache after a successful response.
 - Cached pages and assets can be stale while offline. The page-level notice appears when `navigator.onLine` is false or the worker serves a cached navigation; online navigation otherwise remains network-first.
 - A local HTTP test served the site from a URL-encoded subdirectory and verified successful HTML, manifest, worker, and icon responses with the expected MIME types; the browser resolved the launch URL and worker scope within that subdirectory. This does not verify a production host or replace HTTPS/device testing.
 - The shared detail page keeps its existing query-driven behavior; the service worker caches its HTML by path without query parameters. Previously visited pages work offline from cache; an unvisited page falls back to the localized offline shell. These behaviors were code- and browser-smoke-checked, not validated on a physical installed device.
@@ -165,8 +169,9 @@ All application pages use `css/style.css`, load `js/shared/pwa.js` for PWA regis
 - A focused color-contrast check found low-contrast housing and transportation filter labels; their light-theme colors were darkened, with lighter transportation accents specified for dark theme. The check was a targeted browser heuristic, not a complete WCAG audit.
 - Lighthouse was not installed or available in the browser tools used for this audit, so no Lighthouse categories, scores, or installability diagnostics were produced. No physical Android/iOS devices were available; standalone installation and device-specific behavior remain unverified.
 - Manual release checklist:
-  1. On Android Chrome, verify eligibility/install UI, install and launch standalone, navigate between pages and detail query URLs, switch language/theme, test previously cached pages and an uncached page in airplane mode, then reconnect and accept a waiting update.
-  2. On iOS Safari, use Share > Add to Home Screen, launch the saved app, verify navigation, language/theme and offline fallback, and confirm the status bar behavior on the target iOS version.
+  1. After publishing the changes to GitHub Pages, uninstall any older StudentHub app. Open the HTTPS site in Android Chrome while online; tap “Update now” if the update notice appears, or close StudentHub tabs and reopen the site so the new service worker activates. Install again from Chrome's menu. Launch it and verify the native splash has a white background and no blue icon border, followed by a centered, undistorted full “STUDENT HUB” logo. Confirm it disappears after the homepage is ready and does not appear in a normal browser tab.
+  2. Navigate between pages and detail query URLs, switch language/theme, test previously cached pages and an uncached page in airplane mode, then reconnect and accept a waiting update. The logo is precached; pages still need to have been visited online before their full content is available offline.
+  3. On iOS Safari, use Share > Add to Home Screen, launch the saved app, verify navigation, language/theme and offline fallback, and confirm the status bar behavior on the target iOS version.
 
 ## JavaScript responsibilities
 
