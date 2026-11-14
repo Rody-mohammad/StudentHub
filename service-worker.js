@@ -1,6 +1,6 @@
 'use strict';
 
-const CACHE_VERSION = 3;
+const CACHE_VERSION = 6;
 const CACHE_PREFIX = 'studenthub-';
 const STATIC_CACHE = `${CACHE_PREFIX}static-v${CACHE_VERSION}`;
 const PAGE_CACHE = `${CACHE_PREFIX}pages-v${CACHE_VERSION}`;
@@ -65,6 +65,12 @@ async function cacheCoreAssets() {
 
 self.addEventListener('install', (event) => {
   event.waitUntil(cacheCoreAssets());
+});
+
+self.addEventListener('message', (event) => {
+  if (event.data?.type === 'STUDENTHUB_SKIP_WAITING') {
+    event.waitUntil(self.skipWaiting());
+  }
 });
 
 self.addEventListener('activate', (event) => {

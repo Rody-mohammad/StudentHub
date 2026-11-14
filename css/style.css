@@ -512,7 +512,7 @@ html[lang="ku-Arab"] body {
 .housing-category-chip { min-height: 44px; display: inline-flex; align-items: center; gap: 7px; padding: 7px 13px; color: var(--housing-type-color, var(--primary-navy)); background: color-mix(in srgb, var(--housing-type-color, var(--primary-navy)) 9%, white); border: 1px solid color-mix(in srgb, var(--housing-type-color, var(--primary-navy)) 22%, white); border-radius: 999px; font: inherit; font-size: 12px; font-weight: 600; cursor: pointer; }
 .housing-category-chip .lucide-icon { width: 16px; height: 16px; background-color: currentColor; }
 .housing-category-chip--single { --housing-type-color: #2862ad; }
-.housing-category-chip--shared { --housing-type-color: #008f87; }
+.housing-category-chip--shared { --housing-type-color: #00756e; }
 .housing-category-chip--apartment { --housing-type-color: #7950a1; }
 .housing-category-chip--all { --housing-type-color: #203f7a; }
 .housing-category-chip.active { color: #fff; background: var(--housing-type-color); border-color: var(--housing-type-color); }
@@ -1590,11 +1590,16 @@ a, p, h1, h2, h3, h4, span, strong, label {
 .transport-directory__filters .chip svg { width: 16px; height: 16px; }
 .transport-directory__filters .transport-filter--all { color: var(--primary-navy); }
 .transport-directory__filters .transport-filter--bus { color: #2862ad; }
-.transport-directory__filters .transport-filter--shuttle { color: #008f87; }
+.transport-directory__filters .transport-filter--shuttle { color: #00756e; }
 .transport-directory__filters .transport-filter--minibus { color: #7950a1; }
-.transport-directory__filters .transport-filter--shared-taxi { color: #d66a1f; }
+.transport-directory__filters .transport-filter--shared-taxi { color: #aa4f0e; }
 .transport-directory__filters .transport-filter--taxi { color: #946500; }
 .transport-directory__filters .chip.active { color: #fff; }
+html[data-theme="dark"] .transport-directory__filters .transport-filter--bus:not(.active) { color: #8ab4f8; }
+html[data-theme="dark"] .transport-directory__filters .transport-filter--shuttle:not(.active) { color: #58d4c8; }
+html[data-theme="dark"] .transport-directory__filters .transport-filter--minibus:not(.active) { color: #c9a1f2; }
+html[data-theme="dark"] .transport-directory__filters .transport-filter--shared-taxi:not(.active) { color: #ffae70; }
+html[data-theme="dark"] .transport-directory__filters .transport-filter--taxi:not(.active) { color: #f5c15d; }
 
 .transport-route {
     --transport-accent: #2862ad;
@@ -2626,6 +2631,23 @@ html[data-theme="dark"] .deals-directory__filters .chip[aria-pressed="true"] {
 }
 
 .pwa-offline-notice[hidden] { display: none; }
+
+.pwa-update-button {
+    margin-inline-start: 10px;
+    padding: 3px 8px;
+    border: 1px solid currentColor;
+    border-radius: 4px;
+    background: transparent;
+    color: inherit;
+    font: inherit;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.pwa-update-button:focus-visible {
+    outline: 2px solid currentColor;
+    outline-offset: 2px;
+}
 
 html[data-theme="dark"] .pwa-offline-notice {
     background: #3b321d;

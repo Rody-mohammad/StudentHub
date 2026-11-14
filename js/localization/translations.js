@@ -16,6 +16,16 @@ window.STUDENTHUB_TRANSLATIONS = {
       "en": "This page is showing saved information that may be outdated. Reload when connected.",
       "ku": "ئەڤ لاپەڕە زانیاریێن پاشەکەفتی نیشان ددەت و دبیتە کوڤار بن؛ دەمێ گرێدان هەبوو دوبارە بار بکە."
     },
+    "pwa.updateAvailable": {
+      "ar": "يتوفر تحديث للتطبيق.",
+      "en": "An app update is available.",
+      "ku": "نوەکرنەکا ئەپێ بەردەستە."
+    },
+    "pwa.updateAction": {
+      "ar": "تحديث الآن",
+      "en": "Update now",
+      "ku": "نوە بکە"
+    },
     "offline.title": {
       "ar": "غير متصل",
       "en": "Offline",

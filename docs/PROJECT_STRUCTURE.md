@@ -49,6 +49,7 @@ StudentHub is a static website built with plain HTML, CSS, and vanilla JavaScrip
 │       ├── navigation.js
 │       └── pwa.js
 ├── scripts/
+│   ├── test-pwa.js
 │   ├── test-events.js
 │   ├── test-benefits.js
 │   └── validate-localization.js
@@ -120,15 +121,50 @@ All application pages use `css/style.css`, load `js/shared/pwa.js` for PWA regis
 
 ## Progressive Web App foundation
 
-- `manifest.webmanifest` declares the StudentHub app name, standalone display mode, brand colors, relative launch URL/scope, and install icons. Its `./` paths support deployment from a subdirectory.
-- `assets/icons/app-icon-192.png` and `app-icon-512.png` are standard install icons generated from the existing logo. `app-icon-maskable-512.png` places the logo within the maskable safe zone. `apple-touch-icon.png` is the iOS home-screen icon.
-- `js/shared/pwa.js` feature-detects service-worker support, registers the worker using a URL derived from the script's location, and displays a localized notice while the browser is offline.
+- `manifest.webmanifest` declares the StudentHub app name, standalone display mode, brand colors, relative launch URL/scope, and install icons. Its `./` paths support deployment from a subdirectory. Audit checks verified valid JSON, icon paths and PNG dimensions, and matching browser theme colors across all 16 app pages.
+- The four existing icons are valid, opaque PNGs: the standard icons are 192x192 and 512x512, the maskable icon is 512x512, and the Apple touch icon is 180x180. The maskable logo artwork fits inside the central safe area with a full-bleed navy background. They remain legible at their supplied sizes, so no additional variants were added.
+- Android Chrome uses the manifest's `StudentHub` name, standalone display mode, and standard/maskable icons. There is no custom install button; Chrome controls whether and when its own install UI is available. When Chrome considers the site eligible, users can also check its menu for “Install app” or “Add to Home screen” (wording varies). Production installation requires a secure HTTPS origin. Android installation and standalone launch were not physically tested.
+- All HTML pages include the Apple touch icon, standalone capability, app title, and default status-bar metadata. On iOS, users add the site from Safari's Share menu; there is no Android-style `beforeinstallprompt` flow. The status-bar style is Safari's `default`, not a promise that it follows the page theme. iOS Add to Home Screen and standalone behavior were not device-tested.
+- `js/shared/pwa.js` feature-detects service-worker support, registers the worker using a URL derived from the script's location, and displays localized offline/stale notices and an update action when a new worker is waiting.
 - `offline.html` is the cached fallback for an unvisited page requested without a network connection. It supports Arabic, English, Kurdish, RTL/LTR, saved theme preferences, and retry.
 - `service-worker.js` uses network-first for HTML navigation, caching each successful page by path (not query string) so the shared detail page can resolve different `section`/`id` parameters offline. Unvisited HTML falls back to `offline.html`.
-- The worker precaches the offline shell, shared CSS/JavaScript, manifest, app icons, and logo. Other same-origin CSS/JS and icons use cache-first; requested images are cached only from the app image directory when the response has a declared size of 350 KB or less, with a bounded image cache. External requests, failed responses, opaque responses, and non-HTML dynamic endpoints are not cached.
-- Cache names are versioned with `CACHE_VERSION`. Activation removes only outdated caches whose names start with `studenthub-`; unrelated browser caches are preserved. The worker does not force activation with `skipWaiting()` or `clients.claim()`, so updates wait for controlled tabs to close.
+- The worker precaches the offline shell, shared CSS/data JavaScript, manifest, app icons, and logo. Other same-origin CSS/JS and icons use cache-first; requested images are cached only from `assets/images/` when the response declares a size of 350 KB or less, with a maximum of 24 runtime images. External requests, failed responses, opaque responses, and non-HTML dynamic endpoints are not cached.
+- Cache names are versioned with `CACHE_VERSION`. Activation removes only outdated caches whose names start with `studenthub-`; unrelated browser caches are preserved. A new worker waits rather than replacing an active app silently. Clients running this version show a localized update action; choosing it activates the worker and reloads the page after control changes. Clients still running an older cached page script retain the previous wait-for-tabs-to-close behavior until the new worker activates.
 - Increment `CACHE_VERSION` when changing the precached JavaScript, CSS, or data records so the new worker installs a fresh static cache. New navigations are network-first and replace their path cache after a successful response.
 - Cached pages and assets can be stale while offline. The page-level notice appears when `navigator.onLine` is false or the worker serves a cached navigation; online navigation otherwise remains network-first.
+- A local HTTP test served the site from a URL-encoded subdirectory and verified successful HTML, manifest, worker, and icon responses with the expected MIME types; the browser resolved the launch URL and worker scope within that subdirectory. This does not verify a production host or replace HTTPS/device testing.
+- The shared detail page keeps its existing query-driven behavior; the service worker caches its HTML by path without query parameters. Previously visited pages work offline from cache; an unvisited page falls back to the localized offline shell. These behaviors were code- and browser-smoke-checked, not validated on a physical installed device.
+
+### Offline data freshness
+
+- HTML pages are not precached as a complete site. After a successful online navigation, the worker stores that HTML path (up to 30 paths); its next offline navigation can use the saved HTML. Query strings are not part of the cache key, so cached `detail.html` continues to read the requested `section` and `id` from the URL.
+- An HTML path not previously cached cannot show its requested page offline and instead receives the localized `offline.html` shell. Local listings and detail data are available offline only when their required precached JavaScript and data files are present.
+- HTML is network-first and its saved copy is replaced after a successful online navigation. CSS, JavaScript/data, and icons are cache-first; dynamic same-origin images under `assets/images/` are cached only when small enough and the response declares its size. These assets can therefore remain old while offline or until a new static cache is installed. There is no backend or background data synchronization.
+- The offline/stale notice indicates that a saved page or offline view is being shown; it does not display a fabricated timestamp or claim that listings are live. Cached offers, events, housing, and transport records can be outdated. Online page text refreshes on a successful navigation, but data/script changes require a released worker version (increment `CACHE_VERSION`) and the user's update action to install the new static cache.
+
+### Static deployment requirements
+
+- Production must use HTTPS; `localhost` is allowed for development. Keep the manifest, worker, HTML, and referenced assets available under the same application subdirectory so the relative manifest URLs and worker scope continue to resolve there.
+- Serve `manifest.webmanifest` as `application/manifest+json` (or a browser-supported JSON MIME type), `service-worker.js` as JavaScript (for example `text/javascript`), and PNG icons as `image/png`. The worker must be served from the intended app scope. Do not rewrite direct `.html` page requests or strip their query parameters.
+- Because filenames are not content-hashed, configure the host/CDN to revalidate the service worker and changing HTML/CSS/JavaScript/data files rather than serving stale copies after a release.
+
+### Phase 4 deployment status
+
+- **Platform and URL:** GitHub Pages is live at `https://rody-mohammad.github.io/StudentHub/`. On 2026-11-14 the homepage loaded over HTTPS in the browser, and `window.isSecureContext` was true. The repository source is served from the `/StudentHub/` subdirectory.
+- **Hosting configuration:** the site is a static multi-page website with no build step. Keep the Pages source on `main` at `/(root)`; no SPA fallback, redirects, or additional host configuration are required. Preserve direct `.html` paths and query parameters.
+- **Production resource check (2026-11-14):** the manifest, service worker, offline page, and all three install icons returned HTTP 200. The manifest was served as `application/manifest+json`, the worker as `application/javascript`, and icons as `image/png`. The manifest's relative `./index.html` start URL and `./` scope resolve within `/StudentHub/`.
+- **Service worker status:** the browser found the expected `/StudentHub/` registration scope, but no active, installing, or waiting worker and no controller were present during the check. Successful registration and control are therefore not verified yet; installation, standalone launch, and production offline tests remain pending.
+- **Release/update procedure:** review and commit approved changes to `main`, then push them to trigger a Pages deployment. Allow the deployment to finish and verify the updated site, worker, and critical assets. Do not add a build process or rewrite direct `.html` paths.
+- **PWA and offline limits:** keep `manifest.webmanifest`, `service-worker.js`, `offline.html`, icons, and referenced files at their existing relative locations. Only pages visited successfully online are cached; an unvisited page falls back to the offline page, and cached listings may be stale. Device installation and offline behavior remain unverified until the active service worker is confirmed and those tests complete.
+
+### Verification and device checklist
+
+- In local VS Code embedded Chromium, smoke checks covered the homepage, deals, events, housing, transportation, and a query-driven detail page at a 390x844 viewport. Checks found no horizontal overflow, broken visible images or same-origin HTML links, JavaScript exceptions, or failed non-document requests. Titles, language/direction, viewport metadata, and basic keyboard focus were checked. This was not Android Chrome or iOS Safari.
+- A focused color-contrast check found low-contrast housing and transportation filter labels; their light-theme colors were darkened, with lighter transportation accents specified for dark theme. The check was a targeted browser heuristic, not a complete WCAG audit.
+- Lighthouse was not installed or available in the browser tools used for this audit, so no Lighthouse categories, scores, or installability diagnostics were produced. No physical Android/iOS devices or production deployment were available.
+- Manual release checklist:
+  1. On Android Chrome, verify eligibility/install UI, install and launch standalone, navigate between pages and detail query URLs, switch language/theme, test previously cached pages and an uncached page in airplane mode, then reconnect and accept a waiting update.
+  2. On iOS Safari, use Share > Add to Home Screen, launch the saved app, verify navigation, language/theme and offline fallback, and confirm the status bar behavior on the target iOS version.
 
 ## JavaScript responsibilities
 
@@ -145,7 +181,7 @@ All application pages use `css/style.css`, load `js/shared/pwa.js` for PWA regis
 | `js/pages/benefits/benefits.js` | Search, sort, category/type filters, cards, and results for the three benefits subcatalogs. |
 | `js/pages/home/offers.js` | Homepage skeleton cleanup, offer detail cards, carousels, and student-service showcase. Loaded only on `index.html`. |
 | `js/shared/navigation.js` | Shared navigation drawer, language controls, theme switch, keyboard handling, and page links. Runs on pages with an `.app-bar`. |
-| `js/shared/pwa.js` | Feature-detects and registers the root-scoped service worker; does not affect pages when service workers are unavailable. |
+| `js/shared/pwa.js` | Feature-detects and registers the root-scoped service worker, reports offline/stale content, and lets the user apply a waiting update; does not affect pages when service workers are unavailable. |
 | `js/pages/home/intro.js` | Homepage-only welcome intro. Uses session storage, the `welcome=1` query flag for replay, and the reduced-motion preference. |
 
 `service-worker.js` owns cache versioning, the static shell cache, the bounded runtime page/image caches, and the navigation/static asset strategies.
@@ -200,6 +236,7 @@ Then open `http://localhost:8000/`. Live Server is also suitable.
 Run the available checks from the project root:
 
 ```sh
+node scripts/test-pwa.js
 node scripts/test-benefits.js
 node scripts/test-events.js
 node scripts/validate-localization.js
