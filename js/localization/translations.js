@@ -2541,11 +2541,6 @@ window.STUDENTHUB_TRANSLATIONS = {
       "en": "Feature Ideas and Section Planning",
       "ku": "بیرۆکێن تایبەتمەندیان و پلانکرنا بەشان"
     },
-    "about.developmentTeamGulistanRole": {
-      "ar": "الشعار وتصميم الموقع",
-      "en": "Logo and Website Design",
-      "ku": "لۆگۆ و دیزاینا ماڵپەری"
-    },
     "about.developmentTeamRudyRole": {
       "ar": "تطوير الموقع وإدارة المشروع",
       "en": "Website Development and Project Management",

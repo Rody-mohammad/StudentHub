@@ -187,7 +187,7 @@ const allKurdishKeys = [
   'about.missionTitle', 'about.missionText', 'about.whyTitle', 'about.whyText', 'about.whyText2',
   'about.valuesTitle', 'about.valuesText', 'about.visionTitle', 'about.visionText', 'about.closing',
   'about.developmentTeamTitle', 'about.developmentTeamYoussefRole',
-  'about.developmentTeamJoanRole', 'about.developmentTeamGulistanRole', 'about.developmentTeamRudyRole',
+  'about.developmentTeamJoanRole', 'about.developmentTeamRudyRole',
   'about.partnershipTitle',
   'about.partnershipSubtitle', 'about.partnershipIntro', 'about.partnershipDescription',
   'about.partnershipClosing', 'about.partnershipCta', 'about.partnershipReviewNote',
@@ -211,12 +211,11 @@ assert.match(sharedCss, /\.site-nav__theme-switch\[aria-checked="true"\]\s*>\s*s
 assert.match(sharedCss, /\[dir="rtl"\]\s+\.site-nav__theme-switch\s*>\s*span\s*\{\s*left:\s*23px/);
 assert.match(sharedCss, /\[dir="rtl"\]\s+\.site-nav__theme-switch\[aria-checked="true"\]\s*>\s*span\s*\{\s*left:\s*3px/);
 assert.match(aboutHtml, /class="about-acknowledgements"/, 'the About page includes an acknowledgements section');
-for (const key of ['about.developmentTeamTitle', 'about.developmentTeamYoussefRole', 'about.developmentTeamJoanRole', 'about.developmentTeamGulistanRole', 'about.developmentTeamRudyRole']) {
+for (const key of ['about.developmentTeamTitle', 'about.developmentTeamYoussefRole', 'about.developmentTeamJoanRole', 'about.developmentTeamRudyRole']) {
   assert.ok(dictionary[key]?.ar && dictionary[key]?.en, `${key} has Arabic and English copy`);
 }
 assert.match(aboutHtml, /<strong>Youssef<\/strong> — <span>تجربة المستخدم \(UX\)<\/span>/, 'the development team lists Youssef with the UX role');
 assert.match(aboutHtml, /<strong>Joan<\/strong> — <span>أفكار الميزات وتخطيط الأقسام<\/span>/, 'the development team lists Joan with feature and planning roles');
-assert.match(aboutHtml, /<strong>Gulistan<\/strong> — <span>الشعار وتصميم الموقع<\/span>/, 'the development team lists Gulistan with logo and website design roles');
 assert.match(aboutHtml, /<strong>Rudy<\/strong> — <span>تطوير الموقع وإدارة المشروع<\/span>/, 'the development team lists Rudy with website development and project management roles');
 assert.match(homepageHtml, /class="home-more-card"/, 'the homepage includes a more-to-come card');
 assert.match(homepageHtml, /<h2 id="homeMoreHeading">المزيد قادم قريبًا\s*<\/h2>/, 'the homepage more-to-come heading matches its Arabic translation key');
