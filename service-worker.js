@@ -16,6 +16,7 @@ const CORE_ASSETS = [
   'js/localization/i18n.js',
   'js/localization/translations.js',
   'js/pages/benefits/benefits.js',
+  'js/pages/deals/animations.js',
   'js/pages/events/events.js',
   'js/pages/home/intro.js',
   'js/pages/home/offers.js',
