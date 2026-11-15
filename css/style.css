@@ -2499,6 +2499,35 @@ html[dir="rtl"] .home-service-arrow[data-home-service-prev]::before{content:"→
 .card__image-badge { position: absolute; inset-block-start: 12px; inset-inline-start: 12px; max-width: calc(100% - 24px); padding: 7px 11px; color: #172b50; background: var(--highlight-gold); border: 1px solid rgba(255,255,255,.8); border-radius: 999px; box-shadow: 0 2px 8px rgba(0,0,0,.2); font-size: 13px; font-weight: 700; line-height: 1.25; }
 .card__status { color: var(--text-muted); font-size: 12px; line-height: 1.45; }
 .card__status--expired,.benefit-card__status.is-expired { color: #8b1e1e; font-weight: 700; }
+
+/* Shared card surface and interaction system; card-specific sizing remains above. */
+:is(.card, .featured-card, .housing-card, .housing-listing, .benefit-card, .transport-route, .events-card, .home-event-card, .home-service-card, .home-service-offer, .home-gemini-offer, .home-transport-card, .benefit-tile) {
+    border: 1px solid color-mix(in srgb, var(--primary-navy) 10%, transparent);
+    border-radius: 18px;
+    box-shadow: 0 2px 6px rgba(20, 42, 75, .035), 0 8px 20px rgba(20, 42, 75, .055);
+    transition: transform 180ms ease, box-shadow 180ms ease, border-color 180ms ease;
+}
+
+:is(.card__photo-wrapper, .housing-listing__image-wrap, .events-card__cover, .home-service-offer__image-frame) { overflow: hidden; }
+:is(.card__photo, .housing-listing__image, .events-card__cover img, .home-event-card__image, .featured-card__image, .home-service-offer__image) { object-fit: cover; transition: transform 240ms ease; }
+
+:is(.card__link, .housing-listing__link, .transport-route__link, .benefit-card__link, .events-card__link, .home-event-card, .home-offer-card-link, .home-service-card, .home-service-offer__link, .home-gemini-offer):focus-visible {
+    outline: 3px solid var(--accent-amber);
+    outline-offset: 3px;
+}
+
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+    :is(.card, .featured-card, .housing-card, .housing-listing, .benefit-card, .transport-route, .events-card, .home-event-card, .home-service-card, .home-service-offer, .home-gemini-offer, .home-transport-card, .benefit-tile):hover {
+        border-color: color-mix(in srgb, var(--primary-navy) 20%, transparent);
+        box-shadow: 0 4px 9px rgba(20, 42, 75, .045), 0 12px 26px rgba(20, 42, 75, .10);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    :is(.card, .featured-card, .housing-card, .housing-listing, .benefit-card, .transport-route, .events-card, .home-event-card, .home-service-card, .home-service-offer, .home-gemini-offer, .home-transport-card, .benefit-tile),
+    :is(.card__photo, .housing-listing__image, .events-card__cover img, .home-event-card__image, .featured-card__image, .home-service-offer__image) { transition: none !important; }
+}
+
 .card__link:hover .btn,.card__link:focus-visible .btn { background: #d97706; }
 .card__link:focus-visible,.housing-listing__link:focus-visible,.transport-route__link:focus-visible,.benefit-card__link:focus-visible { outline: 3px solid var(--accent-amber); outline-offset: 3px; border-radius: 14px; }
 

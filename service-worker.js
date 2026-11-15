@@ -21,6 +21,7 @@ const CORE_ASSETS = [
   'js/pages/home/intro.js',
   'js/pages/home/offers.js',
   'js/shared/catalog-pages.js',
+  'js/shared/card-animations.js',
   'js/shared/events.js',
   'js/shared/navigation.js',
   'js/shared/pwa.js',
